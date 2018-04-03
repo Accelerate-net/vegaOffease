@@ -291,7 +291,7 @@ $scope.initReservations();
      	$('#reservationEditModal').modal('show');
      }
      
-            $('#new_date').datetimepicker({  // Date
+        $('#new_date').datetimepicker({  // Date
 		    	format: "dd-mm-yyyy",
 		    	weekStart: 1,
 	        	todayBtn:  1,

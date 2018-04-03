@@ -14,7 +14,7 @@
       <script src="assets/js/jquery.js"></script>
       <script src="assets/js/angular.min.js"></script>
       <script src="assets/js/angular-cookies.min.js"></script>
-      <script src="controllers/marketing.js"></script>
+      <script src="controllers/inventory.js"></script>
       
       <!-- CROPPER -->
       <script src="assets/plugins/cropper/cropper.js"></script>
@@ -31,7 +31,7 @@
       <link type="text/css" href="assets/plugins/bootstrap-tokenfield/css/bootstrap-tokenfield.css" rel="stylesheet">   <!-- Tokenfield -->
    </head>
 
-   <body class="animated-content" ng-app="marketingApp" ng-controller="marketingController" ng-cloak>   
+   <body class="animated-content" ng-app="inventoryApp" ng-controller="inventoryController" ng-cloak>   
       <div id="loading"></div>
       <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">      
          <div class="logo-area">
@@ -107,7 +107,7 @@
                      <div class="container-fluid">
                         <div class="row">
                            <div class="col-md-4">
-                              <div class="info-tile tile-green" ng-click="openType('combos')" id="combosTabButton">
+                              <div class="info-tile tile-green" ng-click="openType('out')" id="combosTabButton">
                                  <div class="tile-icon"><i class="ti ti-export" id="combosIcon"></i></div>
                                  <div class="tile-heading" id="combosTitle"><span>Stock Out</span></div>
                                  <div class="tile-body" id="combosCount">
@@ -118,7 +118,7 @@
                               </div>
                            </div>    
                            <div class="col-md-4">
-                              <div class="info-tile tile-green" ng-click="openType('promotions')" id="promotionsTabButton">
+                              <div class="info-tile tile-green" ng-click="openType('purchases')" id="promotionsTabButton">
                                  <div class="tile-icon"><i class="ti ti-import" id="promotionsIcon"></i></div>
                                  <div class="tile-heading" id="promotionsTitle"><span>Purchases</span></div>
                                  <div class="tile-body" id="promotionsCount">
@@ -129,7 +129,7 @@
                               </div>
                            </div>    
                            <div class="col-md-4">
-                              <div class="info-tile tile-green" ng-click="openType('coupons')" id="couponsTabButton">
+                              <div class="info-tile tile-green" ng-click="openType('payments')" id="couponsTabButton">
                                  <div class="tile-icon"><i class="fa fa-inr" id="couponsIcon"></i></div>
                                  <div class="tile-heading" id="couponsTitle"><span>Payments</span></div>
                                  <div class="tile-body" id="couponsCount">
@@ -146,7 +146,7 @@
 				<div class="col-md-6">
                                  <div class="panel panel-teal" style="margin-bottom: 10px">
                                     <div class="panel-heading" style="background: #2980b9 !important">
-                                       <h2 style="color: #FFF">Active {{marketingType}}</h2>
+                                       <h2 style="color: #FFF">{{marketingType}} History</h2>
                                        					   <div class="pull-right hidden-xs" ng-if="isContentFound">
 									    	<strong>{{currentDisplayPage}}</strong> of <strong>{{totalDisplayPages}}</strong>
 									    	<div class="btn-group ml-sm" ng-if="totalDisplayPages != 1">
@@ -156,7 +156,7 @@
 									    </div>                                        
                                     </div>
                                     <div class="panel-body no-padding">
-                                       <p ng-if="!active_content.length" style="padding: 20px; text-align: center" class="ng-scope">There are no active {{marketingType}}.</p>
+                                       <p ng-if="!active_content.length" style="padding: 20px; text-align: center" class="ng-scope">There are no {{marketingType}} history.</p>
                                        <!-- Display Combos -->
                                        <table class="table m-n" ng-if="active_content.length && marketingType == 'combos' && isContentFound">
                                           <thead>
@@ -239,42 +239,44 @@
                             	 <!-- COMBOS -->
                                  <div class="panel panel-bluegray" ng-show="newComboWindowFlag">
                                     <div class="panel-heading" style="background: #27ae60 !important;">
-                                       <h2>New Combo</h2>
+                                       <h2>Mark New Stock-Out Entry</h2>
                                     </div>
                                     <div class="panel-body">
                                        <div class="row">
                                           <div class="col-md-12">
                                              <form class="form-horizontal tabular-form">
                                              	<div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Combo Name</label>
+                                                   <label for="form-name" class="col-sm-3 control-label">Inventory Name</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text" ng-model="addNewContent.name" placeholder="Biriyani Pot" class="form-control" style="color: #3498db; font-weight: 900;">
+                                                      <input type="text" ng-model="addNewContent.name" placeholder="Start typing here..." class="form-control" style="color: #3498db;">
+                                                   </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                   <label class="col-sm-3 control-label">Quantity</label>
+                                                   <div class="col-sm-6">
+                                                      <input type="number" class="form-control"  ng-model="addNewContent.quantity">
+                                                   </div>
+                                                   <label class="col-sm-2 control-label" style="padding-left: 0; text-align: left">Kgs</label>
+                                                </div>
+
+
+                                             
+
+
+                                                <div class="form-group">
+                                                   <label for="form-name" class="col-sm-3 control-label">Date</label>
+                                                   <div class="col-sm-8">
+                                                      <div class="input-group date">
+                                                         <input type="text" ng-model="addNewContent.date" id="new_stockout_date" class="form-control ng-pristine">
+                                                         <span class="input-group-addon"><i class="ti ti-calendar"></i></span>
+                                                      </div>
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Brief</label>
+                                                   <label for="form-name" class="col-sm-3 control-label">Remarks</label>
                                                    <div class="col-sm-8">
-                                                      <textarea class="form-control" placeholder="1 Biriyani + 1 Spicy BBQ (Quarter) + 500 ml Pepsi" ng-model="addNewContent.brief"></textarea>
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Price</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="number" class="form-control"  ng-model="addNewContent.price">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Expiry Date</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="date"  ng-model="addNewContent.expiry" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Image</label>
-                                                   <div class="col-sm-8">
-                                                      <img ng-src="{{myPhotoURL}}" width="100%" style="border: 2px solid #27ae60" ng-if="isPhotoAttached">
-                                                      <i class="fa fa-picture-o" style="cursor: pointer; margin-top: 5px; color: #bdc3c7" ng-if="isPhotoAttached" ng-click="attachPhoto()"> Change Image</i>
-                                                      <button class="btn-default btn pull-left btn-outline" ng-if="!isPhotoAttached" ng-click="attachPhoto()">Add Image</button>
+                                                      <input type="text" ng-model="addNewContent.remarks" placeholder="Any remarks" class="form-control" style="color: #3498db;">
                                                    </div>
                                                 </div>
                                                 
@@ -504,6 +506,10 @@
 <script type="text/javascript" src="assets/plugins/bootstrap-tokenfield/bootstrap-tokenfield.min.js"></script>     		<!-- Tokenfield -->
 <script type="text/javascript" src="assets/demo/demo-formwizard.js"></script>
 <script type="text/javascript" src="assets/demo/demo-formcomponents.js"></script>
+
+
+      <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> <!-- DateTime Picker -->
+
     
    </body>
 </html>
