@@ -30,34 +30,13 @@ angular.module('vendorsApp', ['ngCookies'])
     $scope.outletCode = localStorage.getItem("branch");
 
 
-	    //UI betterment purpose
-	    $scope.formatTime = function(time){
-	      var formatted = time;
-	        if(time > 1230){
-	          time = time - 1200;
-	          if(time <= 930){
-	            formatted = '0'+time;
-	          }
-	          else{
-	            formatted = time;
-	          }
-	        }
-	
-	      var final = formatted.toString().substring(0,2)+':'+formatted.toString().substring(2,4)+' PM';
-	
-	      return final;
-	    }
 
-
-    
-         
       //Search Key
       $scope.isSearched = false;
       $scope.searchID = '';
       $scope.isReservationsFound = false;
       $scope.resultMessage = '';
       $scope.filterTitle = 'Vendors List';
-      $scope.isMoreLeft = false;
 
       //Default Results : Reservations of the Week
       var today = new Date();
@@ -71,7 +50,7 @@ angular.module('vendorsApp', ['ngCookies'])
       $scope.todayDate = today;
 
 
-$scope.initReservations = function(){
+$scope.initVendors = function(){
 
       var data = {};
       data.token = $cookies.get("zaitoonAdmin");
@@ -104,142 +83,13 @@ $scope.initReservations = function(){
          }
         });
 }
-$scope.initReservations();
+$scope.initVendors();
 
-
-      $scope.limiter = 0;
-      
-      $scope.searchByDate = function(){    
-	    $scope.searchID = "";
-	    setTimeout(function(){
-		    $('#mySearchBox').datetimepicker({  
-			    	format: "dd-mm-yyyy",
-			    	weekStart: 1,
-		        	todayBtn:  1,
-				autoclose: 1,
-				todayHighlight: 1,
-				startView: 2,
-				minView: 2,
-				forceParse: 0
-		    }).on('changeDate', function(ev) {
-			    $scope.searchID = $("#mySearchBox").val();
-			    $scope.search();
-		    }).on('hide', function(ev) { 
-			    $('#mySearchBox').datetimepicker('remove');
-		    });
-			
-		    $("#mySearchBox").datetimepicker().focus();
-	    
-	    }, 200);	     
-      }
-
-      $scope.search = function() {
-
-        var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
-        data.key = $scope.searchID;
-        data.id = 0;
-        $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
-        if($scope.searchID != ""){
-	        $http({
-	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
-	          data    : data,
-	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-	         })
-	         .then(function(response) {
-	         $('#vegaPanelBodyLoader').hide(); $("body").css("cursor", "default");
-	           if(response.data.status){            
-	             $scope.filterTitle = response.data.result;
-	             
-	             $scope.isMoreLeft = false;
-	             $scope.isReservationsFound = true;
-	             $scope.reservationsList = response.data.response;
-	           
-	             $scope.filterTitle = response.data.message;
-	
-	             if($scope.reservationsList.length%10 == 0){
-	                  $scope.isMoreLeft = true;
-	             }else{
-	                  $scope.isMoreLeft = false;
-	             }
-	           }
-	           else{
-	             $scope.isReservationsFound = false;
-	             $scope.filterTitle = "No Matching Results";
-	             $scope.resultMessage = "There are no matching results.";
-	           }
-	          });
-          
-          }
-      }
-
-      //Load More Orders
-      $scope.loadMore = function(){
-        $scope.limiter = $scope.limiter + 10;
-        var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
-        data.key = $scope.searchID;
-        data.id = $scope.limiter;
-
-        $http({
-          method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
-          data    : data,
-          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-         })
-         .then(function(response) {
-           if(response.data.status){
-             $scope.isReservationsFound = true;
-             $scope.reservationsList = $scope.reservationsList.concat(response.data.response);
-
-             if($scope.reservationsList.length%10 == 0){
-                  $scope.isMoreLeft = true;
-             }else{
-                  $scope.isMoreLeft = false;
-             }
-           }
-           else{
-           	if($scope.limiter == 0){
-             		$scope.isReservationsFound = false;
-             	}
-             	else{
-             		$scope.isMoreLeft = false;
-             	}
-           }
-          });
-      }
-      
-      
-      $scope.getStatusColor = function(mystatus){
-	switch(mystatus) {
-	    case 'Seated':{
-	        return 'greenColorText';
-	        break;
-	    }
-	    case 'Completed':{
-	        return 'greenColorText';
-	        break;
-	    }
-	    case 'Cancelled':{
-	        return 'redColorText';
-	        break;
-	    } 
-	    case 'No Show':{
-	        return 'redColorText';
-	        break;
-	    }   
-	    default:{
-	        return '';
-	    }
-	}      
-      }
-               
          
-         $scope.showCancel = function(id, showName){
+         $scope.showCancel = function(vendor){
          
-       		$scope.cancelItemCode = id;
-       		$scope.cancelShowName = showName != ""? showName: "Unknown Person";
+       		$scope.cancelItemCode = vendorid;
+       		$scope.cancelShowName = vendor.name;
        	
        		$('#cancelModal').modal('show');
          
@@ -258,7 +108,7 @@ $scope.initReservations();
 	         .then(function(response) {
 	         	$('#cancelModal').modal('hide');
 	         	if(response.data.status){	   
-	         		$scope.initReservations();
+	         		$scope.initVendors();
 	              	}
 	              	else{
 		              	alert(response.data.error);
@@ -270,15 +120,15 @@ $scope.initReservations();
          
      //Add new reservation
      $scope.nullNewReservation = function(){
-     	$scope.newReservationContent = {};
-     	$scope.newReservationContent.mobile = "";
-     	$scope.newReservationContent.email = "";
-     	$scope.newReservationContent.name = "";
-     	$scope.newReservationContent.count = 2;
-     	$scope.newReservationContent.mode = "";
-     	$scope.newReservationContent.date = "";
-     	$scope.newReservationContent.time = "";
-     	$scope.newReservationContent.comments = "";     
+     	$scope.newVendor = {};
+     	$scope.newVendor.mobile = "";
+     	$scope.newVendor.email = "";
+     	$scope.newVendor.name = "";
+     	$scope.newVendor.count = 2;
+     	$scope.newVendor.mode = "";
+     	$scope.newVendor.date = "";
+     	$scope.newVendor.time = "";
+     	$scope.newVendor.comments = "";     
      }
      $scope.nullNewReservation();
      
@@ -289,91 +139,39 @@ $scope.initReservations();
      }
      
      $scope.showEdit = function(obj){
-     	$scope.editReservationContent = obj;
-     	$('#reservationEditModal').modal('show');
+     	$scope.editVendor = obj;
+     	$('#vendorEditModal').modal('show');
      }
      
-        $('#new_date').datetimepicker({  // Date
-		    	format: "dd-mm-yyyy",
-		    	weekStart: 1,
-	        	todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 0
-	    });
-	    
-	    $('#new_time').datetimepicker({ // Time
-			format: "hhii",
-        		weekStart: 1,
-        		todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 1,
-			minView: 0,
-			maxView: 1,
-			forceParse: 0
-	    });
-	    
-	    $('#edit_date').datetimepicker({  // Date
-		    	format: "dd-mm-yyyy",
-		    	weekStart: 1,
-	        	todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 0
-	    });
-	    
-	    $('#edit_time').datetimepicker({ // Time
-			format: "hhii",
-        		weekStart: 1,
-        		todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 1,
-			minView: 0,
-			maxView: 1,
-			forceParse: 0
-	    });
-	    
-	    
-	    
-	    
 	$scope.saveNewReservation = function(){
-	
-		$scope.newReservationContent.time = document.getElementById("new_time").value;
-		$scope.newReservationContent.date = document.getElementById("new_date").value;
-		$scope.newReservationContent.mode = document.getElementById("my_mode").value;
-		$scope.newReservationContent.isBirthday = document.getElementById("check_birthday").checked ? 1 : 0;
-		$scope.newReservationContent.isAnniversary = document.getElementById("check_anniversary").checked? 1: 0;
+
+		console.log($scope.newVendor);
 		
-		console.log($scope.newReservationContent);
+		$scope.newVendorError = "";
 		
-		$scope.newReservationError = "";
-		
-		if($scope.newReservationContent.name == "" || !(/^[a-zA-Z ]+$/.test($scope.newReservationContent.name))){
-			$scope.newReservationError = "Invalid Name";
+		if($scope.newVendor.name == "" || !(/^[a-zA-Z ]+$/.test($scope.newVendor.name))){
+			$scope.newVendorError = "Invalid Name";
 		}
-		else if($scope.newReservationContent.mobile == "" || !(/^[789]\d{9}$/.test($scope.newReservationContent.mobile))){
-			$scope.newReservationError = "Invalid Mobile Number";
+		else if($scope.newVendor.mobile == "" || !(/^[789]\d{9}$/.test($scope.newVendor.mobile))){
+			$scope.newVendorError = "Invalid Mobile Number";
 		}
-		else if($scope.newReservationContent.count == "" || $scope.newReservationContent.count == 0){
-			$scope.newReservationError = "Invalid Person Count";
+		else if($scope.newVendor.address == ""){
+			$scope.newVendorError = "Invalid Address";
 		}
-		else if($scope.newReservationContent.date == "" || $scope.newReservationContent.time == ""){
-			$scope.newReservationError = "Add Date and Time";
+		else if($scope.newVendor.modeOfPayment == ""){
+			$scope.newVendorError = "Invalid Mode of Payment";
 		}
-		else if($scope.newReservationContent.mode == ""){
-			$scope.newReservationError = "Select Reservation Mode";
+		else if($scope.newVendor.providingBranches == ""){
+			$scope.newVendorError = "Select the branches the vendor will be providing";
+		}
+		else if($scope.newVendor.inventoriesProvided == ""){
+			$scope.newVendorError = "Select the stock items the vendor will be providing";
 		}
 		else{
-			$scope.newReservationError = "";
+			$scope.newVendorError = "";
 			
 			var data = {};
-		    	data.details = $scope.newReservationContent;
+		    	data.details = $scope.newVendor;
 		        data.token = $cookies.get("zaitoonAdmin");
 		        $http({
 		          method  : 'POST',
@@ -384,7 +182,7 @@ $scope.initReservations();
 		         .then(function(response) {
 		         	$('#reservationModal').modal('hide');
 		         	if(response.data.status){	   
-		         		$scope.initReservations();
+		         		$scope.initVendors();
 		              	}
 		              	else{
 			              	alert(response.data.error);
@@ -397,26 +195,35 @@ $scope.initReservations();
 	
 	
 	$scope.saveEditReservation = function(){
-	
-		$scope.editReservationContent.time = document.getElementById("edit_time").value;
-		$scope.editReservationContent.date = document.getElementById("edit_date").value;
-		
-		console.log($scope.editReservationContent);
+
+		console.log($scope.editVendor);
 		
 		$scope.editReservationError = "";
 		
 		
-		if($scope.editReservationContent.count == "" || $scope.editReservationContent.count == 0){
-			$scope.editReservationError = "Invalid Person Count";
+		if($scope.editVendor.name == "" || !(/^[a-zA-Z ]+$/.test($scope.editVendor.name))){
+			$scope.editVendorError = "Invalid Name";
 		}
-		else if($scope.editReservationContent.date == "" || $scope.editReservationContent.time == ""){
-			$scope.editReservationError = "Add Date and Time";
+		else if($scope.editVendor.mobile == "" || !(/^[789]\d{9}$/.test($scope.editVendor.mobile))){
+			$scope.editVendorError = "Invalid Mobile Number";
+		}
+		else if($scope.editVendor.address == ""){
+			$scope.editVendorError = "Invalid Address";
+		}
+		else if($scope.editVendor.modeOfPayment == ""){
+			$scope.editVendorError = "Invalid Mode of Payment";
+		}
+		else if($scope.editVendor.providingBranches == ""){
+			$scope.editVendorError = "Select the branches the vendor will be providing";
+		}
+		else if($scope.editVendor.inventoriesProvided == ""){
+			$scope.editVendorError = "Select the stock items the vendor will be providing";
 		}
 		else{
 			$scope.editReservationError = "";
 			
 			var data = {};
-		    	data.details = $scope.editReservationContent;
+		    	data.details = $scope.editVendor;
 		        data.token = $cookies.get("zaitoonAdmin");
 		        $http({
 		          method  : 'POST',
@@ -427,7 +234,7 @@ $scope.initReservations();
 		         .then(function(response) {
 		         	$('#reservationEditModal').modal('hide');
 		         	if(response.data.status){	   
-		         		$scope.initReservations();
+		         		$scope.initVendors();
 		              	}
 		              	else{
 			              	alert(response.data.error);
