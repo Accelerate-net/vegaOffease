@@ -1,4 +1,4 @@
-angular.module('reservationsApp', ['ngCookies'])
+angular.module('vendorsApp', ['ngCookies'])
 
 .config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
@@ -6,7 +6,7 @@ angular.module('reservationsApp', ['ngCookies'])
 
 
 
-  .controller('reservationsController', function($scope, $http, $interval, $cookies) {
+  .controller('vendorsController', function($scope, $http, $interval, $cookies) {
 
     // //Check if logged in
     // if($cookies.get("zaitoonAdmin")){
@@ -24,6 +24,8 @@ angular.module('reservationsApp', ['ngCookies'])
     //     window.location = "adminlogin.html";
     //   }
     // }
+
+    $('.js-example-basic-single').select2();
 
     $scope.outletCode = localStorage.getItem("branch");
 
@@ -54,7 +56,7 @@ angular.module('reservationsApp', ['ngCookies'])
       $scope.searchID = '';
       $scope.isReservationsFound = false;
       $scope.resultMessage = '';
-      $scope.filterTitle = 'Upcoming Reservations of the Week';
+      $scope.filterTitle = 'Vendors List';
       $scope.isMoreLeft = false;
 
       //Default Results : Reservations of the Week
@@ -98,7 +100,7 @@ $scope.initReservations = function(){
          }
          else{
            $scope.isReservationsFound = false;
-           $scope.resultMessage = "There are no Reservations this week!";
+           $scope.resultMessage = "There are no vendors added!";
          }
         });
 }
