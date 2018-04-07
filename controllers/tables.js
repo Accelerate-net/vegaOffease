@@ -8,22 +8,22 @@ angular.module('tablesApp', ['ngCookies'])
 
   .controller('tablesController', function($scope, $http, $interval, $cookies) {
 
-    //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
-      $scope.isLoggedIn = true;
-    }
-    else{
-      $scope.isLoggedIn = false;
-      window.location = "adminlogin.html";
-    }
+    // //Check if logged in
+    // if($cookies.get("zaitoonAdmin")){
+    //   $scope.isLoggedIn = true;
+    // }
+    // else{
+    //   $scope.isLoggedIn = false;
+    //   window.location = "adminlogin.html";
+    // }
 
-    //Logout function
-    $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
-        window.location = "adminlogin.html";
-      }
-    }
+    // //Logout function
+    // $scope.logoutNow = function(){
+    //   if($cookies.get("zaitoonAdmin")){
+    //     $cookies.remove("zaitoonAdmin");
+    //     window.location = "adminlogin.html";
+    //   }
+    // }
 
     $scope.outletCode = localStorage.getItem("branch");
 
