@@ -48,6 +48,29 @@ angular.module('inventoryApp', ['ngCookies'])
 		}
 		$scope.fetchInventoryList();
 
+		$scope.fetchVendorsList = function(){
+			var co_data = {};
+	        co_data.token = $cookies.get("zaitoonAdmin");
+	        $http({
+	          method  : 'POST',
+	          url     : 'https://zaitoon.online/services/erpFetchVendors.php',
+	          data    : co_data,
+	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+	         })
+	         .then(function(response) {
+			if(response.data.status){   
+			      $scope.vendorsList = response.data.response;
+			      console.log($scope.vendorsList);		    			       
+			}
+			else{	
+				$scope.isContentFound = false;		
+				$scope.newContentSet();	
+				$scope.vendorsList = {};
+			}
+	         });	
+		}
+		$scope.fetchVendorsList();
+
         $('#new_stockout_date').datetimepicker({  // Date
 		    format: "dd-mm-yyyy",
 		    weekStart: 1,
@@ -569,7 +592,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/deletemarketingcontent.php',
+	          url     : 'https://zaitoon.online/services/erpdeleteinventorypurchasehistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -600,7 +623,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/deletemarketingcontent.php',
+	          url     : 'https://zaitoon.online/services/erpdeleteinventorypaymenthistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -646,64 +669,6 @@ angular.module('inventoryApp', ['ngCookies'])
 	      	$scope.isContentFound = false;
 	}
 	$scope.newContentSet();
-	
-	
-	
-      
-      	    //Image Cropper
-      	    $scope.myImage = '';
-	    $scope.myCroppedImage = '';
-	    
-	      var image = "";
-	      $scope.cropBoxData;
-	      $scope.canvasData;
-	      $scope.cropper;
-	
-	    var handleFileSelect = function(evt) {
-	      var file = evt.currentTarget.files[0];
-	      var reader = new FileReader();
-	      reader.onload = function (evt) {
-	        $scope.$apply(function($scope){
-	          $scope.myImage = evt.target.result;
-	          setTimeout(function(){ 
-	          	image = document.getElementById('image');
-	          	$scope.cropper = new Cropper(image, {
-	          	  aspectRatio: 16 / 9,
-		          autoCropArea: 0.8,
-		          scalable: false,
-		          ready: function () {
-		            // Strict mode: set crop box data first
-		            $scope.cropper.setCropBoxData($scope.cropBoxData).setCanvasData($scope.canvasData);
-		          }
-		        });		        
-		  }, 1000);
-		  $scope.photoLoadedToFrame = true;
-	        });
-	      };
-	      reader.readAsDataURL(file);
-	    };
-	    angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
-	    
-	 $scope.attachPhoto = function(){
-	 	$('#imageModal').modal('show');		
-	 	$scope.photoLoadedToFrame = false; 	
-	 }
-	    
-	 $scope.isPhotoAttached = false;
-	 $scope.saveAttachment = function(){
-	 	$scope.isPhotoAttached = true;	 
-	        $scope.canvasData = $scope.cropper.getCroppedCanvas({
-				  width: 853,
-				  height: 480,
-				  fillColor: '#fff',
-				  imageSmoothingEnabled: false,
-				  imageSmoothingQuality: 'high',
-				});
-				
-		$scope.myPhotoURL = $scope.canvasData.toDataURL();
-	        $scope.cropper.destroy();
-	        $('#imageModal').modal('hide');		
-	 }
 
 	 $scope.saveNewContent = function(type){
 		if(type == 'out'){
@@ -779,7 +744,7 @@ angular.module('inventoryApp', ['ngCookies'])
    
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
+			          url     : 'https://zaitoon.online/services/erpaddinventorypurchasehistory.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -831,7 +796,7 @@ angular.module('inventoryApp', ['ngCookies'])
 		        	console.log(data)  	
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
+			          url     : 'https://zaitoon.online/services/erpaddinventorypaymentshistory.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })

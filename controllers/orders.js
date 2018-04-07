@@ -54,12 +54,11 @@ $scope.initStocks = function(){
 
       var data = {};
       data.token = $cookies.get("zaitoonAdmin");
-      data.id = 0;
-      data.key = today;
+      
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
+        url     : 'https://zaitoon.online/services/erpFetchInventoryList.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -88,7 +87,7 @@ $scope.initStocks();
          
          $scope.showCancel = function(stock){
          
-          $scope.cancelItemCode = stockid;
+          $scope.cancelItemCode = stock.id;
           $scope.cancelShowName = stock.name;
         
           $('#cancelModal').modal('show');
@@ -101,7 +100,7 @@ $scope.initStocks();
           data.token = $cookies.get("zaitoonAdmin");
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/cancelreservationsadmin.php',
+            url     : 'https://zaitoon.online/services/erpdeleteinventorylist.php',
             data    : data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
@@ -175,7 +174,7 @@ $scope.initStocks();
             data.token = $cookies.get("zaitoonAdmin");
             $http({
               method  : 'POST',
-              url     : 'https://kopperkadai.online/services/newreservationsadmin.php',
+              url     : 'https://zaitoon.online/services/erpaddinventorylist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -227,7 +226,7 @@ $scope.initStocks();
             data.token = $cookies.get("zaitoonAdmin");
             $http({
               method  : 'POST',
-              url     : 'https://kopperkadai.online/services/editreservationsadmin.php',
+              url     : 'https://zaitoon.online/services/erpeditinventorylist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })

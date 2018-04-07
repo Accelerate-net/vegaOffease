@@ -269,15 +269,12 @@
                                              <form class="form-horizontal tabular-form">
                                              	<div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Inventory Name</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-7" class="form-control" ng-model="addNewContent.id" onchange="dropChange(this)">
+                                                      <select id="drop" class="js-example-basic-single col-sm-7" class="form-control" ng-model="addNewContent.id">
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
+                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
+                                                              {{inventory.name}}
                                                          </option>
                                                       </select>
                                                 </div>
@@ -337,11 +334,8 @@
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
+                                                         <option ng-repeat="vendor in vendorList" value="vendor.id">
+                                                              {{vendor.name}}
                                                          </option>
                                                       </select>
                                                 </div>
@@ -351,11 +345,8 @@
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
+                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
+                                                              {{inventory.name}}
                                                          </option>
                                                       </select>
                                                 </div>
@@ -425,11 +416,8 @@
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
+                                                         <option ng-repeat="vendor in vendorList" value="vendor.id">
+                                                              {{vendor.name}}
                                                          </option>
                                                       </select>
                                                 </div>
@@ -510,11 +498,8 @@
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
+                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
+                                                              {{inventory.name}}
                                                          </option>
                                                       </select>
                                                 </div>

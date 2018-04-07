@@ -55,27 +55,21 @@ $scope.initVendors = function(){
       var data = {};
       data.token = $cookies.get("zaitoonAdmin");
       data.id = 0;
-      data.key = today;
+
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
+        url     : 'https://zaitoon.online/services/erpFetchVendors.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
        .then(function(response) {
        $('#vegaPanelBodyLoader').hide(); $("body").css("cursor", "default");
+       console.log(response.data)
          if(response.data.status){
-
+         	console.log(response.data)
            $scope.isReservationsFound = true;
-           $scope.reservationsList = response.data.response;
-           
-           	     if($scope.reservationsList.length%10 == 0){
-	                  $scope.isMoreLeft = true;
-	             }else{
-	                  $scope.isMoreLeft = false;
-	             }
-	             
+           $scope.vendorsList = response.data.response;
          }
          else{
            $scope.isReservationsFound = false;
@@ -88,7 +82,7 @@ $scope.initVendors();
          
          $scope.showCancel = function(vendor){
          
-       		$scope.cancelItemCode = vendorid;
+       		$scope.cancelItemCode = vendor.id;
        		$scope.cancelShowName = vendor.name;
        	
        		$('#cancelModal').modal('show');
@@ -97,11 +91,11 @@ $scope.initVendors();
          
          $scope.confirmCancel = function(code){
 	    	var data = {};
-	    	data.id = code;
+	    	data.code = code;
 	        data.token = $cookies.get("zaitoonAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/cancelreservationsadmin.php',
+	          url     : 'https://zaitoon.online/services/erpdeleteinventoryvendors.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -175,7 +169,7 @@ $scope.initVendors();
 		        data.token = $cookies.get("zaitoonAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/newreservationsadmin.php',
+		          url     : 'https://zaitoon.online/services/erpaddinventoryvendors.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -227,7 +221,7 @@ $scope.initVendors();
 		        data.token = $cookies.get("zaitoonAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/editreservationsadmin.php',
+		          url     : '',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
