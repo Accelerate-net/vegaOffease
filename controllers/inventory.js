@@ -711,7 +711,8 @@ angular.module('inventoryApp', ['ngCookies'])
 
 
 		else if(type == 'purchases'){ 
-
+			$scope.addNewContent.vendorId = '9043960876';
+			$scope.addNewContent.item = 'Chicken';
 			if($scope.addNewContent.vendorId == ""){
 		      		$scope.newContentSaveError = "Choose a vendor";
 		      	}      
@@ -735,13 +736,16 @@ angular.module('inventoryApp', ['ngCookies'])
 		      		
 	
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
+		        	data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOgyQZMMeKUIflJfJvkCMRcAKqUwzMstLJzZceSsxZQrQg==';
 		        	data.vendorId = $scope.addNewContent.vendorId;
 		        	data.item = $scope.addNewContent.item;
-		        	data.units = $scope.addNewContent.units;
+		        	data.units = $scope.addNewContent.unitsPurchased;
+		        	data.totalAmount = $scope.addNewContent.totalAmount;
 		        	data.paymentMode = $scope.addNewContent.paymentMode;
+		        	data.date = $scope.addNewContent.date;
 		        	data.remarks = $scope.addNewContent.remarks;   
-   
+   					console.log(data)
+
 			        $http({
 			          method  : 'POST',
 			          url     : 'https://zaitoon.online/services/erpaddinventorypurchasehistory.php',
