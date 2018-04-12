@@ -36,6 +36,8 @@ angular.module('peopleApp', ['ngCookies'])
 
 
 
+
+
       $scope.searchWithBranch = function(){
 
             var data = {};
@@ -599,7 +601,7 @@ angular.module('peopleApp', ['ngCookies'])
                   $scope.isFound = false;
                   $scope.studentData = {}
                 }
-      });
+            });
     }
 
 
@@ -642,6 +644,200 @@ angular.module('peopleApp', ['ngCookies'])
   $scope.viewPhoto = function(img){
     $('#imagePreviewModal').modal('show'); 
     $scope.currentImage = img;  
+  }
+
+
+  //Attendance Page
+
+  $scope.calendarView = true;
+
+  $scope.attendanceRecord = [];
+  $scope.FetchAttendanceRecord = function(month, year){
+
+          if(!month || month == '' || !year || year == ''){
+            var today = new Date();
+            var mm = today.getMonth()+1; //January is 0!
+            var year = today.getFullYear();
+            if(mm<10) {
+                mm = '0'+mm;
+            } 
+            var month = mm;
+          }
+
+            var userID = $scope.studentData.employeeID;
+            
+            var data = {};
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.year = year;
+            data.month = month;
+            data.user = userID;
+
+            $http({
+              method  : 'POST',
+              url     : 'https://www.zaitoon.online/services/erpfetchpeopleattendance.php',
+              data    : data,
+              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+             })
+             .then(function(response) {
+                if(response.data.status){
+                  $scope.attendanceRecord = response.data.response;   
+                  $scope.fetchCalendar($scope.attendanceRecord);
+                }
+            });
+  }
+
+
+  $scope.fetchCalendar = function(attendanceRecord){
+
+            $scope.events = [];
+
+            angular.forEach(attendanceRecord, function(value, key){
+
+              if(value.status == 0){
+                var tempDate = (value.date).split("-");
+                value.start = tempDate[2]+"-"+tempDate[1]+"-"+tempDate[0];
+                value.backgroundColor = "#bdc3c7";
+                value.title = "Unknown";
+              }
+              else if(value.status == 1){
+                var tempDate = (value.date).split("-");
+                value.start = tempDate[2]+"-"+tempDate[1]+"-"+tempDate[0];
+                value.backgroundColor = "#e67e22";
+                value.title = "Half Day";
+              }
+              else if(value.status == 2){
+                var tempDate = (value.date).split("-");
+                value.start = tempDate[2]+"-"+tempDate[1]+"-"+tempDate[0];
+                value.backgroundColor = "#2ecc71";
+                value.title = "Present";
+              }
+              else if(value.status == 5){
+                var tempDate = (value.date).split("-");
+                value.start = tempDate[2]+"-"+tempDate[1]+"-"+tempDate[0];
+                value.backgroundColor = "#e74c3c";
+                value.title = "Absent";
+              }
+
+              $scope.events.push(value);
+            });
+
+
+            console.log($scope.events)
+
+            /* initialize the calendar
+            -----------------------------------------------------------------*/
+
+            $('#calendar-view').fullCalendar({
+              header: {
+                  left:   'title',
+                  center: '',
+                  right:  ''
+              },
+              defaultView: 'month',
+              editable: false,
+              droppable: false, // this allows things to be dropped onto the calendar
+              drop: function() {
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                  // if so, remove the element from the "Draggable Events" list
+                  $(this).remove();
+                }
+              },
+              
+              
+              events: $scope.events,
+              
+              buttonIcons: { //multiple fa class because it will then output .fc-icon-fa.fa.fa-...
+                  prev: 'fa fa fa-angle-left',
+                  next: 'fa fa fa-angle-right',
+                  prevYear: 'fa fa fa-angle-double-left',
+                  nextYear: 'fa fa fa-angle-double-left'
+              },
+              
+              
+            });
+   }
+
+   $scope.openMonthSelector = function(){
+
+      $('#attendanceFilterMonth').datetimepicker({
+        format: "MM, yyyy",
+        autoclose: 1,
+        startView: 3,
+        minView: 3,
+        forceParse: 0
+      })
+
+      $('#monthSelectorModal').modal('show'); 
+   }
+
+
+   var tempToday = new Date();
+
+   //default month year display
+   $scope.attendanceFilterDisplay = (getFancyMonth(tempToday.getMonth()))+', '+(tempToday.getFullYear());
+
+   $scope.applyMonthFilterAttendance = function(){
+    var tempNewDate = document.getElementById("attendanceFilterMonth").value;
+    $('#monthSelectorModal').modal('hide');
+
+    $scope.attendanceFilterDisplay = tempNewDate;
+
+    var tempSplit = tempNewDate.split(", ");
+
+    var month = getMonthDigit(tempSplit[0]);
+    var year = tempSplit[1];
+
+    $scope.FetchAttendanceRecord(month, year)
+
+    var newDate = new Date(year, month-1, 01)
+    $('#calendar-view').fullCalendar('gotoDate', newDate);
+   }
+
+  function getMonthDigit(text){
+    switch(text) {
+        case 'January':
+            return '01'
+        case 'February':
+            return '02'
+        case 'March':
+            return '03'
+        case 'April':
+            return '04'
+        case 'May':
+            return '05'
+        case 'June':
+            return '06'
+        case 'July':
+            return '07'
+        case 'August':
+            return '08'   
+        case 'September':
+            return '09'
+        case 'October':
+            return '10'
+        case 'November':
+            return '11'
+        case 'December':
+            return '12'                
+    }
+  }
+
+  function getFancyMonth(id){
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    return month[id];    
   }
 
 });

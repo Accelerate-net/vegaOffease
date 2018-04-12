@@ -32,6 +32,50 @@
   
 }
 
+.attendance_unknown{
+  cursor: pointer;
+  background: gray;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: #FFF;
+  min-width: 80px;
+      display: inline-block;
+    text-align: center;
+}
+
+.attendance_half{
+  cursor: pointer;
+  background: #e67e22;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: #FFF;
+  min-width: 80px;
+      display: inline-block;
+    text-align: center;
+}
+
+.attendance_absent{
+  cursor: pointer;
+  background: #e74c3c;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: #FFF;
+  min-width: 80px;
+      display: inline-block;
+    text-align: center;
+}
+
+.attendance_present{
+  cursor: pointer;
+  background: #2ecc71;
+  padding: 3px 5px;
+  border-radius: 3px;
+  color: #FFF;
+  min-width: 80px;
+      display: inline-block;
+    text-align: center;
+}
+
 .centeredOverlay{
     position: absolute;
     top: 50%;

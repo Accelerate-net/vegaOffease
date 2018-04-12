@@ -24,7 +24,7 @@ angular.module('attendanceApp', ['ngCookies'])
 
 
 
-        $('#new_referal_date').datetimepicker({  // Date
+        $('#new_attendance_date').datetimepicker({  // Date
 		    format: "dd-mm-yyyy",
 		    weekStart: 1,
 	        todayBtn:  1,
@@ -38,16 +38,16 @@ angular.module('attendanceApp', ['ngCookies'])
 
 $scope.fetchFigures = function(){
 
-    $scope.figure_total_referers = 0;
-    $scope.figure_total_referees = 0;
-    $scope.figure_converted_referees = 0;	
+    $scope.figure_total_employees = 0;
+    $scope.figure_total_present = 0;
+    $scope.figure_total_absent = 0;	
 
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-
+		        	data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+          
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/fetchreferalfigures.php',
+			          url     : 'https://zaitoon.online/services/erpfetchattendancefigures.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -55,10 +55,10 @@ $scope.fetchFigures = function(){
 			              
 			              if(response.data.status){
 
-						    $scope.figure_total_referers = response.data.figure_total_referers;
-						    $scope.figure_total_referees = response.data.figure_total_referees;
-						    $scope.figure_converted_referees = response.data.figure_converted_referees;	
-			              
+      						    $scope.figure_total_employees = response.data.figure_total_employees;
+      						    $scope.figure_total_present = response.data.figure_total_present;
+      						    $scope.figure_total_absent = response.data.figure_total_absent;	
+      			              
 			              }
 			         });    
 }
@@ -80,53 +80,9 @@ $scope.fetchFigures();
      
     $scope.outletCode = localStorage.getItem("branch");
 
-	 $scope.saveNewContent = function(){
-		
-				if($scope.addNewContent.name == ""){
-		      		$scope.newContentSaveError = "Name can not be empty";
-		      	}      
-		      	else if(!(/^[0-9]+$/.test($scope.addNewContent.mobile))){
-		      		$scope.newContentSaveError = "Invalid mobile number";
-		      	}
-		      	else{
-		      		//Add to server
-		      		$scope.newContentSaveError = "";
-		      		
-		      		$('#loading').show(); $("body").css("cursor", "progress");
-		      				      		
-		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-		        	data.name = $scope.addNewContent.name;
-		        	data.mobile = $scope.addNewContent.mobile;
-		        	data.date = $scope.addNewContent.date;   
-		        	date.list = $scope.referencesHoldList;
-   
-			        $http({
-			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
-			          data    : data,
-			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-			         })
-			         .then(function(response) {
-			              $('#loading').hide(); $("body").css("cursor", "default");
-			              if(response.data.status){
-			              	$scope.resetNewContent();
-			              	$scope.fetchFigures();
-			              
-			              }
-			              else{
-			              	$scope.newContentSaveError = response.data.error;
-			              }
-			         });
-		      	}	
-	}
-	
 	$scope.resetNewContent = function(){
-		$scope.referencesHoldList = [];
 
-		$scope.addNewContent = {};
-		$scope.addNewContent.mobile = "";
-		$scope.addNewContent.name = "";
+		$scope.attendancePopup = {};
 
 		  var today = new Date();
 
@@ -145,8 +101,8 @@ $scope.fetchFigures();
           today = dd + '-' + mm + '-' + yyyy;
 
 
-		$scope.addNewContent.date = today;
-		document.getElementById("new_referal_date").value = today;
+		$scope.attendancePopup.date = today;
+		document.getElementById("new_attendance_date").value = today;
 
 		$scope.newContentSaveError = '';
 	}
@@ -154,79 +110,22 @@ $scope.fetchFigures();
 	$scope.resetNewContent();
 
 
-	$scope.referencesHoldList = [];
-
-	$scope.addNewReference = function(){
-		var name = document.getElementById("new_reference_name").value;
-		var mobile = document.getElementById("new_reference_mobile").value;
-
-		if(!name || name == '' || !mobile || mobile == ''){
-			return '';
-		}
-		else if(mobile.length != 10){
-			return '';
-		}
-
-
-		if($scope.referencesHoldList.length > 0){
-			var n = 0;
-			while($scope.referencesHoldList[n]){
-				if($scope.referencesHoldList[n].mobile == mobile){
-					//Error
-					return '';
-				}
-				n++;
-			}
-
-			$scope.referencesHoldList.push({"name": name, "mobile": mobile});
-			document.getElementById("new_reference_name").value = '';
-			document.getElementById("new_reference_mobile").value = '';
-		}
-		else{
-			$scope.referencesHoldList.push({"name": name, "mobile": mobile});
-			document.getElementById("new_reference_name").value = '';
-			document.getElementById("new_reference_mobile").value = '';
-		}
-
-		console.log($scope.referencesHoldList)
-	}
-
-	$scope.removeNewReference = function(mobile){
-		
-		if($scope.referencesHoldList.length > 0){
-			var n = 0;
-			while($scope.referencesHoldList[n]){
-				if($scope.referencesHoldList[n].mobile == mobile){
-					$scope.referencesHoldList.splice(n,1);
-					break;
-				}
-				n++;
-			}
-
-		}
-		else{
-			return '';
-		}
-	}
-
 
 
       //Seater Area
 	
 		$scope.seatPlan = "";
-		$scope.freeingAllList = "";
 		$scope.seatPlanError = "";
-		$scope.fetchTime = 'now';
 
-		$scope.dateFancy = '12th April';
-
+		
 		$scope.initAllStaff = function(){
 		
 			  $scope.seatPlanError = "";
 		
 		      var data = {};
 		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
-		      data.date = '20180412';
+		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
+
 
 		      $http({
 		        method  : 'POST',
@@ -243,10 +142,15 @@ $scope.fetchFigures();
 		         else{
 		           	$scope.seatPlanError = response.data.error;
 		         }
+		         $('#attendancePlanModal').modal('show');
 		        });
 		}
 	
 
+		function getFormattedDate(date){
+			var temp = date.split('-');
+			return temp[2]+''+temp[1]+''+temp[0];
+		}
 
 
 
@@ -254,8 +158,8 @@ $scope.fetchFigures();
 
 		$scope.showEmployeeSelector = function(){
 			$scope.holdList = [];
-			$scope.initAllStaff();      	
-			$('#attendancePlanModal').modal('show');
+			$scope.initAllStaff();   
+			$scope.displayDate = document.getElementById("new_attendance_date").value;   	
 		}
 
       $scope.getMyClass = function(person){
@@ -263,6 +167,9 @@ $scope.fetchFigures();
       		return "btn-default";
       	}
       	else if(person.attendance == 1){
+      		return "btn-warning";
+      	}
+      	else if(person.attendance == 2){
       		return "btn-success";
       	}
       	else if(person.attendance == 5){
@@ -275,19 +182,42 @@ $scope.fetchFigures();
 
       		//Invert Attendance code
       		if(person.attendance == 0){
-      			person.attendance = 1;
+      			person.attendance = 2;
       		}
-      		else if(person.attendance == 1){
+      		else if(person.attendance == 2){
       			person.attendance = 5;
       		}
       		else if(person.attendance == 5){
+      			person.attendance = 1;
+      		}
+      		else if(person.attendance == 1){
       			person.attendance = 0;
       		}	
       }
       
 
       $scope.confirmAttendance = function(fullData){
-      	console.log(fullData)
+
+		      var data = {};
+		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
+		      data.info = fullData;
+
+		      $http({
+		        method  : 'POST',
+		        url     : 'https://zaitoon.online/services/erpmarkattendance.php',
+		        data    : data,
+		        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+		       })
+		       .then(function(response) {
+		         if(response.data.status){
+		         	$scope.seatPlanError = '';
+		         	$('#attendancePlanModal').modal('hide');
+		         }
+		         else{
+		           	$scope.seatPlanError = response.data.error;
+		         }
+		        });
       }
 
 
