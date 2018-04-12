@@ -31,192 +31,412 @@ angular.module('peopleApp', ['ngCookies'])
           window.location = "adminlogin.html";
         }
       }
-      
-      //Schools basic info
-      $scope.schoolCode = localStorage.getItem("schoolCode");
-      $scope.schoolFancyName = localStorage.getItem("schoolCity");
-
-      $scope.isSearched = false;
-      $scope.isFound = false;
-      $scope.singleStudent = false;
-      $scope.studentData = "";
-      $scope.newStudent = [];
-      $scope.newStudent.fName = "";
-      $scope.newStudent.lName = "";
-      $scope.newStudent.height = "";
-      $scope.newStudent.weight = "";
-      $scope.newStudent.dob = "";
-      $scope.newStudent.doj = "";
-      $scope.newStudent.class = "";
-      $scope.newStudent.division = "";
-      $scope.newStudent.stream = "";
-      $scope.newStudent.section = "";
-      $scope.newStudent.gender = "";
-      $scope.newStudent.bloodGroup = "";
-      $scope.newStudent.contactAddress = "";
-      $scope.newStudent.contactPhone = "";
-      $scope.newStudent.religion = "";
-      $scope.newStudent.caste = "";
-      $scope.newStudent.location = "";
-      $scope.newStudent.city = "";
-      $scope.newStudent.pincode = "";
-      $scope.newStudent.father = {};
-      $scope.newStudent.father.name = "";
-      $scope.newStudent.father.mobile = "";
-      $scope.newStudent.father.email = "";
-      $scope.newStudent.father.occupation = "";
-      $scope.newStudent.father.income = "";
-      $scope.newStudent.father.location = "";
-      $scope.newStudent.mother = {};
-      $scope.newStudent.mother.name = "";
-      $scope.newStudent.mother.mobile = "";
-      $scope.newStudent.mother.email = "";
-      $scope.newStudent.mother.occupation = "";
-      $scope.newStudent.mother.income = "";
-      $scope.newStudent.mother.location = "";
 
 
-      $scope.searchKey = "";
-      $scope.errorMessage = "";
-      $scope.divisions = {};
 
-      $scope.search = function(search_key){
+
+
+      $scope.searchWithBranch = function(){
 
             var data = {};
-            data.token = $cookies.get("dashManager");
-            data.key = search_key;
-            console.log("Goes to server");
-            console.log(data);
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
 
             $http({
               method  : 'POST',
-              url     : 'http://www.schooldash.xyz/services/fetchstudents.php',
+              url     : 'https://www.zaitoon.online/services/erpfetchpeoplemetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
              .then(function(response) {
-                console.log("Comes from server");
-                console.log(response);
+                if(response.data.status){
+                  $scope.branchList = response.data.branches;
+                  if($scope.branchList.length > 0)
+                    $('#filterModal').modal('show'); 
+                  else
+                    return '';
+                }
+            });
+      }
 
-            if(response.data.status){
-              $scope.isSearched = true;
-              $scope.isFound = true;
-              $scope.studentData = response.data.response;
+      $scope.searchWithBranchAction = function(key){
+        $scope.searchKey = key;
+        $scope.search(key);
+        $('#filterModal').modal('hide');
+      }
 
-              if($scope.studentData.length == 1){
-                $scope.singleStudent = true;
-                $scope.studentData = $scope.studentData[0];
-                console.log($scope.studentData);
-              }
 
-              else{
-                $scope.singleStudent = false;
-              }
-            }
-            
-            else{
-              $scope.isSearched = true;
-              $scope.isFound = false;
-              $scope.studentData = {};
-            }
+
+      $scope.searchWithRole = function(){
+
+            var data = {};
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+
+            $http({
+              method  : 'POST',
+              url     : 'https://www.zaitoon.online/services/erpfetchpeoplemetadata.php',
+              data    : data,
+              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+             })
+             .then(function(response) {
+                if(response.data.status){
+                  $scope.roleList = response.data.roles;
+                  if($scope.roleList.length > 0)
+                    $('#filterModalRole').modal('show'); 
+                  else
+                    return '';
+                }
+            });
+      }
+
+      $scope.searchWithRoleAction = function(key){
+        $scope.searchKey = key;
+        $scope.search(key);
+        $('#filterModalRole').modal('hide');
+      }
+
+
+
+      $scope.search = function(search_key){
+
+            var data = {};
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.key = search_key;
+
+
+            $http({
+              method  : 'POST',
+              url     : 'https://www.zaitoon.online/services/erpfetchpeople.php',
+              data    : data,
+              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+             })
+             .then(function(response) {
+
+                if(response.data.status){
+                  $scope.isSearched = true;
+                  $scope.isFound = true;
+                  $scope.studentData = response.data.response;
+
+                  console.log($scope.studentData)
+
+                  if($scope.studentData.length == 1){
+                    $scope.singleStudent = true;
+                    $scope.studentData = $scope.studentData[0];
+                    console.log($scope.studentData);
+                  }
+                  else{
+                    $scope.singleStudent = false;
+                  }
+                }
+                else{
+                  $scope.isSearched = true;
+                  $scope.isFound = false;
+                  $scope.studentData = {};
+                }
 
             });
               
       }
 
-      $scope.createStudent = function(){
 
-            $scope.newStudent.dob = document.getElementById('dob1').value;
-            console.log($scope.dob);
+      $scope.resetSearchView = function(){
+        $scope.createView = false;
+        $scope.editStudentWindow = false;
 
-            if($scope.newStudent.gender === ''){
-              $scope.errorMessage = 'Mention the gender of the student';
-            }
-            else if($scope.newStudent.fName === ''){
-              $scope.errorMessage = 'Mention the first name of the student';
-            }
-            else if($scope.newStudent.lName === ''){
-              $scope.errorMessage = 'Mention the last name of the student';
-            }
-            else if($scope.newStudent.class === ''){
-              $scope.errorMessage = 'Mention the class of the student';
-            }
-            else if($scope.newStudent.division === ''){
-              $scope.errorMessage = 'Mention the division of the student';
-            }
-            else if($scope.newStudent.height === ''){
-              $scope.errorMessage = 'Mention the height of the student';
-            }
-            else if($scope.newStudent.weight === ''){
-              $scope.errorMessage = 'Mention the weight of the student';
-            }
-            else if($scope.newStudent.religion === ''){
-              $scope.errorMessage = "Mention the student's religion";
-            }
-            else if($scope.newStudent.caste === ''){
-              $scope.errorMessage = "Mention the student's caste";
-            }
-            else if($scope.newStudent.bloodGroup === ''){
-              $scope.errorMessage = "Mention the student's Blood Group";
-            }
-            else if($scope.newStudent.contactAddress === ''){
-              $scope.errorMessage = "Mention the student's Address";
-            }
-            else if($scope.newStudent.pincode === ''){
-              $scope.errorMessage = "Mention the student's location Pin Code";
-            }
-            else if($scope.newStudent.contactPhone === ''){
-              $scope.errorMessage = "Mention the student's Telephone Number";
-            }
-            else if($scope.newStudent.class > 10){
-              if($scope.newStudent.stream === ''){
-                $scope.errorMessage = 'Mention the date of birth of the student';
-              }
-            }
-            else if($scope.newStudent.father.name === ''){
-              $scope.errorMessage = "Mention the father's name";
-            }
-            else if($scope.newStudent.father.mobile === ''){
-              $scope.errorMessage = "Mention the father's mobile number";
-            }
-            else if($scope.newStudent.father.email === ''){
-              $scope.errorMessage = "Mention the father's email";
-            }
-            else if($scope.newStudent.father.occupation === ''){
-              $scope.errorMessage = "Mention the father's occupation";
-            }
-            else if($scope.newStudent.father.income === ''){
-              $scope.errorMessage = "Mention the father's income";
-            }
-            else if($scope.newStudent.father.location === ''){
-              $scope.errorMessage = "Mention the father's office address";
-            }
-            else if($scope.newStudent.mother.name === ''){
-              $scope.errorMessage = "Mention the mother's name";
-            }
-            else if($scope.newStudent.mother.occupation === ''){
-              $scope.errorMessage = "Mention the mother's occupation";
-            }
-            else if($scope.newStudent.mother.income === ''){
-              $scope.errorMessage = "Mention the mother's income";
-            }
-            else if($scope.newStudent.mother.location === ''){
-              $scope.errorMessage = "Mention the mother's office address";
-            }
-            else if($scope.newStudent.dob === ''){
-              $scope.errorMessage = 'Mention the Date of Birth of the student';
-            }
-            else if($scope.newStudent.location === ''){
-              $scope.errorMessage = 'Mention the Area name and/or Landmark';
-            }
-            else if($scope.newStudent.city === ''){
-              $scope.errorMessage = "Mention the student's city name";
-            }
+        $scope.isSearched = false;
+        $scope.isFound = false;
+        $scope.singleStudent = false;
+        
+        $scope.studentData = "";
 
+        $scope.newStudent = [];
+        $scope.newStudent.fName = "";
+        $scope.newStudent.lName = "";
+        $scope.newStudent.height = "";
+        $scope.newStudent.weight = "";
+        $scope.newStudent.dob = "";
+        $scope.newStudent.doj = "";
+        $scope.newStudent.class = "";
+        $scope.newStudent.division = "";
+        $scope.newStudent.stream = "";
+        $scope.newStudent.section = "";
+        $scope.newStudent.gender = "";
+        $scope.newStudent.bloodGroup = "";
+
+        $scope.searchKey = "";
+        $scope.errorMessage = "";
+      }
+
+      $scope.resetSearchView();
+
+
+      $scope.editCurrentProfile = function(currentData){  
+
+        $scope.createView = true;
+        $scope.editStudentWindow = true;
+        $scope.editStudent = currentData;
+
+        $scope.displayedName = $scope.editStudent.fName +' '+ $scope.editStudent.lName;
+
+        $scope.editStudent.regEmpID = currentData.employeeID;
+        $scope.editStudent.regMobile = currentData.contact;
+        currentData.gender == 'Male' ? $scope.editStudent.gender = 'M' : $scope.editStudent.gender = 'F';
+        $scope.editStudent.dob = currentData.birthDate;
+
+        $scope.editStudent.addressHouse = currentData.currentAddress.house;
+        $scope.editStudent.addressLocation = currentData.currentAddress.location;
+        $scope.editStudent.addressPost = currentData.currentAddress.post;
+        $scope.editStudent.addressPostcode = currentData.currentAddress.postCode;
+        $scope.editStudent.addressCity = currentData.currentAddress.city;
+        $scope.editStudent.addressDistrict = currentData.currentAddress.district;
+        $scope.editStudent.addressState = currentData.currentAddress.state;
+
+        $scope.editStudent.permanentHouse = currentData.permanentAddress.house;
+        $scope.editStudent.permanentLocation = currentData.permanentAddress.location;
+        $scope.editStudent.permanentPost = currentData.permanentAddress.post;
+        $scope.editStudent.permanentPostcode = currentData.permanentAddress.postCode;
+        $scope.editStudent.permanentCity = currentData.permanentAddress.city;
+        $scope.editStudent.permanentDistrict = currentData.permanentAddress.district;
+        $scope.editStudent.permanentState = currentData.permanentAddress.state;
+
+        $scope.editStudent.emergencyContact = currentData.emergencyName;
+        $scope.editStudent.emergencyPhone = currentData.emergencyNumber;
+
+        document.getElementById('dob_edit').value = currentData.birthDate;
+        document.getElementById('doj_edit').value = currentData.joinDate;
+
+        $scope.editStudent.dob = currentData.birthDate;
+        $scope.editStudent.doj = currentData.joinDate;
+
+        $scope.editStudent.bankAccountName = currentData.bankInfo.name;
+        $scope.editStudent.bankAccountNumber = currentData.bankInfo.number;
+        $scope.editStudent.bankName = currentData.bankInfo.bank;
+        $scope.editStudent.bankBranch = currentData.bankInfo.branch;
+        $scope.editStudent.ifsc = currentData.bankInfo.ifsc;
+
+        if(currentData.photoURL && currentData.photoURL != ''){
+          $scope.isPhotoAttached = true;
+          $scope.myPhotoURL = currentData.photoURL;
+        }
+        else{
+          $scope.isPhotoAttached = false;
+        }
+
+
+        $('#dob_edit').datetimepicker({  
+          format: "dd-mm-yyyy",
+          weekStart: 1,
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1,
+          startView: 2,
+          minView: 2,
+          forceParse: 0
+        }) 
+
+        $('#doj_edit').datetimepicker({  
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        }) 
+
+
+
+      }
+
+
+
+      $scope.saveEditStudent = function(){
+
+            $scope.editStudent.dob = document.getElementById('dob_edit').value;
+            $scope.editStudent.doj = document.getElementById('doj_edit').value;
+
+            if($scope.editStudent.gender === ''){
+              $scope.errorMessage = 'Mention the gender of the Staff';
+            }
+            else if($scope.editStudent.fName === ''){
+              $scope.errorMessage = 'Mention the first name of the Staff';
+            }
+            else if($scope.editStudent.dob === ''){
+              $scope.errorMessage = 'Mention the Date of Birth';
+            }
+            else if($scope.editStudent.nativePlace === ''){
+              $scope.errorMessage = 'Mention the native place of the staff';
+            }
+            else if($scope.editStudent.religion === ''){
+              $scope.errorMessage = "Mention the Religion";
+            }
+            else if($scope.editStudent.bloodGroup === ''){
+              $scope.errorMessage = "Mention Blood Group";
+            }
+            else if($scope.editStudent.addressHouse === '' || $scope.editStudent.addressLocation === '' || $scope.editStudent.addressPost === '' || $scope.editStudent.addressPostcode === '' || $scope.editStudent.addressCity === '' || $scope.editStudent.addressDistrict === '' || $scope.editStudent.addressState === ''){
+              $scope.errorMessage = "Add complete Residential Address";
+            }
+            else if($scope.editStudent.permanentHouse === '' || $scope.editStudent.permanentLocation === '' || $scope.editStudent.permanentPost === '' || $scope.editStudent.permanentPostcode === '' || $scope.editStudent.permanentCity === '' || $scope.editStudent.permanentDistrict === '' || $scope.editStudent.permanentState === ''){
+              $scope.errorMessage = "Add complete Permanent Address";
+            }
+            else if($scope.editStudent.emergencyContact === '' || $scope.editStudent.emergencyPhone === ''){
+              $scope.errorMessage = "Add Emerygency contact details";
+            }
+            else if($scope.editStudent.designation === ''){
+              $scope.errorMessage = "Mention designation of the staff";
+            }
+            else if($scope.editStudent.doj === ''){
+              $scope.errorMessage = "Mention joining date";
+            }
+            else if($scope.editStudent.joinBranch === ''){
+              $scope.errorMessage = "Mention first joining branch";
+            }
+            else if($scope.editStudent.currentBranch === ''){
+              $scope.errorMessage = "Mention the current branch";
+            }
             else{
             
                         var data = {};
-                        data.token = $cookies.get("dashManager");
+                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+
+                        data.empID = $scope.editStudent.regEmpID;
+                        data.regMobile = $scope.editStudent.regMobile;
+
+                        data.fName = $scope.editStudent.fName;
+                        data.lName = $scope.editStudent.lName;
+                        data.gender = $scope.editStudent.gender;
+                        data.dob = $scope.editStudent.dob;
+                        data.height = $scope.editStudent.height;
+                        data.weight = $scope.editStudent.weight;
+                        data.religion = $scope.editStudent.religion;
+                        data.bloodGroup = $scope.editStudent.bloodGroup;
+                        data.nativePlace = $scope.editStudent.nativePlace;
+
+                        data.currentAddress = {
+                          "house" : $scope.editStudent.addressHouse,
+                          "location" : $scope.editStudent.addressLocation,
+                          "post" : $scope.editStudent.addressPost,
+                          "postCode" : $scope.editStudent.addressPostcode,
+                          "city" : $scope.editStudent.addressCity,
+                          "district" : $scope.editStudent.addressDistrict,
+                          "state" : $scope.editStudent.addressState
+                        }
+
+                        data.permanentAddress = {
+                          "house" : $scope.editStudent.permanentHouse,
+                          "location" : $scope.editStudent.permanentLocation,
+                          "post" : $scope.editStudent.permanentPost,
+                          "postCode" : $scope.editStudent.permanentPostcode,
+                          "city" : $scope.editStudent.permanentCity,
+                          "district" : $scope.editStudent.permanentDistrict,
+                          "state" : $scope.editStudent.permanentState
+                        }
+
+                        data.designation = $scope.editStudent.designation;
+                        data.joinDate = $scope.editStudent.doj;
+                        data.joinBranch = $scope.editStudent.joinBranch;
+                        data.currentBranch = $scope.editStudent.currentBranch;
+
+                        data.bankInfo = {
+                          "name" : $scope.editStudent.bankAccountName,
+                          "number" : $scope.editStudent.bankAccountNumber,
+                          "bank" : $scope.editStudent.bankName,
+                          "branch" : $scope.editStudent.bankBranch,
+                          "ifsc" : $scope.editStudent.ifsc
+                        }
+
+                        data.url = $scope.myPhotoURL;
+
+                        data.emergencyContact = $scope.editStudent.emergencyContact;
+                        data.emergencyPhone = $scope.editStudent.emergencyPhone;
+
+                        console.log(data)
+            
+                        $http({
+                          method  : 'POST',
+                          url     : 'https://www.zaitoon.online/services/epreditperson.php',
+                          data    : data,
+                          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+                         })
+                         .then(function(response) {            
+                            if(response.data.status){
+                              
+                              var temp_key = $scope.editStudent.regEmpID;
+
+                              $scope.cancelCreateView();
+                              $scope.editStudent = []; 
+                              $scope.errorMessage = "";
+
+                              $scope.search(temp_key);
+
+                            }
+                
+                            else{
+                              $scope.errorMessage = response.data.error;
+                            }
+                    });
+                }        
+      }
+
+
+
+      $scope.createStudent = function(){
+            $scope.newStudent.dob = document.getElementById('dob').value;
+            $scope.newStudent.doj = document.getElementById('doj').value;
+
+            if($scope.newStudent.regEmpID === ''){
+              $scope.errorMessage = 'Add Employee ID';
+            }
+            if($scope.newStudent.regMobile === ''){
+              $scope.errorMessage = 'Add Mobile Number of the Staff';
+            }
+            if($scope.newStudent.gender === ''){
+              $scope.errorMessage = 'Mention the gender of the Staff';
+            }
+            else if($scope.newStudent.fName === ''){
+              $scope.errorMessage = 'Mention the first name of the Staff';
+            }
+            else if($scope.newStudent.dob === ''){
+              $scope.errorMessage = 'Mention the Date of Birth';
+            }
+            else if($scope.newStudent.nativePlace === ''){
+              $scope.errorMessage = 'Mention the native place of the staff';
+            }
+            else if($scope.newStudent.religion === ''){
+              $scope.errorMessage = "Mention the Religion";
+            }
+            else if($scope.newStudent.bloodGroup === ''){
+              $scope.errorMessage = "Mention Blood Group";
+            }
+            else if($scope.newStudent.addressHouse === '' || $scope.newStudent.addressLocation === '' || $scope.newStudent.addressPost === '' || $scope.newStudent.addressPostcode === '' || $scope.newStudent.addressCity === '' || $scope.newStudent.addressDistrict === '' || $scope.newStudent.addressState === ''){
+              $scope.errorMessage = "Add complete Residential Address";
+            }
+            else if($scope.newStudent.permanentHouse === '' || $scope.newStudent.permanentLocation === '' || $scope.newStudent.permanentPost === '' || $scope.newStudent.permanentPostcode === '' || $scope.newStudent.permanentCity === '' || $scope.newStudent.permanentDistrict === '' || $scope.newStudent.permanentState === ''){
+              $scope.errorMessage = "Add complete Permanent Address";
+            }
+            else if($scope.newStudent.emergencyContact === '' || $scope.newStudent.emergencyPhone === ''){
+              $scope.errorMessage = "Add Emerygency contact details";
+            }
+            else if($scope.newStudent.designation === ''){
+              $scope.errorMessage = "Mention designation of the staff";
+            }
+            else if($scope.newStudent.doj === ''){
+              $scope.errorMessage = "Mention joining date";
+            }
+            else if($scope.newStudent.joinBranch === ''){
+              $scope.errorMessage = "Mention first joining branch";
+            }
+            else if($scope.newStudent.currentBranch === ''){
+              $scope.errorMessage = "Mention the current branch";
+            }
+            else{
+            
+                        var data = {};
+                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+
+                        data.empID = $scope.newStudent.regEmpID;
+                        data.regMobile = $scope.newStudent.regMobile;
+
                         data.fName = $scope.newStudent.fName;
                         data.lName = $scope.newStudent.lName;
                         data.gender = $scope.newStudent.gender;
@@ -225,168 +445,203 @@ angular.module('peopleApp', ['ngCookies'])
                         data.weight = $scope.newStudent.weight;
                         data.religion = $scope.newStudent.religion;
                         data.bloodGroup = $scope.newStudent.bloodGroup;
-                        data.contactAddress = $scope.newStudent.contactAddress;
-                        data.location = $scope.newStudent.location;
-                        data.city = $scope.newStudent.city;
-                        data.pincode = $scope.newStudent.pincode;
-                        data.caste = $scope.newStudent.caste;
-                        data.class = $scope.newStudent.class;
-                        data.division = $scope.newStudent.division.divisions;
-                        data.stream = $scope.newStudent.stream;
-                        data.fatherName = $scope.newStudent.father.name;
-                        data.fatherMobile = $scope.newStudent.father.mobile;
-                        data.fatherEmail = $scope.newStudent.father.email;
-                        data.fatherOccupation = $scope.newStudent.father.occupation;
-                        data.fatherIncome = $scope.newStudent.father.income;
-                        data.fatherAddress = $scope.newStudent.father.location;
-                        data.motherName = $scope.newStudent.mother.name;
-                        data.motherMobile = $scope.newStudent.mother.mobile;
-                        data.motherEmail = $scope.newStudent.mother.email;
-                        data.motherOccupation = $scope.newStudent.mother.occupation;
-                        data.motherIncome = $scope.newStudent.mother.income;
-                        data.motherAddress = $scope.newStudent.mother.location;
-            
-            
-                        console.log("Goes to server");
-                        console.log(data);
+                        data.nativePlace = $scope.newStudent.nativePlace;
+
+                        data.currentAddress = {
+                          "house" : $scope.newStudent.addressHouse,
+                          "location" : $scope.newStudent.addressLocation,
+                          "post" : $scope.newStudent.addressPost,
+                          "postCode" : $scope.newStudent.addressPostcode,
+                          "city" : $scope.newStudent.addressCity,
+                          "district" : $scope.newStudent.addressDistrict,
+                          "state" : $scope.newStudent.addressState
+                        }
+
+                        data.permanentAddress = {
+                          "house" : $scope.newStudent.permanentHouse,
+                          "location" : $scope.newStudent.permanentLocation,
+                          "post" : $scope.newStudent.permanentPost,
+                          "postCode" : $scope.newStudent.permanentPostcode,
+                          "city" : $scope.newStudent.permanentCity,
+                          "district" : $scope.newStudent.permanentDistrict,
+                          "state" : $scope.newStudent.permanentState
+                        }
+
+                        data.designation = $scope.newStudent.designation;
+                        data.joinDate = $scope.newStudent.doj;
+                        data.joinBranch = $scope.newStudent.joinBranch;
+                        data.currentBranch = $scope.newStudent.currentBranch;
+
+                        data.bankInfo = {
+                          "name" : $scope.newStudent.bankAccountName,
+                          "number" : $scope.newStudent.bankAccountNumber,
+                          "bank" : $scope.newStudent.bankName,
+                          "branch" : $scope.newStudent.bankBranch,
+                          "ifsc" : $scope.newStudent.ifsc
+                        }
+
+                        data.url = $scope.myPhotoURL;
+
+                        data.emergencyContact = $scope.newStudent.emergencyContact;
+                        data.emergencyPhone = $scope.newStudent.emergencyPhone;
             
                         $http({
                           method  : 'POST',
-                          url     : 'http://www.schooldash.xyz/services/createstudent.php',
+                          url     : 'https://www.zaitoon.online/services/erpaddperson.php',
                           data    : data,
                           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                          })
                          .then(function(response) {
-                            console.log("Comes from server");
-                            console.log(response);
             
-                        if(response.data.status){
-                          $scope.cancelCreateView();
-                          $scope.newStudent = []; 
-                          $scope.errorMessage = "";
-                        }
-            
-                        else{
-                          $scope.errorMessage = response.data.error;
-                        }
+                            if(response.data.status){
+                              $scope.cancelCreateView();
+                              $scope.newStudent = []; 
+                              $scope.errorMessage = "";
+                            }
+                
+                            else{
+                              $scope.errorMessage = response.data.error;
+                            }
                     });
                 }
       }
 
-      $scope.updateDivList = function(){
 
-            var data = {};
+      
+      //Image Cropper
+      $scope.myImage = '';
+      $scope.myCroppedImage = '';
+      
+        var image = "";
+        $scope.cropBoxData;
+        $scope.canvasData;
+        $scope.cropper;
+  
+      var handleFileSelect = function(evt) {
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          $scope.$apply(function($scope){
+            $scope.myImage = evt.target.result;
+            setTimeout(function(){ 
+              image = document.getElementById('image');
+              $scope.cropper = new Cropper(image, {
+                aspectRatio: 1 / 1,
+              autoCropArea: 0.9,
+              scalable: false,
+              ready: function () {
+                // Strict mode: set crop box data first
+                $scope.cropper.setCropBoxData($scope.cropBoxData).setCanvasData($scope.canvasData);
+              }
+            });           
+      }, 1000);
+      $scope.photoLoadedToFrame = true;
+          });
+        };
+        reader.readAsDataURL(file);
+      };
+      angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
+      
+   $scope.attachPhoto = function(){
+    $('#imageModal').modal('show');   
+    $scope.photoLoadedToFrame = false;  
+   }
 
-            if($scope.newStudent.class < 11){
-              $scope.newStudent.stream = "";
-            }
-
-            data.token = $cookies.get("dashManager");
-            data.class = $scope.newStudent.class;
-            data.stream = $scope.newStudent.stream;
-
-            console.log("Goes to server");
-            console.log(data);
-
-            $http({
-              method  : 'POST',
-              url     : 'http://www.schooldash.xyz/services/fetchdivisionlist.php',
-              data    : data,
-              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-             })
-             .then(function(response) {
-                console.log("Comes from server");
-                console.log(response);
-
-            if(response.data.status){
-              $scope.divisions = response.data.response;
-
-              console.log($scope.divisions);
-            }
-
-            else{
-              $scope.divisions = {};
-            }
+   $scope.removePhoto = function(){
+    $scope.isPhotoAttached = false;
+    $scope.myPhotoURL = '';
+   }
+      
+   $scope.isPhotoAttached = false;
+   $scope.saveAttachment = function(){
+    $scope.isPhotoAttached = true;   
+          $scope.canvasData = $scope.cropper.getCroppedCanvas({
+          width: 540,
+          height: 540,
+          fillColor: '#fff',
+          imageSmoothingEnabled: false,
+          imageSmoothingQuality: 'high',
         });
-      }
+        
+    $scope.myPhotoURL = $scope.canvasData.toDataURL();
+          $scope.cropper.destroy();
+          $('#imageModal').modal('hide');   
+   }
+
+
+
+
+
 
       $scope.goToStudentProfile = function(search_key){
             
             var data = {};
-            data.token = $cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
             data.key = search_key;
-            console.log("Goes to server");
-            console.log(data);
 
             $http({
               method  : 'POST',
-              url     : 'http://www.schooldash.xyz/services/fetchstudents.php',
+              url     : 'https://www.zaitoon.online/services/erpfetchpeople.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
              .then(function(response) {
-                console.log("Comes from server");
-                console.log(response);
+                if(response.data.status){
+                  $scope.singleStudent = true;
+                  $scope.isSearched = true;
+                  $scope.isFound = true;
 
-            if(response.data.status){
-              $scope.singleStudent = true;
-              $scope.isSearched = true;
-              $scope.isFound = true;
+                  $scope.studentData = response.data.response[0];   
+                }
 
-              $scope.studentData = response.data.response[0];   
-            }
-
-            else{
-              $scope.isSearched = true;
-              $scope.isFound = false;
-              $scope.studentData = {}
-            }
+                else{
+                  $scope.isSearched = true;
+                  $scope.isFound = false;
+                  $scope.studentData = {}
+                }
       });
     }
 
 
-      //Edit Student Info
-
-         setTimeout(function(){
-        $('#dob').datetimepicker({  
-            format: "dd-mm-yyyy",
-            weekStart: 1,
-              todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-        })  
-      }, 200);
+      //Edit 
 
       setTimeout(function(){
-        $('#dob1').datetimepicker({  
+        $('#dob').datetimepicker({  
+          format: "dd-mm-yyyy",
+          weekStart: 1,
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1,
+          startView: 2,
+          minView: 2,
+          forceParse: 0
+        }) 
+
+        $('#doj').datetimepicker({  
             format: "dd-mm-yyyy",
             weekStart: 1,
-              todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-        })  
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        }) 
       }, 200);
+
       
-      $scope.createStudentView = function() {
+  $scope.createStudentView = function() {
     	$scope.createView = true;
+      $scope.editStudentWindow = false;
   }
   
-        $scope.cancelCreateView = function() {
+  $scope.cancelCreateView = function() {
     	$scope.createView = false;
   }
 
-  $scope.studentEditInfo = $scope.studentData;
-      console.log($scope.studentData)
-        console.log($scope.studentEditInfo);
-
-      $scope.saveEditChanges = function(){
-
-      }
+  $scope.viewPhoto = function(img){
+    $('#imagePreviewModal').modal('show'); 
+    $scope.currentImage = img;  
+  }
 
 });
