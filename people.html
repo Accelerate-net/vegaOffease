@@ -1,57 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Dash Students</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="description" content="Avenxo Admin Theme">
-    <meta name="author" content="KaijuThemes">
-
-    <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
-
-    <link type="text/css" href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">        <!-- Font Awesome -->
-    <link type="text/css" href="assets/fonts/themify-icons/themify-icons.css" rel="stylesheet">              <!-- Themify Icons -->
-    <link type="text/css" href="assets/css/styles.css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
-
-    <link type="text/css" href="assets/plugins/codeprettifier/prettify.css" rel="stylesheet">                <!-- Code Prettifier -->
-    <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
-
-    <link type="text/css" href="assets/plugins/gridforms/gridforms/gridforms.css" rel="stylesheet">                           <!-- Gridforms -->
-    <link type="text/css" href="assets/plugins/clockface/css/clockface.css" rel="stylesheet">
-
-    <!--[if lt IE 10]>
-        <script type="text/javascript" src="assets/js/media.match.min.js"></script>
-        <script type="text/javascript" src="assets/js/respond.min.js"></script>
-        <script type="text/javascript" src="assets/js/placeholder.min.js"></script>
-    <![endif]-->
-    <!-- The following CSS are included as plugins and can be removed if unused-->
-    
-<link type="text/css" href="assets/plugins/form-fseditor/fseditor.css" rel="stylesheet">                          <!-- FullScreen Editor -->
-<style type="text/css">
-   .studentRow:hover{
-      cursor: pointer;
-   }
-</style>
-
+   <head>
+      <meta charset="utf-8">
+      <title>Dash Students</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-touch-fullscreen" content="yes">
+      <meta name="description" content="Avenxo Admin Theme">
+      <meta name="author" content="KaijuThemes">
+      <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
+      <link type="text/css" href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link type="text/css" href="assets/fonts/themify-icons/themify-icons.css" rel="stylesheet">
+      <!-- Themify Icons -->
+      <link type="text/css" href="assets/css/styles.css" rel="stylesheet">
+      <!-- Core CSS with all styles -->
+      <link type="text/css" href="assets/plugins/codeprettifier/prettify.css" rel="stylesheet">
+      <!-- Code Prettifier -->
+      <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">
+      <!-- iCheck -->
+      <link type="text/css" href="assets/plugins/gridforms/gridforms/gridforms.css" rel="stylesheet">
+      <!-- Gridforms -->
+      <link type="text/css" href="assets/plugins/clockface/css/clockface.css" rel="stylesheet">
+      <!--[if lt IE 10]>
+      <script type="text/javascript" src="assets/js/media.match.min.js"></script>
+      <script type="text/javascript" src="assets/js/respond.min.js"></script>
+      <script type="text/javascript" src="assets/js/placeholder.min.js"></script>
+      <![endif]-->
+      <!-- The following CSS are included as plugins and can be removed if unused-->
+      <link type="text/css" href="assets/plugins/form-fseditor/fseditor.css" rel="stylesheet">
+      <!-- FullScreen Editor -->
+      <style type="text/css">
+         .studentRow:hover{
+         cursor: pointer;
+         }
+      </style>
       <!-- Controller -->
       <script src="assets/js/jquery.js"></script>
       <script src="assets/js/angular.min.js"></script>
       <script src="assets/js/angular-cookies.min.js"></script>
       <script src="controllers/people.js"></script>
-
-
-
-
-    </head>
-
-    <body class="animated-content" ng-app="peopleApp" ng-controller="peopleController" ng-cloak>
-        
-
-      <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">      
+      <!-- CROPPER -->
+      <script src="assets/plugins/cropper/cropper.js"></script>
+      <link type="text/css" href="assets/plugins/cropper/cropper.css" rel="stylesheet">
+   </head>
+   <body class="animated-content" ng-app="peopleApp" ng-controller="peopleController" ng-cloak>
+      <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
          <div class="logo-area">
             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg">
             <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -79,1096 +74,1069 @@
             </li>
          </ul>
       </header>
-
-
-        <div id="wrapper">
-            <div id="layout-static">
-                <div class="static-sidebar-wrapper sidebar-default">
-                    <div class="static-sidebar">
-                        <div class="sidebar">
-
-
-   <div class="widget stay-on-collapse" id="widget-sidebar">
-
-<nav role="navigation" class="widget-body">
+      <div id="wrapper">
+         <div id="layout-static">
+            <div class="static-sidebar-wrapper sidebar-default">
+               <div class="static-sidebar">
+                  <div class="sidebar">
+                     <div class="widget stay-on-collapse" id="widget-sidebar">
+                        <nav role="navigation" class="widget-body">
                            <ul class="acc-menu">
                               <li><a href="index.html"><i class="ti ti-layout-grid2"></i><span>Table Manager</span><span class="badge badge-teal" ng-if="pending_orders_length > 0">{{pending_orders_length}}</span></a></li>
                               <li><a href="reservations.html"><i class="ti ti-bookmark-alt"></i><span>Reservations</span><span class="badge badge-inverse" ng-if="reservations_length > 0">{{reservations_length}}</span></a></li>
-                              <li><a href="redeem.html"><i class="ti ti-gift"></i><span>Redeem Coupon</span></a></li>                              
+                              <li><a href="redeem.html"><i class="ti ti-gift"></i><span>Redeem Coupon</span></a></li>
                               <li><a href="feedback.html"><i class="ti ti-thumb-up"></i><span>Feedbacks</span></a></li>
                               <li><a href="guest-profile.html"><i class="ti ti-user"></i><span>Guest Details</span></a></li>
                               <li><a href="referals.html"><i class="ti ti-star"></i><span>Referral Program</span></a></li>
                               <li>
-                                     <a href="javascript:;"><i class="ti ti-id-badge"></i><span>Human Resources</span></a>
-                                     <ul class="acc-menu">
-                                        <li><a href="people.html">People</a></li>
-                                        <li><a href="salary-slips.html">Salary Slips</a></li>
-                                     </ul>
+                                 <a href="javascript:;"><i class="ti ti-id-badge"></i><span>Human Resources</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="people.html">People</a></li>
+                                    <li><a href="attendance.html">Attendance</a></li>
+                                    <li><a href="salary-slips.html">Salary Slips</a></li>
+                                 </ul>
                               </li>
                               <li>
-                                     <a href="javascript:;"><i class="ti ti-package"></i><span>Inventory</span></a>
-                                     <ul class="acc-menu">
-                                        <li><a href="inventory-stock.html">Stock</a></li>
-                                        <li><a href="inventory-stock-register.html">Stock Register</a></li>
-                                        <li><a href="inventory-vendors.html">Vendors</a></li>
-                                     </ul>
+                                 <a href="javascript:;"><i class="ti ti-package"></i><span>Inventory</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="inventory-stock.html">Stock</a></li>
+                                    <li><a href="inventory-stock-register.html">Stock Register</a></li>
+                                    <li><a href="inventory-vendors.html">Vendors</a></li>
+                                 </ul>
                               </li>
                               <li>
-                                     <a href="javascript:;"><i class="ti ti-settings"></i><span>Tools</span></a>
-                                     <ul class="acc-menu">
-                                        <li><a href="resources-steward.html">Stewards</a></li>
-                                        <li><a href="resources-reservationchannel.html">Reservation Channels</a></li>
-                                        <li><a href="tables.html">Tables List</a></li>
-                                        <!--<li><a href="settings.html">Account Settings</a></li>-->
-                                     </ul>
+                                 <a href="javascript:;"><i class="ti ti-settings"></i><span>Tools</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="resources-steward.html">Stewards</a></li>
+                                    <li><a href="resources-reservationchannel.html">Reservation Channels</a></li>
+                                    <li><a href="tables.html">Tables List</a></li>
+                                    <!--<li><a href="settings.html">Account Settings</a></li>-->
+                                 </ul>
                               </li>
                            </ul>
                         </nav>
-
-
-
-    </div>
-
-
-</div>
-                    </div>
-                </div>
-    
-                <div class="static-content-wrapper">
-                    <div class="static-content">
-                        <div class="page-content">
-                          <button class="pull-right btn btn-success-alt" style="margin-top: 2%;margin-right: 2%;" ng-show="!createView" ng-click="createStudentView()"><i class="ti ti-plus"></i> Add New Student</button>
-                            <div class="container-fluid" style="padding-top: 4%;">
-
-<div data-widget-group="group1">
-
-      <div class="row" ng-show="createView">
-      <div class="col-md-12">
-         <div class="panel panel-white" data-widget='{"draggable": "false"}'>
-            <div class="panel-heading">
-               <h2 style="font-size: 24px; margin-top: 10px; font-weight: 300;">New Staff Registration</h2>
-
-            </div>
-            <div class="panel-body">
-               <form class="grid-form">
-                  <fieldset>
-                     <legend>Personal Details</legend>
-
-                     <div data-row-span="5">
-                        <div data-field-span="1">
-                           <label>Title</label>
-                           <label><input type="radio" name="customer-title[]" ng-model="newStudent.gender" value="M"> Mr.</label> &nbsp;
-                           <label><input type="radio" name="customer-title[]" ng-model="newStudent.gender" value="F"> Mrs.</label> &nbsp;
-
-                        </div>
-                        <div data-field-span="2">
-                           <label>First Name</label>
-                           <input ng-model="newStudent.fName" type="text">
-                        </div>
-                        <div data-field-span="2">
-                           <label>Last Name</label>
-                           <input ng-model="newStudent.lName" type="text">
-                        </div>
-                     </div>
-                     <div data-row-span="4">
-                        <div data-field-span="2">
-                           <label>Date of birth</label>
-                           <input id="dob1" ng-model="newStudent.dob" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Height(in cm)</label>
-                           <input ng-model="newStudent.height" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Weight(in kg)</label>
-                           <input ng-model="newStudent.weight" type="text">
-                        </div>
-                     <div data-row-span="3">
-                        <div data-field-span="1">
-                           <label>Religion</label>
-                           <select ng-model="newStudent.religion">
-                              <option value="Muslim" title="Muslim">Muslim</option>
-                              <option value="Hindu" title="Hindu">Hindu</option>
-                              <option value="Christian" title="Christian">Christian</option>
-                              <option value="Jain" title="Jain">Jain</option>
-                              <option value="Buddhist" title="Buddhist">Buddhist</option>
-                              <option value="Other" title="Other">Other</option>
-                           </select>
-                        </div>
-                        <div data-field-span="1">
-                           <label>Caste</label>
-                           <input ng-model="newStudent.caste" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Blood Group</label>
-                           <select ng-model="newStudent.bloodGroup">
-                              <option value="A+" title="A+">A+</option>
-                              <option value="O+" title="O+">O+</option>
-                              <option value="B+" title="B+">B+</option>
-                              <option value="AB+" title="AB+">AB+</option>
-                              <option value="A-" title="A-">A-</option>
-                              <option value="O-" title="O-">O-</option>
-                              <option value="B-" title="B-">B-</option>
-                              <option value="AB-" title="AB-">AB-</option>
-                           </select>
-                        </div>
-                     </div>
-                     <br>
-                     <fieldset>
-                        <legend>Residential address</legend>
-                        <div data-row-span="2">
-                           <div data-field-span="1">
-                              <label>Flat no. and bldg. name, Road no./name</label>
-                              <input ng-model="newStudent.contactAddress" type="text">
-                           </div>
-                           <div data-field-span="1">
-                              <label>Area and landmark</label>
-                              <input ng-model="newStudent.location" type="text">
-                           </div>
-                        </div>
-                        <div data-row-span="3">
-                           <div data-field-span="1">
-                              <label>City</label>
-                              <input ng-model="newStudent.city" type="text">
-                           </div>
-                           <div data-field-span="1">
-                              <label>Pin code</label>
-                              <input ng-model="newStudent.pincode" type="text">
-                           </div>
-                           <div data-field-span="1">
-                              <label>Telephone Residence</label>
-                              <input ng-model="newStudent.contactPhone" type="text">
-                           </div>
-                        </div>
-                     </fieldset>
-                  </fieldset>
-                  <br>
-
-                  <fieldset>
-                     <legend>Parental Details</legend>
-                     <div data-row-span="4">
-                        <div data-field-span="1">
-                           <label>Father's Name</label>
-                           <input ng-model="newStudent.father.name" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Father's Mobile Number</label>
-                           <input ng-model="newStudent.father.mobile" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Father's E-Mail</label>
-                           <input ng-model="newStudent.father.email" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Father's Occupation</label>
-                           <input ng-model="newStudent.father.occupation" type="text">
-                        </div>
-                     </div>
-                     <div data-row-span="4">
-                        <div data-field-span="1">
-                           <label>Father's Income</label>
-                           <input ng-model="newStudent.father.income" type="text">
-                        </div>
-                        <div data-field-span="3">
-                           <label>Father's Office Address</label>
-                           <input ng-model="newStudent.father.location" type="text">
-                        </div>
-                     </div>
-                     <div data-row-span="4">
-                        <div data-field-span="1">
-                           <label>Mother's Name</label>
-                           <input ng-model="newStudent.mother.name" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Mother's Mobile Number</label>
-                           <input ng-model="newStudent.mother.mobile" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Mother's E-Mail</label>
-                           <input ng-model="newStudent.mother.email" type="text">
-                        </div>
-                        <div data-field-span="1">
-                           <label>Mother's Occupation</label>
-                           <input ng-model="newStudent.mother.occupation" type="text">
-                        </div>
-                     </div>
-                     <div data-row-span="4">
-                        <div data-field-span="1">
-                           <label>Mother's Income</label>
-                           <input ng-model="newStudent.mother.income" type="text">
-                        </div>
-                        <div data-field-span="3">
-                           <label>Mother's Office Address</label>
-                           <input ng-model="newStudent.mother.location" type="text">
-                        </div>
-                     </div>
-                  </fieldset>
-
-                  <br><br>
-
-                  <fieldset>
-                     <legend>Academic Details</legend>
-                     <div data-row-span="4">
-                        <div data-field-span="1">
-                           <label>Class</label>
-                           <select ng-model="newStudent.class" ng-change="updateDivList()">
-                              <option value="PKG" title="PKG">PKG</option>
-                              <option value="LKG" title="LKG">LKG</option>
-                              <option value="UKG" title="UKG">UKG</option>
-                              <option value="1" title="1">1</option>
-                              <option value="2" title="2">2</option>
-                              <option value="3" title="3">3</option>
-                              <option value="4" title="4">4</option>
-                              <option value="5" title="5">5</option>
-                              <option value="6" title="6">6</option>
-                              <option value="7" title="7">7</option>
-                              <option value="8" title="8">8</option>
-                              <option value="9" title="9">9</option>
-                              <option value="10" title="10">10</option>
-                              <option value="11" title="11">11</option>
-                              <option value="12" title="12">12</option>
-                           </select>
-                        </div>
-                        <div data-field-span="1" ng-if="newStudent.class > 10">
-                           <label>Stream</label>
-                           <select ng-model="newStudent.stream" ng-change="updateDivList()">
-                              <option value="Science" title="Science">Science</option>
-                              <option value="Commerce" title="Commerce">Commerce</option>
-                              <option value="Humanities" title="Humanities">Humanities</option>
-                           </select>
-                        </div>
-                        <div data-field-span="1">
-                           <label>Division</label>
-                           <select ng-model="newStudent.division" ng-value="div.divisions" ng-options="div.divisions for div in divisions">
-                           </select>
-                        </div>
-                     </div>
-                  </fieldset>
-
-                  <br><br>
-
-                  
-                  <div class="clearfix pt-md">
-                    <p ng-if="errorMessage" style="color: red;text-align: center;">{{errorMessage}}</p>
-                     <div class="pull-right">
-                        <button class="btn-primary btn" ng-click="createStudent()">Submit</button>
-                        <button class="btn-default btn" ng-click="cancelCreateView()">Cancel</button>
                      </div>
                   </div>
-               </form>
+               </div>
             </div>
-         </div>
-      </div>
-   </div>
+            <div class="static-content-wrapper">
+               <div class="static-content">
+                  <div class="page-content">
+                   
+                     <div class="container-fluid" style="padding-top: 4%;">
+                        <div data-widget-group="group1">
+                           <div class="row" ng-show="createView">
+                              <div class="col-md-12">
+
+
+                                 <!-- NEW REGISTRATION -->
+                                 <div class="panel panel-white" ng-show="!editStudentWindow">
+                                    <div class="panel-heading">
+                                       <h2 style="font-size: 32px; margin-top: 18px; text-transform: none; color: #2ecc71; font-weight: 300;">New Staff Registration</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                       <form class="grid-form">
+                                          <fieldset>
+                                             <legend>New Registration</legend>
+                                             <div data-row-span="2">
+                                                <div data-field-span="1">
+                                                   <label>Employee ID</label>
+                                                   <input style="color: #e67e22" ng-model="newStudent.regEmpID" type="text">
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Registered Mobile</label>
+                                                   <input style="color: #3498db" ng-model="newStudent.regMobile" type="text">
+                                                </div>
+                                             </div>
+                                             <br>
+
+                                          <fieldset>
+                                             <legend>Personal Details</legend>
+                                             <div data-row-span="5">
+                                                <div data-field-span="1">
+                                                   <label>Title</label>
+                                                   <label><input type="radio" name="customer-title[]" ng-model="newStudent.gender" value="M"> Mr.</label> &nbsp;
+                                                   <label><input type="radio" name="customer-title[]" ng-model="newStudent.gender" value="F"> Mrs.</label> &nbsp;
+                                                </div>
+                                                <div data-field-span="2">
+                                                   <label>First Name</label>
+                                                   <input ng-model="newStudent.fName" type="text">
+                                                </div>
+                                                <div data-field-span="2">
+                                                   <label>Last Name</label>
+                                                   <input ng-model="newStudent.lName" type="text">
+                                                </div>
+                                             </div>
+                                             <div data-row-span="4">
+                                                <div data-field-span="2">
+                                                   <label>Date of birth</label>
+                                                   <input id="dob" ng-model="newStudent.dob" type="text">
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Height (in cm)</label>
+                                                   <input ng-model="newStudent.height" type="text">
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Weight (in kg)</label>
+                                                   <input ng-model="newStudent.weight" type="text">
+                                                </div>
+                                             </div>
+                                             <div data-row-span="3">
+                                                <div data-field-span="1">
+                                                   <label>Religion</label>
+                                                   <select ng-model="newStudent.religion">
+                                                      <option value="Muslim" title="Muslim">Muslim</option>
+                                                      <option value="Hindu" title="Hindu">Hindu</option>
+                                                      <option value="Christian" title="Christian">Christian</option>
+                                                      <option value="Jain" title="Jain">Jain</option>
+                                                      <option value="Buddhist" title="Buddhist">Buddhist</option>
+                                                      <option value="Other" title="Other">Other</option>
+                                                   </select>
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Blood Group</label>
+                                                   <select ng-model="newStudent.bloodGroup">
+                                                      <option value="A+" title="A+">A+</option>
+                                                      <option value="O+" title="O+">O+</option>
+                                                      <option value="B+" title="B+">B+</option>
+                                                      <option value="AB+" title="AB+">AB+</option>
+                                                      <option value="A-" title="A-">A-</option>
+                                                      <option value="O-" title="O-">O-</option>
+                                                      <option value="B-" title="B-">B-</option>
+                                                      <option value="AB-" title="AB-">AB-</option>
+                                                   </select>
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Native Place</label>
+                                                   <input ng-model="newStudent.nativePlace" type="text">
+                                                </div>
+                                             </div>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Present Residential Address</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>House Number and Name</label>
+                                                      <input ng-model="newStudent.addressHouse" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Locality</label>
+                                                      <input ng-model="newStudent.addressLocation" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Post Office</label>
+                                                      <input ng-model="newStudent.addressPost" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Pin code</label>
+                                                      <input ng-model="newStudent.addressPostcode" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>City</label>
+                                                      <input ng-model="newStudent.addressCity" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>District</label>
+                                                      <input ng-model="newStudent.addressDistrict" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>State</label>
+                                                      <input ng-model="newStudent.addressState" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Permanent Address</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>House Number and Name</label>
+                                                      <input ng-model="newStudent.permanentHouse" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Locality</label>
+                                                      <input ng-model="newStudent.permanentLocation" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Post Office</label>
+                                                      <input ng-model="newStudent.permanentPost" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Pin code</label>
+                                                      <input ng-model="newStudent.permanentPostcode" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>City</label>
+                                                      <input ng-model="newStudent.permanentCity" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>District</label>
+                                                      <input ng-model="newStudent.permanentDistrict" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>State</label>
+                                                      <input ng-model="newStudent.permanentState" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Emergency Contact</legend>
+                                                <div data-row-span="2">
+                                                   <div data-field-span="1">
+                                                      <label>Name of the Person</label>
+                                                      <input ng-model="newStudent.emergencyContact" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Contact Number</label>
+                                                      <input ng-model="newStudent.emergencyPhone" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Official Information</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>Designation</label>
+                                                      <select ng-model="newStudent.designation">
+                                                         <option value="MANAGER" selected>Manager</option>
+                                                         <option value="ACCOUNTANT">Accountant</option>
+                                                         <option value="BILLING">Billing</option>
+                                                         <option value="STEWARD">Steward</option>
+                                                         <option value="COOK">Cook</option>
+                                                      </select>
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Date of Joining</label>
+                                                      <input id="doj" ng-model="newStudent.doj" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Joining Branch</label>
+                                                      <select ng-model="newStudent.joinBranch">
+                                                         <option value="VELACHERY" selected>Velachery</option>
+                                                      </select>
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Assigned Branch</label>
+                                                      <select ng-model="newStudent.currentBranch">
+                                                         <option value="VELACHERY" selected>Velachery</option>
+                                                      </select>
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Bank Account Details</legend>
+                                                <div data-row-span="2">
+                                                   <div data-field-span="1">
+                                                      <label>Account Holder's Name</label>
+                                                      <input ng-model="newStudent.bankAccountName" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Account Number</label>
+                                                      <input ng-model="newStudent.bankAccountNumber" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="3">
+                                                   <div data-field-span="1">
+                                                      <label>Bank Name</label>
+                                                      <input ng-model="newStudent.bankName" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Branch</label>
+                                                      <input ng-model="newStudent.bankBranch" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>IFSC</label>
+                                                      <input ng-model="newStudent.ifsc" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                          </fieldset>
+                                          <br>
+                                          <fieldset>
+                                             <legend>Upload Photo</legend>
+                                             <div data-row-span="3">
+                                                <div data-field-span="1">
+                                                   <button ng-if="isPhotoAttached" ng-click="attachPhoto()" class="btn-default btn pull-left btn-outline"> <i class="fa fa-picture-o" style="padding-right: 5px; color: #bdc3c7"></i> Change Image</button>
+                                                   <button ng-if="isPhotoAttached" ng-click="removePhoto()" class="btn-default btn btn-outline" style="margin-left: 5px"> <i class="fa fa-trash-o" style="padding-right: 5px; color: #bdc3c7"></i> Remove Image</button>
+
+                                                   <button class="btn-default btn pull-left btn-outline" ng-if="!isPhotoAttached" ng-click="attachPhoto()">Select Image</button>
+                                                </div>
+                                                <div data-field-span="2" ng-if="isPhotoAttached">
+                                                   <label>Current Photo</label>
+                                                   <img ng-src="{{myPhotoURL}}" width="240px" style="border: 2px solid #27ae60" ng-if="isPhotoAttached">
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                          <div class="clearfix pt-md">
+                                             <p ng-if="errorMessage" style="color: red;text-align: center;">{{errorMessage}}</p>
+                                             <div class="pull-right">
+                                                <button style="float: right" class="btn-primary btn" ng-click="createStudent()">Save</button>
+                                                <button style="margin-right: 10px" class="btn-default btn" ng-click="cancelCreateView()">Cancel</button>
+                                             </div>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div> <!-- new reg. -->
+
+
+
+                                 <!-- EDIT REGISTRATION -->
+                                 <div class="panel panel-white" ng-show="editStudentWindow">
+                                    <div class="panel-heading">
+                                       <h2 style="font-size: 32px; margin-top: 18px; text-transform: none; color: #2ecc71; font-weight: 300;">Editing Profile of <b>{{displayedName}}</b></h2>
+                                    </div>
+                                    <div class="panel-body">
+                                       <form class="grid-form">
+                                          <fieldset>
+                                             <legend>Registration Details</legend>
+                                             <div data-row-span="2">
+                                                <div data-field-span="1">
+                                                   <label>Employee ID</label>
+                                                   <input style="color: #e67e22" ng-model="editStudent.regEmpID" type="text" disabled>
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Registered Mobile</label>
+                                                   <input style="color: #3498db" ng-model="editStudent.regMobile" type="text" disabled>
+                                                </div>
+                                             </div>
+                                             <br>
+
+                                          <fieldset>
+                                             <legend>Personal Details</legend>
+                                             <div data-row-span="5">
+                                                <div data-field-span="1">
+                                                   <label>Title</label>
+                                                   <label><input type="radio" name="customer-title[]" ng-model="editStudent.gender" value="M"> Mr.</label> &nbsp;
+                                                   <label><input type="radio" name="customer-title[]" ng-model="editStudent.gender" value="F"> Mrs.</label> &nbsp;
+                                                </div>
+                                                <div data-field-span="2">
+                                                   <label>First Name</label>
+                                                   <input ng-model="editStudent.fName" type="text">
+                                                </div>
+                                                <div data-field-span="2">
+                                                   <label>Last Name</label>
+                                                   <input ng-model="editStudent.lName" type="text">
+                                                </div>
+                                             </div>
+                                             <div data-row-span="4">
+                                                <div data-field-span="2">
+                                                   <label>Date of birth</label>
+                                                   <input id="dob_edit" ng-model="editStudent.dob" type="text">
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Height (in cm)</label>
+                                                   <input ng-model="editStudent.height" type="text">
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Weight (in kg)</label>
+                                                   <input ng-model="editStudent.weight" type="text">
+                                                </div>
+                                             </div>
+                                             <div data-row-span="3">
+                                                <div data-field-span="1">
+                                                   <label>Religion</label>
+                                                   <select ng-model="editStudent.religion">
+                                                      <option value="Muslim" title="Muslim">Muslim</option>
+                                                      <option value="Hindu" title="Hindu">Hindu</option>
+                                                      <option value="Christian" title="Christian">Christian</option>
+                                                      <option value="Jain" title="Jain">Jain</option>
+                                                      <option value="Buddhist" title="Buddhist">Buddhist</option>
+                                                      <option value="Other" title="Other">Other</option>
+                                                   </select>
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Blood Group</label>
+                                                   <select ng-model="editStudent.bloodGroup">
+                                                      <option value="A+" title="A+">A+</option>
+                                                      <option value="O+" title="O+">O+</option>
+                                                      <option value="B+" title="B+">B+</option>
+                                                      <option value="AB+" title="AB+">AB+</option>
+                                                      <option value="A-" title="A-">A-</option>
+                                                      <option value="O-" title="O-">O-</option>
+                                                      <option value="B-" title="B-">B-</option>
+                                                      <option value="AB-" title="AB-">AB-</option>
+                                                   </select>
+                                                </div>
+                                                <div data-field-span="1">
+                                                   <label>Native Place</label>
+                                                   <input ng-model="editStudent.nativePlace" type="text">
+                                                </div>
+                                             </div>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Present Residential Address</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>House Number and Name</label>
+                                                      <input ng-model="editStudent.addressHouse" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Locality</label>
+                                                      <input ng-model="editStudent.addressLocation" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Post Office</label>
+                                                      <input ng-model="editStudent.addressPost" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Pin code</label>
+                                                      <input ng-model="editStudent.addressPostcode" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>City</label>
+                                                      <input ng-model="editStudent.addressCity" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>District</label>
+                                                      <input ng-model="editStudent.addressDistrict" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>State</label>
+                                                      <input ng-model="editStudent.addressState" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Permanent Address</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>House Number and Name</label>
+                                                      <input ng-model="editStudent.permanentHouse" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Locality</label>
+                                                      <input ng-model="editStudent.permanentLocation" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Post Office</label>
+                                                      <input ng-model="editStudent.permanentPost" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Pin code</label>
+                                                      <input ng-model="editStudent.permanentPostcode" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>City</label>
+                                                      <input ng-model="editStudent.permanentCity" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>District</label>
+                                                      <input ng-model="editStudent.permanentDistrict" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>State</label>
+                                                      <input ng-model="editStudent.permanentState" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Emergency Contact</legend>
+                                                <div data-row-span="2">
+                                                   <div data-field-span="1">
+                                                      <label>Name of the Person</label>
+                                                      <input ng-model="editStudent.emergencyContact" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Contact Number</label>
+                                                      <input ng-model="editStudent.emergencyPhone" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Official Information</legend>
+                                                <div data-row-span="4">
+                                                   <div data-field-span="1">
+                                                      <label>Designation</label>
+                                                      <select ng-model="editStudent.designation">
+                                                         <option value="MANAGER" selected>Manager</option>
+                                                         <option value="ACCOUNTANT">Accountant</option>
+                                                         <option value="BILLING">Billing</option>
+                                                         <option value="STEWARD">Steward</option>
+                                                         <option value="COOK">Cook</option>
+                                                      </select>
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Date of Joining</label>
+                                                      <input id="doj_edit" ng-model="editStudent.doj" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Joining Branch</label>
+                                                      <select ng-model="editStudent.joinBranch">
+                                                         <option value="VELACHERY" selected>Velachery</option>
+                                                      </select>
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Assigned Branch</label>
+                                                      <select ng-model="editStudent.currentBranch">
+                                                         <option value="VELACHERY" selected>Velachery</option>
+                                                      </select>
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                             <br>
+                                             <fieldset>
+                                                <legend>Bank Account Details</legend>
+                                                <div data-row-span="2">
+                                                   <div data-field-span="1">
+                                                      <label>Account Holder's Name</label>
+                                                      <input ng-model="editStudent.bankAccountName" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Account Number</label>
+                                                      <input ng-model="editStudent.bankAccountNumber" type="text">
+                                                   </div>
+                                                </div>
+                                                <div data-row-span="3">
+                                                   <div data-field-span="1">
+                                                      <label>Bank Name</label>
+                                                      <input ng-model="editStudent.bankName" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>Branch</label>
+                                                      <input ng-model="editStudent.bankBranch" type="text">
+                                                   </div>
+                                                   <div data-field-span="1">
+                                                      <label>IFSC</label>
+                                                      <input ng-model="editStudent.ifsc" type="text">
+                                                   </div>
+                                                </div>
+                                             </fieldset>
+                                          </fieldset>
+                                          <br>
+                                          <fieldset>
+                                             <legend>Upload Photo</legend>
+                                             <div data-row-span="3">
+                                                <div data-field-span="1">
+                                                   <button ng-if="isPhotoAttached" ng-click="attachPhoto()" class="btn-default btn pull-left btn-outline"> <i class="fa fa-picture-o" style="padding-right: 5px; color: #bdc3c7"></i> Change Image</button>
+                                                   <button ng-if="isPhotoAttached" ng-click="removePhoto()" class="btn-default btn btn-outline" style="margin-left: 5px"> <i class="fa fa-trash-o" style="padding-right: 5px; color: #bdc3c7"></i> Remove Image</button>
+
+
+                                                   <button class="btn-default btn pull-left btn-outline" ng-if="!isPhotoAttached" ng-click="attachPhoto()">Select Image</button>
+                                                </div>
+                                                <div data-field-span="2" ng-if="isPhotoAttached">
+                                                   <label>Current Photo</label>
+                                                   <img ng-src="{{myPhotoURL}}" width="240px" style="border: 2px solid #27ae60" ng-if="isPhotoAttached">
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                          <div class="clearfix pt-md">
+                                             <p ng-if="errorMessage" style="color: red;text-align: center;">{{errorMessage}}</p>
+                                             <div class="pull-right">
+                                                <button style="float: right" class="btn-primary btn" ng-click="saveEditStudent()">Save Changes</button>
+                                                <button style="margin-right: 10px" class="btn-default btn" ng-click="cancelEditView()">Cancel</button>
+                                             </div>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div> <!-- edit reg. -->
+
+
+
+
+
+
+                              </div>
+                           </div>
+
 
                            <div class="row" ng-show="!createView">
                               <div class="col-sm-3"></div>
                               <div class="col-sm-6">
                                  <div class="input-group" style="padding: 10px; border: none;">
-                                    <input type="text" ng-model="searchKey" class="form-control input-lg" style="text-align: center" placeholder="Eg: Allen John, 12-A, 12A002, 43564, 9999123456">
+                                    <input type="text" ng-model="searchKey" class="form-control input-lg" style="text-align: center" placeholder="Search for Employee">
                                     <span class="input-group-btn">
                                     <button class="btn btn-default btn-lg" type="button" ng-click="search(searchKey)"><i class="ti ti-search"></i></button>
+
+                                    <button class="btn btn-default-alt btn-lg newRoundButton" type="button" title="Reset" style="margin-left: 10px" ng-show="!createView" ng-click="resetSearchView()"><i class="ti ti-reload"></i></button>
+
+                                    <button class="btn btn-success-alt btn-lg newRoundButton" type="button" title="Add New" style="margin-left: 10px" ng-show="!createView" ng-click="createStudentView()"><i class="ti ti-plus"></i></button>
+
                                     </span>
+
                                  </div>
-                                 <p ng-if="!isSearched" style="font-size:21px; text-align: center; color: #7f8c8d">Search with Name, Class, Roll Number, Registration Number, Mobile Number</p>
+                                 <p ng-if="!isSearched" style="font-weight: 300; font-size:14px; text-align: center; color: #7f8c8d">Search with Name or <tag style="font-weight: 300; text-transform: none; font-size: 13px; padding: 3px 2px" class="btn btn-info-alt btn-xs" ng-click="searchWithRole()">Designation</tag> or <tag style="font-weight: 300; text-transform: none; font-size: 13px; padding: 3px 2px" class="btn btn-info-alt btn-xs" ng-click="searchWithBranch()">Allotted Branch</tag> or Employee ID or Mobile Number</p>
                               </div>
                            </div>
 
 
                            <div class="row" ng-if="isSearched && !isFound" style="padding-top: 30px">
-                             <p style="font-size:21px; text-align: center; color: #7f8c8d">No results found.</p>
+                              <p style="font-size:21px; text-align: center; color: #7f8c8d">No matching results found.</p>
                            </div>
 
-               <div class="panel panel-default" ng-show="isSearched && isFound && !singleStudent && !createView">
-                  <div class="panel-heading">
-                     <h2>List of Students</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr style="font-weight: 400; color: #2980b9 !important; background: #ecf0f1">
-                                  <th>#</th>
-                                  <th>Name</th>
-                                  <th>Class</th>
-                                  <th>Roll No</th>
-                                  <th>Stream</th>
-                                  <th>Contact No</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr class="studentRow" ng-repeat="student in studentData track by $index" onmouseover="this.style.color='#2980b9';" onmouseout="this.style.color='';" ng-click="goToStudentProfile(student.regNo)">
-                                  <th scope="row">{{$index + 1}}.</th>
-                                  <td><strong>{{student.fName}} {{student.lName}} </strong></td>
-                                  <td>{{student.class}} - {{student.division}} </td>
-                                  <td>{{student.roll}}</td>
-                                  <td>{{student.stream}}</td>
-                                  <td>{{student.contactPhone}}</td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-                </div>
 
-   <div class="row" ng-show="isSearched && isFound && singleStudent && !createView">
-      <div class="col-sm-3">
-         <div class="panel panel-profile">
-           <div class="panel-body">
-             <img src="http://placehold.it/300&text=Placeholder" class="img-circle">
-             <div class="name">{{studentData.fName + " " + student.lName}}</div>
-             <div class="info">Reg No : {{studentData.regNo}}</div>
-             <div class="info">{{studentData.class}} - {{studentData.division}}</div>
-             <div class="info">Mob: {{studentData.contactPhone}}</div>
-           </div>
-         </div><!-- panel -->
-         <div class="list-group list-group-alternate mb-n nav nav-tabs">
-            <a href="#tab-about"    role="tab" data-toggle="tab" class="list-group-item active"><i class="ti ti-user"></i> About </a>
-            <a href="#tab-timeline" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-view-list-alt"></i> Academics </a>
-            <a href="#tab-cocuricular" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-dribbble"></i> Co-Curicular</a>
-            <a href="#tab-edit"  role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-pencil"></i> Edit</a>
+                           <div class="panel panel-default" ng-show="isSearched && isFound && !singleStudent && !createView">
+                              <div class="panel-heading">
+                                 <h2>Registered Employees</h2>
+                              </div>
+                              <div class="panel-body">
+                                 <div class="table-responsive">
+                                    <table class="table m-n">
+                                       <thead>
+                                          <tr style="font-weight: 400; color: #2980b9 !important; background: #ecf0f1">
+                                             <th>#</th>
+                                             <th>Name</th>
+                                             <th>Designation</th>
+                                             <th>Branch</th>
+                                             <th>Contact Number</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <tr class="studentRow" ng-repeat="student in studentData track by $index" onmouseover="this.style.color='#2980b9';" onmouseout="this.style.color='';" ng-click="goToStudentProfile(student.employeeID)">
+                                             <th scope="row">{{$index + 1}}.</th>
+                                             <td><strong>{{student.fName}} {{student.lName}} </strong></td>
+                                             <td>{{student.designation}}</td>
+                                             <td>{{student.currentBranch}}</td>
+                                             <td>{{student.contact}}</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <!-- /.table-responsive -->
+                              </div>
+                              <!-- /.panel-body -->
+                           </div>
+                           <div class="row" ng-show="isSearched && isFound && singleStudent && !createView"> <!--  -->
+                              <div class="col-sm-3">
+                                 <div class="panel panel-profile">
+                                    <div class="panel-body">
+                                       <img ng-if="studentData.photoURL && studentData.photoURL != ''" ng-src="{{studentData.photoURL}}" ng-click="viewPhoto(studentData.photoURL)" class="img-circle" style="cursor: pointer">
+                                       <img ng-if="!studentData.photoURL || studentData.photoURL == ''" src="assets/img/default_user.png" class="img-circle">
+                                       <div class="name">{{studentData.fName + " " + student.lName}}</div>
+                                       <div class="info" style="font-weight: bold; color: #e67e22">{{studentData.employeeID}}</div>
+                                       <div class="info"><i class="fa fa-phone"></i> {{studentData.contact}}</div>
+                                    </div>
+                                 </div>
+                                 <!-- panel -->
+                                 <div class="list-group list-group-alternate mb-n nav nav-tabs">
+                                    <a href="#tab-about"    role="tab" data-toggle="tab" class="list-group-item active"><i class="ti ti-user"></i> Profile </a>
+                                    <a href="#tab-salary" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-view-list-alt"></i> Salary Slips </a>
+                                    <a href="#tab-attendance" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-dribbble"></i> Attendance</a>
+                                    <a href="#tab-actions"  role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-pencil"></i> Actions</a>
+                                 </div>
+                              </div>
+                              <!-- col-sm-3 -->
+                              <div class="col-sm-9">
+                                 <div class="tab-content">
+
+
+
+
+                                    <div class="tab-pane" id="tab-salary">
+                                       <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                             <h2>Sports</h2>
+                                          </div>
+                                          <div class="panel-body">
+                                             <div class="table-responsive">
+                                                <table class="table m-n">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>#</th>
+                                                         <th>Skill Type</th>
+                                                         <th>Description</th>
+                                                         <th>Progress</th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      <tr>
+                                                         <th scope="row">1.</th>
+                                                         <td><strong>Avenxo</strong></td>
+                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
+                                                         <td class="vam">
+                                                            <div class="progress m-n">
+                                                               <div class="progress-bar progress-bar-success" style="width: 20%"></div>
+                                                            </div>
+                                                         </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th scope="row">6.</th>
+                                                         <td><strong>Xavant</strong></td>
+                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
+                                                         <td class="vam">
+                                                            <div class="progress m-n">
+                                                               <div class="progress-bar progress-bar-success" style="width: 15%"></div>
+                                                            </div>
+                                                         </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                             <!-- /.table-responsive -->
+                                          </div>
+                                          <!-- /.panel-body -->
+                                       </div>
+                                    </div>
+
+                                       
+                                    <!-- #tab-projects -->
+                                    <div class="tab-pane active" id="tab-about">
+                                       <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                             <h2>About</h2>
+                                             <button class="btn btn-success-alt btn-sm" style="margin-top: 10px; float: right" ng-click="editCurrentProfile(studentData)">Edit</button>
+                                          </div>
+                                          <div class="panel-body">
+                                             <div class="about-area">
+                                                <h4 style="color: #2980b9">Official Information</h4>
+                                                <div class="table-responsive">
+                                                   <table class="table">
+                                                      <col width="40%">
+                                                      <col width="60%">
+                                                      <tbody>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Employee ID</td>
+                                                            <td>{{studentData.employeeID}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Name</td>
+                                                            <td>{{studentData.fName}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Designation</td>
+                                                            <td>{{studentData.designation}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Date of Join</td>
+                                                            <td>{{studentData.joinDate}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Joined Branch</td>
+                                                            <td>{{studentData.joinBranch}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Current Branch</td>
+                                                            <td>{{studentData.currentBranch}}</td>
+                                                         </tr>
+                                                      </tbody>
+                                                   </table>
+                                                </div>
+                                             </div>
+                                             <div class="about-area">
+                                                <h4 style="color: #2980b9">Bank Details</h4>
+                                                <div class="table-responsive">
+                                                   <table class="table about-table">
+                                                      <col width="40%">
+                                                      <col width="60%">
+                                                      <tbody>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Account Holder's Name</td>
+                                                            <td>{{studentData.bankInfo.name}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Account Number</td>
+                                                            <td>{{studentData.bankInfo.number}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Bank Name</td>
+                                                            <td>{{studentData.bankInfo.bank}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Branch</td>
+                                                            <td>{{studentData.bankInfo.branch}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">IFSC</td>
+                                                            <td>{{studentData.bankInfo.ifsc}}</td>
+                                                         </tr>
+                                                      </tbody>
+                                                   </table>
+                                                </div>
+                                             </div>
+
+                                             <div class="about-area">
+                                                <h4 style="color: #2980b9">Personal Information</h4>
+                                                <div class="table-responsive">
+                                                   <table class="table about-table">
+                                                      <col width="40%">
+                                                      <col width="60%">
+                                                      <tbody>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Full Name</td>
+                                                            <td>{{studentData.fName + " " + studentData.lName}} </td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Birth Date</td>
+                                                            <td>{{studentData.birthDate}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Height (in cm)</td>
+                                                            <td>{{studentData.height}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Weight (in kg)</td>
+                                                            <td>{{studentData.weight}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Gender</td>
+                                                            <td>{{studentData.gender}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Blood Group</td>
+                                                            <td>{{studentData.bloodGroup}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Contact Number</td>
+                                                            <td>{{studentData.contact}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Presesent Address</td>
+                                                            <td>
+                                                               {{studentData.currentAddress.house != undefined? studentData.currentAddress.house+', ' : ''}}
+                                                               {{studentData.currentAddress.postOffice != undefined? studentData.currentAddress.postOffice+', ' : ''}}
+                                                               {{studentData.currentAddress.locality != undefined? studentData.currentAddress.locality+', ' : ''}}
+                                                               {{studentData.currentAddress.city != undefined? studentData.currentAddress.city+', ' : ''}}
+                                                               {{studentData.currentAddress.district != undefined? studentData.currentAddress.district+', ' : ''}}
+                                                               {{studentData.currentAddress.state != undefined? studentData.currentAddress.state+', ' : ''}}
+                                                               {{studentData.currentAddress.postCode != undefined? studentData.currentAddress.postCode : ''}}
+
+                                                            </td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Permanent Address</td>
+                                                            <td>
+                                                               {{studentData.permanentAddress.house != undefined? studentData.permanentAddress.house+', ' : ''}}
+                                                               {{studentData.permanentAddress.postOffice != undefined? studentData.permanentAddress.postOffice+', ' : ''}}
+                                                               {{studentData.permanentAddress.locality != undefined? studentData.permanentAddress.locality+', ' : ''}}
+                                                               {{studentData.permanentAddress.city != undefined? studentData.permanentAddress.city+', ' : ''}}
+                                                               {{studentData.permanentAddress.district != undefined? studentData.permanentAddress.district+', ' : ''}}
+                                                               {{studentData.permanentAddress.state != undefined? studentData.permanentAddress.state+', ' : ''}}
+                                                               {{studentData.permanentAddress.postCode != undefined? studentData.permanentAddress.postCode : ''}}
+
+                                                            </td>
+                                                         </tr>
+                                                         <tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Religion</td>
+                                                            <td>{{studentData.religion}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Native Place </td>
+                                                            <td>{{studentData.nativePlace}}</td>
+                                                         </tr>
+                                                      </tbody>
+                                                   </table>
+                                                </div>
+                                             </div>
+                                             <div class="about-area">
+                                                <h4 style="color: #e74c3c">Emergency Contact</h4>
+                                                <div class="table-responsive">
+                                                   <table class="table about-table">
+                                                      <col width="40%">
+                                                      <col width="60%">
+                                                      <tbody>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Contact Name</td>
+                                                            <td>{{studentData.emergencyName}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <td style="color: #4a4949; font-weight: 300;">Contact Number</td>
+                                                            <td>{{studentData.emergencyNumber}}</td>
+                                                         </tr>
+                                                      </tbody>
+                                                   </table>
+                                                </div>
+                                             </div>
+                                             
+
+
+                                          </div>
+                                       </div>
+                                    </div>
+
+
+
+                                    <div class="tab-pane" id="tab-attendance">
+                                       <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                             <h2>Art</h2>
+                                          </div>
+                                          <div class="panel-body">
+                                             <div class="table-responsive">
+                                                <table class="table m-n">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>#</th>
+                                                         <th>Skill Type</th>
+                                                         <th>Description</th>
+                                                         <th>Progress</th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      <tr>
+                                                         <th scope="row">1.</th>
+                                                         <td><strong>Avenxo</strong></td>
+                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
+                                                         <td class="vam">
+                                                            <div class="progress m-n">
+                                                               <div class="progress-bar progress-bar-success" style="width: 20%"></div>
+                                                            </div>
+                                                         </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th scope="row">6.</th>
+                                                         <td><strong>Xavant</strong></td>
+                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
+                                                         <td class="vam">
+                                                            <div class="progress m-n">
+                                                               <div class="progress-bar progress-bar-success" style="width: 15%"></div>
+                                                            </div>
+                                                         </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                             <!-- /.table-responsive -->
+                                          </div>
+                                          <!-- /.panel-body -->
+                                       </div>
+                                    </div>
+                                    
+
+
+
+                                    <div class="tab-pane" id="tab-actions">
+                                       <div class="panel">
+                                          <div class="panel-heading">
+                                             <h2>Actions</h2>
+                                          </div>
+                                          <div class="panel-body">
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   Actions here.
+                                                </div>
+                                             </div>
+                                          </div>
+                                          
+                                       </div>
+                                    </div>
+
+
+
+                                 </div>
+                                 <!-- .tab-content -->
+                              </div>
+                              <!-- col-sm-8 -->
+                           </div>
+
+
+                        </div>
+                     </div>
+                     <!-- .container-fluid -->
+                  </div>
+                  <!-- #page-content -->
+               </div>
+            </div>
          </div>
-      </div><!-- col-sm-3 -->
-      <div class="col-sm-9">
-         <div class="tab-content">
-            <div class="tab-pane" id="tab-cocuricular">
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Sports</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Art</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Literary</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Music</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Instruments</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Dance</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Tech</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h2>Misc</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="table-responsive">
-                        <table class="table m-n">
-                           <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Skill Type</th>
-                                  <th>Description</th>
-                                  <th>Progress</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                <tr>
-                                  <th scope="row">1.</th>
-                                  <td><strong>Avenxo</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6.</th>
-                                  <td><strong>Xavant</strong></td>
-                                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                  <td class="vam">
-                                    <div class="progress m-n">
-                                              <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                            </div>
-                                        </td>
-                                </tr>
-                           </tbody>
-                        </table>
-                     </div><!-- /.table-responsive -->
-                  </div> <!-- /.panel-body -->
-               </div>
-            </div> <!-- #tab-projects -->
+      </div>
 
-            <div class="tab-pane active" id="tab-about">
-               <div class="panel panel-default">
-                   <div class="panel-heading">
-                     <h2>About</h2>
-                   </div>
-                  <div class="panel-body">
 
-                     <div class="about-area">
-                           <h4>Basic Information</h4>
-                            <div class="table-responsive">
-                              <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <th>Registration No</th>
-                                    <td>{{studentData.regNo}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Class</th>
-                                    <td>{{studentData.class}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Division</th>
-                                    <td>{{studentData.division}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Roll No</th>
-                                    <td>{{studentData.roll}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Date Of Joining </th>
-                                    <td>{{studentData.doj}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Stream</th>
-                                    <td>{{studentData.stream}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Section</th>
-                                    <td>{{studentData.section}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                     </div>
-                     <div class="about-area">
-                           <h4>Personal Information</h4>
-                            <div class="table-responsive">
-                              <table class="table about-table">
-                                <tbody>
-                                  <tr>
-                                    <th>Full Name</th>
-                                    <td>{{studentData.fName + " " + studentData.lName}} </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Birth Date</th>
-                                    <td>{{studentData.dob}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Height</th>
-                                    <td>{{studentData.height}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Weight</th>
-                                    <td>{{studentData.weight}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Gender</th>
-                                    <td>{{studentData.gender}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Blood Group</th>
-                                    <td>{{studentData.bloodGroup}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Contact No </th>
-                                    <td>{{studentData.contactPhone}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Contact Address</th>
-                                    <td>{{studentData.contactAddress}}</td>
-                                  </tr>
-                                  <tr>
-                                  <tr>
-                                    <th>Religion</th>
-                                    <td>{{studentData.religion}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Caste </th>
-                                    <td>{{studentData.caste}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                     </div>
-                     <div class="about-area">
-                           <h4>Parents Information</h4>
-                            <div class="table-responsive">
-                              <table class="table about-table">
-                                <tbody>
-                                 
-                                  <tr>
-                                    <th>Fathers Name</th>
-                                    <td>{{studentData.fatherName}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Fathers Occupation </th>
-                                    <td>{{studentData.fatherOccupation}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Fathers Contact No </th>
-                                    <td>{{studentData.fatherPhone}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Fathers Income </th>
-                                    <td>{{studentData.fatherIncome}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Mothers Name </th>
-                                    <td>{{studentData.motherName}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Mothers Occupation</th>
-                                    <td>{{studentData.motherOccupation}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Mothers Contact No </th>
-                                    <td>{{studentData.motherPhone}}</td>
-                                  </tr>
-                                   <tr>
-                                    <th>Mothers Income</th>
-                                    <td>{{studentData.motherIncome}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="tab-pane" id="tab-timeline">
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h2>Timeline</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <ul class="timeline">
-                              <li class="timeline-primary">
-                                 <div class="timeline-icon"><i class="ti ti-pencil"></i></div>
-                                 <div class="timeline-body">
-                                    <div class="timeline-header">
-                                       <span class="author">Posted by <a href="#">David Tennant</a></span>
-                                       <span class="date">Monday, November 21, 2013</span>
-                                    </div>
-                                    <div class="timeline-content">
-                                       <h4>Consectetur Adipisicing Elit</h4>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, officiis, molestiae, deserunt asperiores architecto ut vel repudiandae dolore inventore nesciunt necessitatibus doloribus ratione facere consectetur suscipit!</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="timeline-info">
-                                 <div class="timeline-icon"><i class="ti ti-heart"></i></div>
-                                 <div class="timeline-body">
-                                    <div class="timeline-header">
-                                       <span class="author">Posted by <a href="#">David Tennant</a></span>
-                                       <span class="date">Monday, November 21, 2013</span>
-                                    </div>
-                                    <div class="timeline-content">
-                                       <h4>Consectetur Adipisicing Elit</h4>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, officiis, molestiae, deserunt asperiores architecto ut vel repudiandae dolore inventore nesciunt necessitatibus doloribus ratione facere consectetur suscipit!</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="timeline-warning">
-                                 <div class="timeline-icon"><i class="ti ti-camera"></i></div>
-                                 <div class="timeline-body">
-                                    <div class="timeline-header">
-                                       <span class="author">Posted by <a href="#">David Tennant</a></span>
-                                       <span class="date">Monday, November 21, 2013</span>
-                                    </div>
-                                    <div class="timeline-content">
-                                       <h4>Consectetur Adipisicing Elit</h4>
-                                       <ul class="list-inline">
-                                          <li><img src="http://placehold.it/300&text=Placeholder" alt="" class="pull-left img-thumbnail img-responsive clearfix" width="200"></li>
-                                          <li><img src="http://placehold.it/300&text=Placeholder" alt="" class="pull-left img-thumbnail img-responsive clearfix" width="200"></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="timeline-danger">
-                                 <div class="timeline-icon"><i class="ti ti-home"></i></div>
-                                 <div class="timeline-body">
-                                    <div class="timeline-header">
-                                       <span class="author">Posted by <a href="#">David Tennant</a></span>
-                                       <span class="date">Monday, November 21, 2013</span>
-                                    </div>
-                                    <div class="timeline-content">
-                                       <h4>Consectetur Adipisicing Elit</h4>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, officiis, molestiae, deserunt asperiores architecto ut vel repudiandae dolore inventore nesciunt necessitatibus doloribus ratione facere consectetur suscipit!</p>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
+               <!-- FILTER MODAL -->
+               <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                               <div class="modal-header" style="color: #27ae60; border: none; padding-bottom: 0">
+                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                 <h4 class="modal-title" style="font-size: 16px">Available Branches</h4>
+                               </div>                                            
+                        <div class="modal-body">      
+                           <button ng-repeat="branch in branchList" type="button" class="btn btn-default btn-block" ng-click="searchWithBranchAction(branch.code)" style="text-transform: none; text-align: left; font-size: 18px; font-weight: 400">{{branch.name}}</button>                     
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="tab-pane" id="tab-photos">
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h2>Photos</h2>
-                  </div>
-                  <div class="panel-body profile-photos">
-                     <div class="row">
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                        <div class="col-md-3">
-                           <img src="http://placehold.it/300&text=Placeholder" alt="" class="img-thumbnail img-responsive mb-xl">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="tab-pane" id="tab-edit">
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h2>Edit</h2>
-                  </div>
-                  <div class="panel-body">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <form class="form-horizontal tabular-form">
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">First Name</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.fname" class="form-control" id="form-fname" placeholder="John">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Last Name</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.lname"  class="form-control" id="form-lname" placeholder="Appleseed">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Class</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.class" class="form-control" id="form-class" placeholder="">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Division</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.division" class="form-control" id="form-division" placeholder="">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Date of Birth</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" id="dob" maxlength="10" ng-model="studentEditInfo.dob" class="form-control" id="form-division" placeholder="">
-                                 </div>
-                              </div>
-
-                            
-                              <div class="form-group">
-                                 <label for="radio" class="col-sm-2 control-label">Gender</label>
-                                 <div class="col-sm-8 tabular-border" ng-model="studentEditInfo.gender">
-                                    <div class="radio block icheck"><label><input type="radio" name="gender" value="M"> Male</label></div>
-                                    <div class="radio block icheck"><label><input type="radio" name="gender" value="F"> Female</label></div>
-                                 </div>
-                              </div>
-
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Stream</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.stream" class="form-control" id="form-stream" placeholder="Engineering/ Medicine">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Section</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.section" class="form-control" id="form-section" placeholder="">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Address</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <textarea class="form-control fullscreen" ng-model="studentEditInfo.contactAddress"></textarea>
-                                 </div>
-                              </div>
-                               <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">Locality</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.location" class="form-control" id="form-locality" placeholder="">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="form-name" class="col-sm-2 control-label">City</label>
-                                 <div class="col-sm-8 tabular-border">
-                                    <input type="text" ng-model="studentEditInfo.city" class="form-control" id="form-city" placeholder="">
-                                 </div>
-                              </div>
-                           </form>  
-                        </div>
-                     </div>
-                  </div>
-                  <div class="panel-footer">
-                     <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
-                           <button class="btn-primary btn" ng-click="saveEditChanges(studentEditInfo)">Save</button>
-                           <a href="#tab-about"><button class="btn-default btn">Cancel</button></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-         </div><!-- .tab-content -->
-      </div><!-- col-sm-8 -->
-     
+                     </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
                
-   </div>
-</div>
 
-      
+               <!-- FILTER MODAL -->
+               <div class="modal fade" id="filterModalRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                               <div class="modal-header" style="color: #27ae60; border: none; padding-bottom: 0">
+                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                 <h4 class="modal-title" style="font-size: 16px">Designations</h4>
+                               </div>                                            
+                        <div class="modal-body">      
+                           <button ng-repeat="role in roleList" type="button" class="btn btn-default btn-block" ng-click="searchWithRoleAction(role.code)" style="text-transform: none; text-align: left; font-size: 18px; font-weight: 400">{{role.name}}</button>                     
+                        </div>
+                     </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
 
-                            </div> <!-- .container-fluid -->
-                        </div> <!-- #page-content -->
-                    </div>
-                    <footer role="contentinfo">
-    <div class="clearfix">
-        <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2015 Avenxo</h6></li>
-        </ul>
-        <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
-    </div>
-</footer>
 
-                </div>
+
+
+               <!-- IMAGE PREVIEW MODAL -->
+               <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content" style="width: 540px">
+                        <div class="modal-body" style="padding: 0">
+                              <img ng-src="{{currentImage}}" style="max-width: 100%;">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 100%; height: 60px">Close</button>
+                        </div>
+                     </div>
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+
+
+      <!-- Image Modal -->
+      <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="width: 810px">
+               <div class="modal-body">
+                  <div class="row" style="padding: 15px">
+                     <button class="btn-success btn pull-right" ng-click="saveAttachment()" style="margin-left: 5px" ng-show="photoLoadedToFrame">Save</button>
+                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                     <div style="padding:5px 10px; background:#00ad2d; border:1px solid #00ad2d; position:relative; color:#fff; border-radius:2px; text-align:center; float:left; cursor:pointer">Select an Image<input type="file" id="fileInput" style="position: absolute; z-index: 1000; opacity: 0; cursor: pointer; right: 0; top: 0; height: 100%; font-size: 24px; width: 100%;"/></div>
+                  </div>
+                  <div style="margin-top: 10px">
+                     <img id="image" ng-src="{{myImage}}" style="max-width: 100%;">
+                  </div>
+                  <p style="margin: 0; padding-top: 15px; color: #bdc3c7">Upload High Quality image only. Use minimum 853x480 resolution(Width: 853px Height: 480px). Only JPG, PNG files supported.</p>
+               </div>
             </div>
-        </div>
-
-    <!-- Load site level scripts -->
-
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
-
-<script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>                      <!-- Load jQuery -->
-<script type="text/javascript" src="assets/js/jqueryui-1.10.3.min.js"></script>                    <!-- Load jQueryUI -->
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>                       <!-- Load Bootstrap -->
-<script type="text/javascript" src="assets/js/enquire.min.js"></script>                            <!-- Load Enquire -->
-
-<script type="text/javascript" src="assets/plugins/velocityjs/velocity.min.js"></script>              <!-- Load Velocity for Animated Content -->
-<script type="text/javascript" src="assets/plugins/velocityjs/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="assets/plugins/wijets/wijets.js"></script>                     <!-- Wijet -->
-
-<script type="text/javascript" src="assets/plugins/codeprettifier/prettify.js"></script>           <!-- Code Prettifier  -->
-<script type="text/javascript" src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script>       <!-- Swith/Toggle Button -->
-
-<script type="text/javascript" src="assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>  <!-- Bootstrap Tabdrop -->
-
-<script type="text/javascript" src="assets/plugins/iCheck/icheck.min.js"></script>                    <!-- iCheck -->
-
-<script type="text/javascript" src="assets/plugins/nanoScroller/js/jquery.nanoscroller.min.js"></script> <!-- nano scroller -->
-
-<script type="text/javascript" src="assets/js/application.js"></script>
-<script type="text/javascript" src="assets/demo/demo.js"></script>
-<script type="text/javascript" src="assets/demo/demo-switcher.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> <!-- DateTime Picker -->
-
-<!-- End loading site level scripts -->
-    
-    <!-- Load page level scripts-->
-    
-<script type="text/javascript" src="assets/plugins/form-fseditor/jquery.fseditor-min.js"></script>                   <!-- Fullscreen Editor -->
-<script type="text/javascript" src="assets/plugins/bootbox/bootbox.js"></script>    <!-- Bootbox -->
-
-<script type="text/javascript" src="assets/demo/demo-profile.js"></script>
-
-    <!-- End loading page level scripts-->
-
-    </body>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- Load site level scripts -->
+      <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
+      <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>                      <!-- Load jQuery -->
+      <script type="text/javascript" src="assets/js/jqueryui-1.10.3.min.js"></script>                    <!-- Load jQueryUI -->
+      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>                       <!-- Load Bootstrap -->
+      <script type="text/javascript" src="assets/js/enquire.min.js"></script>                            <!-- Load Enquire -->
+      <script type="text/javascript" src="assets/plugins/velocityjs/velocity.min.js"></script>              <!-- Load Velocity for Animated Content -->
+      <script type="text/javascript" src="assets/plugins/velocityjs/velocity.ui.min.js"></script>
+      <script type="text/javascript" src="assets/plugins/wijets/wijets.js"></script>                     <!-- Wijet -->
+      <script type="text/javascript" src="assets/plugins/codeprettifier/prettify.js"></script>           <!-- Code Prettifier  -->
+      <script type="text/javascript" src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script>       <!-- Swith/Toggle Button -->
+      <script type="text/javascript" src="assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>  <!-- Bootstrap Tabdrop -->
+      <script type="text/javascript" src="assets/plugins/iCheck/icheck.min.js"></script>                    <!-- iCheck -->
+      <script type="text/javascript" src="assets/plugins/nanoScroller/js/jquery.nanoscroller.min.js"></script> <!-- nano scroller -->
+      <script type="text/javascript" src="assets/js/application.js"></script>
+      <script type="text/javascript" src="assets/demo/demo.js"></script>
+      <script type="text/javascript" src="assets/demo/demo-switcher.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> <!-- DateTime Picker -->
+      <!-- End loading site level scripts -->
+      <!-- Load page level scripts-->
+      <script type="text/javascript" src="assets/plugins/form-fseditor/jquery.fseditor-min.js"></script>                   <!-- Fullscreen Editor -->
+      <script type="text/javascript" src="assets/plugins/bootbox/bootbox.js"></script>    <!-- Bootbox -->
+      <script type="text/javascript" src="assets/demo/demo-profile.js"></script>
+      <!-- End loading page level scripts-->
+   </body>
 </html>
