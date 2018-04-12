@@ -115,33 +115,33 @@
                      <div class="container-fluid">
                         <div class="row">
                            <div class="col-md-4">
-                              <div class="info-tile tile-green">
-                                 <div class="tile-icon"><i class="fa fa-user"></i></div>
-                                 <div class="tile-heading"><span>Referers</span></div>
+                              <div class="info-tile tile-blue">
+                                 <div class="tile-icon"><i class="ti ti-user"></i></div>
+                                 <div class="tile-heading"><span>Total Employees</span></div>
                                  <div class="tile-body">
-                                 	<span ng-if="figure_total_referers != undefined">{{figure_total_referers}}</span>
-                                 	<span ng-if="figure_total_referers == undefined">...</span>
+                                 	<span ng-if="figure_total_employees != undefined">{{figure_total_employees}}</span>
+                                 	<span ng-if="figure_total_employees == undefined">...</span>
                                  </div>
-                                 <div class="tile-footer"><span class="text-default">Guests Referred</span></div>
+                                 <div class="tile-footer"><span class="text-default">Employees</span></div>
                               </div>
 
                               <div class="info-tile tile-green">
-                                 <div class="tile-icon"><i class="fa fa-users"></i></div>
-                                 <div class="tile-heading"><span>References</span></div>
+                                 <div class="tile-icon"><i class="ti ti-check"></i></div>
+                                 <div class="tile-heading"><span>Present</span></div>
                                  <div class="tile-body">
-                                    <span ng-if="figure_total_referees != undefined">{{figure_total_referees}}</span>
-                                    <span ng-if="figure_total_referees == undefined">...</span>
+                                    <span ng-if="figure_total_present != undefined">{{figure_total_present}}</span>
+                                    <span ng-if="figure_total_present == undefined">...</span>
                                  </div>
-                                 <div class="tile-footer"><span class="text-default">References Made</span></div>
+                                 <div class="tile-footer"><span class="text-default">On Duty Today</span></div>
                               </div>
-                              <div class="info-tile tile-green">
-                                 <div class="tile-icon"><i class="fa fa-thumbs-up"></i></div>
-                                 <div class="tile-heading"><span>Accepted</span></div>
+                              <div class="info-tile tile-danger">
+                                 <div class="tile-icon"><i class="ti ti-close"></i></div>
+                                 <div class="tile-heading"><span>Absent</span></div>
                                  <div class="tile-body">
-                                    <span ng-if="figure_converted_referees != undefined">{{figure_converted_referees}}</span>
-                                    <span ng-if="figure_converted_referees == undefined">...</span>
+                                    <span ng-if="figure_total_absent != undefined">{{figure_total_absent}}</span>
+                                    <span ng-if="figure_total_absent == undefined">...</span>
                                  </div>
-                                 <div class="tile-footer"><span class="text-default">References Accepted</span></div>
+                                 <div class="tile-footer"><span class="text-default">Absent Today</span></div>
                               </div>
 
 
@@ -168,24 +168,17 @@
                                                    <label for="form-name" class="col-sm-3 control-label">Date</label>
                                                    <div class="col-sm-8">
                                                       <div class="input-group date">
-                                                         <input type="text" ng-model="addNewContent.date" id="new_referal_date" class="form-control ng-pristine">
+                                                         <input type="text" ng-model="attendancePopup.date" id="new_attendance_date" class="form-control ng-pristine">
                                                          <span class="input-group-addon"><i class="ti ti-calendar"></i></span>
                                                       </div>
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Absentees</label>
+                                                   <label for="form-name" class="col-sm-3 control-label">Attendance</label>
                                                    <div class="col-sm-8">
-                                                      <button class="btn-success btn" style="font-weight: 300" ng-click="showEmployeeSelector()"><i class="fa fa-plus"></i> Select</button>
+                                                      <button class="btn-success btn" style="font-weight: 300; width: 100%" ng-click="showEmployeeSelector()">View</button>
                                                    </div>
 
-                                                </div>
-
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label"></label>
-                                                   <div class="col-sm-8">
-                                                      <button ng-repeat="person in referencesHoldList" style="margin-right: 5px" class="btn btn-default savedCommentButton" ng-click="removeNewReference(person.mobile)"><tag class="savedCommentButtonIcon"><i class="fa fa-minus-circle"></i></tag>{{person.name}} ({{person.mobile}})</button>
-                                                   </div>
                                                 </div>
                                                 
                                              </form>
@@ -194,16 +187,7 @@
                                        
                                        <p style="color: #e74c3c; font-weight: bold; margin: 10px 0px 0px 0px; text-align: center;">{{newContentSaveError}}</p>
                                        
-                                    </div>                                    
-                                    
-                                    <div class="panel-footer">
-                                       <div class="row">
-                                          <div class="col-sm-12">
-                                             <button class="btn-success btn pull-right" ng-click="saveNewContent()">Save</button>
-                                             <button class="btn-default btn pull-right" style="margin-right: 10px" ng-click="resetNewContent()" >Reset</button>
-                                          </div>
-                                       </div>
-                                    </div>
+                                    </div>  
                                  </div>
 
                                  
@@ -238,7 +222,7 @@
                   <div class="modal-dialog" style="width: 80%;">
                      <div class="modal-content">
                         <div class="modal-header" style="padding: 16px; background: #27ae60 !important;">
-                           <h2 style="margin: 0; color: #FFF; text-align: center; font-size: 21px;">Attendance Record as on <b>{{dateFancy}}</b></h2>
+                           <h2 style="margin: 0; color: #FFF; text-align: center; font-size: 21px;">Attendance Record as on <b>{{displayDate}}</b></h2>
                         </div>
                         <div class="modal-body" style="padding: 5px 12px 20px 5px" ng-if="seatPlanError == ''">
                         <center>
@@ -253,7 +237,9 @@
                                  <img ng-if="!person.photoURL || person.photoURL == ''" src="assets/img/default_user.png" style="cursor: pointer; width: 100%" class="img-circle">
 
                                  <div class="centeredOverlay">
-                                    <tag ng-if="person.attendance == 1" style="color: rgba(126, 184, 61, 0.7);
+                                    <tag ng-if="person.attendance == 1" style="color: rgba(249, 193, 51, .85);
+    font-size: 24px;">Half Day</tag>
+                                    <tag ng-if="person.attendance == 2" style="color: rgba(126, 184, 61, 0.7);
     font-size: 60px;"><i class="fa fa-check"></i></tag>
                                     <tag ng-if="person.attendance == 5" style="color: rgba(230, 67, 46, 0.7);
     font-size: 60px;"><i class="fa fa-times"></i></tag>

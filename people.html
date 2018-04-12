@@ -30,6 +30,11 @@
       <![endif]-->
       <!-- The following CSS are included as plugins and can be removed if unused-->
       <link type="text/css" href="assets/plugins/form-fseditor/fseditor.css" rel="stylesheet">
+
+
+         <link type="text/css" href="assets/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">   <!-- Calendar Plugin -->
+
+
       <!-- FullScreen Editor -->
       <style type="text/css">
          .studentRow:hover{
@@ -724,7 +729,7 @@
                                  <div class="list-group list-group-alternate mb-n nav nav-tabs">
                                     <a href="#tab-about"    role="tab" data-toggle="tab" class="list-group-item active"><i class="ti ti-user"></i> Profile </a>
                                     <a href="#tab-salary" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-view-list-alt"></i> Salary Slips </a>
-                                    <a href="#tab-attendance" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-dribbble"></i> Attendance</a>
+                                    <a href="#tab-attendance" ng-click="FetchAttendanceRecord()" role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-dribbble"></i> Attendance</a>
                                     <a href="#tab-actions"  role="tab" data-toggle="tab" class="list-group-item"><i class="ti ti-pencil"></i> Actions</a>
                                  </div>
                               </div>
@@ -962,38 +967,35 @@
                                     <div class="tab-pane" id="tab-attendance">
                                        <div class="panel panel-default">
                                           <div class="panel-heading">
-                                             <h2>Art</h2>
+                                             <h2>Attendance Records</h2>
+                                             <button class="btn btn-info-alt btn-sm" ng-click="calendarView = !calendarView" style="margin-left: 10px">Switch View</button>
+                                             <button class="btn btn-success-alt btn-sm" ng-click="openMonthSelector()">Filter by Month</button>
+                                             
+
+                                             
                                           </div>
                                           <div class="panel-body">
-                                             <div class="table-responsive">
+                                             <div class="row" ng-show="calendarView">
+                                                <div id="calendar-view" class="col-sm-12"></div>
+                                             </div>
+                                             <div class="table-responsive" ng-show="!calendarView">
                                                 <table class="table m-n">
                                                    <thead>
                                                       <tr>
-                                                         <th>#</th>
-                                                         <th>Skill Type</th>
-                                                         <th>Description</th>
-                                                         <th>Progress</th>
+                                                         <th>Date</th>
+                                                         <th>Day</th>
+                                                         <th>Status</th>
                                                       </tr>
                                                    </thead>
                                                    <tbody>
-                                                      <tr>
-                                                         <th scope="row">1.</th>
-                                                         <td><strong>Avenxo</strong></td>
-                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                                         <td class="vam">
-                                                            <div class="progress m-n">
-                                                               <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                                            </div>
-                                                         </td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th scope="row">6.</th>
-                                                         <td><strong>Xavant</strong></td>
-                                                         <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</td>
-                                                         <td class="vam">
-                                                            <div class="progress m-n">
-                                                               <div class="progress-bar progress-bar-success" style="width: 15%"></div>
-                                                            </div>
+                                                      <tr ng-repeat="entry in attendanceRecord track by $index">
+                                                         <td>{{entry.date}}</td>
+                                                         <td>{{entry.day}}</td>
+                                                         <td>
+                                                            <tag class="attendance_unknown" ng-if="entry.status == 0">Unknown</tag>
+                                                            <tag class="attendance_half" ng-if="entry.status == 1">Half Day</tag>
+                                                            <tag class="attendance_present" ng-if="entry.status == 2">Present</tag>
+                                                            <tag class="attendance_absent" ng-if="entry.status == 5">Absent</tag>
                                                          </td>
                                                       </tr>
                                                    </tbody>
@@ -1092,6 +1094,28 @@
 
 
 
+
+
+               <!-- Month Picker Modal -->
+               <div class="modal fade" id="monthSelectorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content" style="width: 540px">
+                        <div class="modal-body" style="padding: 0">
+                              <input type="text" style="margin-top: 10px; padding: 20px; width: 100%; text-align: left; font-size: 21px; border: none;" id="attendanceFilterMonth" placeholder="Select Month">
+
+                              
+                        </div>
+                        <div class="modal-footer" style="padding: 0; border: none">
+                              <button class="btn btn-default" data-dismiss="modal" style="width: 50%; float: left; border: none; height: 36px; border-radius: 0; margin: 0">Close</button>
+                              <button class="btn btn-success" ng-click="applyMonthFilterAttendance()" style="width: 50%; float: right; border: none; height: 36px; border-radius: 0; margin: 0">Apply</button>
+                        </div>
+                     </div>
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+
+
+
       <!-- Image Modal -->
       <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
          <div class="modal-dialog">
@@ -1138,5 +1162,9 @@
       <script type="text/javascript" src="assets/plugins/bootbox/bootbox.js"></script>    <!-- Bootbox -->
       <script type="text/javascript" src="assets/demo/demo-profile.js"></script>
       <!-- End loading page level scripts-->
+
+
+            <script type="text/javascript" src="assets/plugins/fullcalendar/moment.min.js"></script>   <!-- Moment.js Dependency -->
+      <script type="text/javascript" src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>   <!-- Calendar Plugin -->
    </body>
 </html>
