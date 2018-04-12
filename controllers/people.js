@@ -771,9 +771,17 @@ angular.module('peopleApp', ['ngCookies'])
       $('#monthSelectorModal').modal('show'); 
    }
 
+
+   var tempToday = new Date();
+
+   //default month year display
+   $scope.attendanceFilterDisplay = (getFancyMonth(tempToday.getMonth()))+', '+(tempToday.getFullYear());
+
    $scope.applyMonthFilterAttendance = function(){
     var tempNewDate = document.getElementById("attendanceFilterMonth").value;
     $('#monthSelectorModal').modal('hide');
+
+    $scope.attendanceFilterDisplay = tempNewDate;
 
     var tempSplit = tempNewDate.split(", ");
 
@@ -813,6 +821,23 @@ angular.module('peopleApp', ['ngCookies'])
         case 'December':
             return '12'                
     }
+  }
+
+  function getFancyMonth(id){
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    return month[id];    
   }
 
 });
