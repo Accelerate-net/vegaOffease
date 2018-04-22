@@ -53,13 +53,14 @@ angular.module('vendorsApp', ['ngCookies'])
 $scope.initVendors = function(){
 
       var data = {};
-      data.token = $cookies.get("zaitoonAdmin");
+      data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
       data.id = 0;
 
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/erpFetchVendors.php',
+        url     : 'https://zaitoon.online/services/erpfetchvendors.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -67,87 +68,248 @@ $scope.initVendors = function(){
        $('#vegaPanelBodyLoader').hide(); $("body").css("cursor", "default");
        console.log(response.data)
          if(response.data.status){
-         	console.log(response.data)
            $scope.isReservationsFound = true;
-           $scope.vendorsList = response.data.response;
+           $scope.vendorList = response.data.response;
          }
          else{
            $scope.isReservationsFound = false;
-           $scope.resultMessage = "There are no vendors added!";
+           $scope.resultMessage = "There are no vendors added yet.";
          }
         });
 }
 $scope.initVendors();
 
+
+$scope.getRandomColor = function(code){
+
+  code = code.toString().split('').pop();
+
+  var styles = [
+    {"color": "#ff4300"},
+    {"color": "#1abc9c"},
+    {"color": "#3498db"},
+    {"color": "#9b59b6"},
+    {"color": "#34495e"},
+    {"color": "#e67e22"},
+    {"color": "#0a3d62"},
+    {"color": "#b71540"},
+    {"color": "#e58e26"},
+    {"color": "#60a3bc"}
+  ];
+
+  return styles[code];
+}
+
          
          $scope.showCancel = function(vendor){
          
-       		$scope.cancelItemCode = vendor.id;
+       		$scope.cancelItemCode = vendor.code;
        		$scope.cancelShowName = vendor.name;
        	
        		$('#cancelModal').modal('show');
          
          }
          
-         $scope.confirmCancel = function(code){
-	    	var data = {};
-	    	data.code = code;
-	        data.token = $cookies.get("zaitoonAdmin");
-	        $http({
-	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpdeleteinventoryvendors.php',
-	          data    : data,
-	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-	         })
-	         .then(function(response) {
-	         	$('#cancelModal').modal('hide');
-	         	if(response.data.status){	   
-	         		$scope.initVendors();
-	              	}
-	              	else{
-		              	alert(response.data.error);
-	              	}
-	         });         
+        $scope.confirmCancel = function(code){
+    	    	  var data = {};
+    	    	  data.code = code;
+    	        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+              console.log(data)
+    	        $http({
+    	          method  : 'POST',
+    	          url     : 'https://zaitoon.online/services/erpdeleteinventoryvendors.php',
+    	          data    : data,
+    	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+    	         })
+    	         .then(function(response) {
+    	         	$('#cancelModal').modal('hide');
+    	         	      if(response.data.status){	   
+    	         		      $scope.initVendors();
+    	              	}
+    	              	else{
+    		              	alert(response.data.error);
+    	              	}
+    	         });         
          }
          
          
          
      //Add new reservation
-     $scope.nullNewReservation = function(){
+     $scope.nullNewVendor = function(){
      	$scope.newVendor = {};
-     	$scope.newVendor.mobile = "";
-     	$scope.newVendor.email = "";
      	$scope.newVendor.name = "";
-     	$scope.newVendor.count = 2;
-     	$scope.newVendor.mode = "";
-     	$scope.newVendor.date = "";
-     	$scope.newVendor.time = "";
-     	$scope.newVendor.comments = "";     
-     }
-     $scope.nullNewReservation();
-     
-     
-     $scope.openNewReservation = function(){
-     	$scope.nullNewReservation();
-     	$('#reservationModal').modal('show');
-     }
-     
-     $scope.showEdit = function(obj){
-     	$scope.editVendor = obj;
-     	$('#vendorEditModal').modal('show');
-     }
-     
-	$scope.saveNewReservation = function(){
+     	$scope.newVendor.contact = "";
+     	$scope.newVendor.address = "";
+     	$scope.newVendor.modeOfPayment = "";
+     	$scope.newVendor.paymentReference = ""; 
 
-		console.log($scope.newVendor);
+      document.getElementById("dropProvidingBranches").innerHTML = '';
+      document.getElementById("dropProvidingInventories").innerHTML = ''; 
+     }
+     $scope.nullNewVendor();
+     
+     
+     $scope.openNewVendor = function(){
+     	$scope.nullNewVendor();
+
+
+            var data = {}; 
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+            //fetch inventory list, branches list etc.
+            $http({
+              method  : 'POST',
+              url     : 'https://zaitoon.online/services/erpnewvendormetadata.php',
+              data    : data,
+              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+             })
+             .then(function(response) {
+                    if(response.data.status){
+                      $scope.metaBranchesList = response.data.branches;
+                      $scope.metaInventoryList = response.data.inventories;
+
+                      var n = 0;
+                      var listing = '';
+                      while($scope.metaBranchesList[n]){
+                        listing = listing + '<option value="'+$scope.metaBranchesList[n].code+'">'+$scope.metaBranchesList[n].name+'</option>';
+                        
+
+                        if(n == $scope.metaBranchesList.length - 1){
+                          document.getElementById("dropProvidingBranches").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
+                        }
+
+                        n++;
+                      }
+
+
+                      var m = 0;
+                      var items = '';
+                      while($scope.metaInventoryList[m]){
+                        items = items + '<option value="'+$scope.metaInventoryList[m].code+'">'+$scope.metaInventoryList[m].name+'</option>';
+                        
+
+                        if(m == $scope.metaInventoryList.length - 1){
+                          document.getElementById("dropProvidingInventories").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ items;
+                          $('#newVendorModal').modal('show');
+                        }
+
+                        m++;
+                      }
+
+
+
+                    }
+             });  
+
+
+     }
+     
+
+     $scope.showEdit = function(obj){
+
+      $scope.editVendor = obj;
+      $scope.editDisplayName = $scope.editVendor.name;
+
+      var tempBranchList = [];
+      var tempInventoryList = [];
+
+      console.log($scope.editVendor)
+
+      if(($scope.editVendor.branchesProvided).length > 0){
+        var j = 0;
+        while($scope.editVendor.branchesProvided[j]){
+          tempBranchList.push($scope.editVendor.branchesProvided[j].code)
+          j++;
+        }  
+      }
+
+      if(($scope.editVendor.inventoriesProvided).length > 0){
+        var k = 0;
+        while($scope.editVendor.inventoriesProvided[k]){
+          tempInventoryList.push($scope.editVendor.inventoriesProvided[k].code)
+          k++;
+        }  
+      }
+
+      
+            var data = {}; 
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+            //fetch categories list, vendors list etc.
+            $http({
+              method  : 'POST',
+              url     : 'https://zaitoon.online/services/erpnewvendormetadata.php',
+              data    : data,
+              headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+             })
+             .then(function(response) {
+                    if(response.data.status){
+
+                      $scope.metaBranchesList = response.data.branches;
+                      $scope.metaInventoryList = response.data.inventories;
+
+                      console.log($scope.metaBranchesList)
+
+                      var n = 0;
+                      var listing = '';
+                      while($scope.metaBranchesList[n]){
+                        listing = listing + '<option value="'+$scope.metaBranchesList[n].code+'">'+$scope.metaBranchesList[n].name+'</option>';
+                        
+
+                        if(n == $scope.metaBranchesList.length - 1){
+                          document.getElementById("dropProvidingBranchesEdit").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
+                        
+                        }
+
+                        n++;
+                      }
+
+
+                      var m = 0;
+                      var items = '';
+                      while($scope.metaInventoryList[m]){
+                        items = items + '<option value="'+$scope.metaInventoryList[m].code+'">'+$scope.metaInventoryList[m].name+'</option>';
+                        
+
+                        if(m == $scope.metaInventoryList.length - 1){
+                          document.getElementById("dropProvidingInventoriesEdit").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ items;
+                          
+                          $('#editVendorModal').modal('show');
+
+                          //Prefill branches list
+                          $('#dropProvidingBranchesEdit').select2({}).select2('val', tempBranchList);
+
+                          //Prefill branches list
+                          $('#dropProvidingInventoriesEdit').select2({}).select2('val', tempInventoryList);
+
+                          
+                        }
+
+                        m++;
+                      }
+
+                    }
+             });  
+
+     }
+
+
+
+ 
+
+	$scope.saveNewVendor = function(){
+
+		var tempInventories = $("#dropProvidingInventories").val();
+    var tempBranches = $("#dropProvidingBranches").val();
 		
 		$scope.newVendorError = "";
 		
 		if($scope.newVendor.name == "" || !(/^[a-zA-Z ]+$/.test($scope.newVendor.name))){
 			$scope.newVendorError = "Invalid Name";
 		}
-		else if($scope.newVendor.mobile == "" || !(/^[789]\d{9}$/.test($scope.newVendor.mobile))){
-			$scope.newVendorError = "Invalid Mobile Number";
+		else if($scope.newVendor.contact == ""){
+			$scope.newVendorError = "Invalid Contact Number";
 		}
 		else if($scope.newVendor.address == ""){
 			$scope.newVendorError = "Invalid Address";
@@ -155,18 +317,20 @@ $scope.initVendors();
 		else if($scope.newVendor.modeOfPayment == ""){
 			$scope.newVendorError = "Invalid Mode of Payment";
 		}
-		else if($scope.newVendor.providingBranches == ""){
-			$scope.newVendorError = "Select the branches the vendor will be providing";
-		}
-		else if($scope.newVendor.inventoriesProvided == ""){
-			$scope.newVendorError = "Select the stock items the vendor will be providing";
-		}
 		else{
 			$scope.newVendorError = "";
 			
-			var data = {};
-		    	data.details = $scope.newVendor;
-		        data.token = $cookies.get("zaitoonAdmin");
+			      var data = {};
+            data.details = $scope.newVendor;
+            if(tempInventories && tempInventories.length > 0){
+              data.inventoriesList = tempInventories;
+            }
+            if(tempBranches && tempBranches.length > 0){
+              data.branchesList = tempBranches;
+            }
+
+		        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
 		        $http({
 		          method  : 'POST',
 		          url     : 'https://zaitoon.online/services/erpaddinventoryvendors.php',
@@ -174,9 +338,9 @@ $scope.initVendors();
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
 		         .then(function(response) {
-		         	$('#reservationModal').modal('hide');
-		         	if(response.data.status){	   
-		         		$scope.initVendors();
+		         	      $('#newVendorModal').modal('hide');
+		         	      if(response.data.status){	   
+		         		      $scope.initVendors();
 		              	}
 		              	else{
 			              	alert(response.data.error);
@@ -188,18 +352,18 @@ $scope.initVendors();
 	
 	
 	
-	$scope.saveEditReservation = function(){
+	$scope.saveEditVendor = function(){
 
-		console.log($scope.editVendor);
+		var tempInventories = $("#dropProvidingInventoriesEdit").val();
+    var tempBranches = $("#dropProvidingBranchesEdit").val();
+    		
+		$scope.editVendorError = "";
 		
-		$scope.editReservationError = "";
-		
-		
-		if($scope.editVendor.name == "" || !(/^[a-zA-Z ]+$/.test($scope.editVendor.name))){
+		if($scope.editVendor.name == ""){
 			$scope.editVendorError = "Invalid Name";
 		}
-		else if($scope.editVendor.mobile == "" || !(/^[789]\d{9}$/.test($scope.editVendor.mobile))){
-			$scope.editVendorError = "Invalid Mobile Number";
+		else if($scope.editVendor.contact == ""){
+			$scope.editVendorError = "Invalid Contact Number";
 		}
 		else if($scope.editVendor.address == ""){
 			$scope.editVendorError = "Invalid Address";
@@ -207,28 +371,27 @@ $scope.initVendors();
 		else if($scope.editVendor.modeOfPayment == ""){
 			$scope.editVendorError = "Invalid Mode of Payment";
 		}
-		else if($scope.editVendor.providingBranches == ""){
-			$scope.editVendorError = "Select the branches the vendor will be providing";
-		}
-		else if($scope.editVendor.inventoriesProvided == ""){
-			$scope.editVendorError = "Select the stock items the vendor will be providing";
-		}
 		else{
-			$scope.editReservationError = "";
+			$scope.editVendorError = "";
 			
-			var data = {};
-		    	data.details = $scope.editVendor;
-		        data.token = $cookies.get("zaitoonAdmin");
-		        $http({
+			       var data = {};
+		    	   data.details = $scope.editVendor;
+		         data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+             data.id = $scope.editVendor.code;
+             data.inventoriesList = tempInventories;
+             data.branchesList = tempBranches;
+
+            $http({
 		          method  : 'POST',
-		          url     : '',
+		          url     : 'https://zaitoon.online/services/erpeditinventoryvendors.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
 		         .then(function(response) {
-		         	$('#reservationEditModal').modal('hide');
-		         	if(response.data.status){	   
-		         		$scope.initVendors();
+		         	$('#editVendorModal').modal('hide');
+		         	      if(response.data.status){	   
+		         		      $scope.initVendors();
 		              	}
 		              	else{
 			              	alert(response.data.error);

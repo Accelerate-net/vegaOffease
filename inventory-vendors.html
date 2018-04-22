@@ -117,7 +117,7 @@
                                 <div class="panel panel-default">
                                 
                                    <div class="panel-heading">
-                                      <h2>{{filterTitle}}</h2><button class="btn btn-success-alt btn-sm" style="margin-top: 10px; float: right" ng-click="openNewReservation()">Add New</button>
+                                      <h2>{{filterTitle}}</h2><button class="btn btn-success-alt btn-sm" style="margin-top: 10px; float: right" ng-click="openNewVendor()">Add New</button>
                                    </div>
                                    <div class="panel-body">
                                    <div id="vegaPanelBodyLoader"></div> 
@@ -147,8 +147,13 @@
                                                 <td>{{vendor.name}}</td>
                                                 <td>{{vendor.address}}</td>
                                                 <td>{{vendor.contact}}</td>
-                                                <td>{{vendor.inventoriesProvided}}</td>
-                                                <td>{{vendor.providingBranches}}</td>
+                                                <td>
+                                                  <tag ng-style="getRandomColor(inventory.code)" ng-repeat="inventory in vendor.inventoriesProvided track by $index">{{inventory.name}}<comma style="color: #000" ng-if="$index != vendor.inventoriesProvided.length - 1 && vendor.inventoriesProvided.length > 1 ">, </comma></tag>
+                                                </td>
+                                                <td>
+                                                  <tag ng-repeat="branch in vendor.branchesProvided track by $index">{{branch.name}}<comma ng-if="$index != vendor.branchesProvided.length - 1 && vendor.branchesProvided.length > 1 ">, </comma></tag>
+
+                                                </td>
                                                 <td>{{vendor.modeOfPayment}}</td>
                                                 <td>{{vendor.paymentReference}}</td>
                                                 <td><a ng-click="showEdit(vendor)"><i class="fa fa-pencil" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
@@ -168,7 +173,7 @@
                   <div class="modal-dialog">
                      <div class="modal-content">   
                         <div class="modal-body" style="padding-bottom: 40px">                   
-                           <p style="font-size: 16px; color: #95a5a6; float: left">Do you really want to delete<strong style="color: #e74c3c">{{cancelShowName}}</strong> from your vendors list?</p>
+                           <p style="font-size: 16px; color: #95a5a6; float: left">Do you really want to delete <strong style="color: #e74c3c">{{cancelShowName}}</strong> from your Vendors list?</p>
                         </div>                                                               
                         <div class="modal-footer">                                                    
                            <button type="button" class="btn btn-default" style="float: left" data-dismiss="modal">No</button>
@@ -180,7 +185,7 @@
                
                
                <!-- NEW Vendor Modal -->
-               <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <div class="modal fade" id="newVendorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-body">
@@ -188,71 +193,51 @@
                            <div class="row">
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Vendor Name</label>
-                                 <input type="text" ng-model="newVendor.name" class="form-control input-lg" placeholder="Customer Name">
+                                 <input type="text" ng-model="newVendor.name" class="form-control input-lg" placeholder="Vendor Name">
                               </div>
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Contact Number</label>
-                                 <input type="text" ng-model="newVendor.mobile" class="form-control input-lg" placeholder="Number">
+                                 <input type="text" ng-model="newVendor.contact" class="form-control input-lg" placeholder="Number">
                               </div>
                            </div>
-                           <div class="row">
-                              <br>
-                           </div>
-                           <div class="row">
-                              <div class="col-sm-6">
+
+                           <div class="row" style="margin-top: 15px">
+                              <div class="col-sm-12">
                                  <label class="myReservationLabel">Address</label>
-                                 <input type="text" ng-model="newVendor.address" class="form-control input-lg" placeholder="address">
+                                 <input type="text" ng-model="newVendor.address" class="form-control input-lg" placeholder="Address">
                               </div>
                               
-                              <div class="col-sm-6">
-                                 <label class="myReservationLabel">Providing Branches</label>
-                                 <div>
-                                 <select style="padding: 0;" id="drop" class="js-example-basic-single col-sm-12" class="form-control" ng-model="newVendor.providingBranches" multiple="multiple">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
-                                 </div>
-                              </div>
+                              
                            </div>
                            <div class="row" style="margin-top: 15px;">
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Inventories Provided</label>
                                  <div>
-                                    <select style="padding: 0;" id="drop" class="js-example-basic-single col-sm-12" class="form-control" ng-model="newVendor.inventoriesProvided"  multiple="multiple">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
+                                    <select style="padding: 0;" id="dropProvidingInventories" class="js-example-basic-single col-sm-12" class="form-control" multiple="multiple">
+
+                                    </select>
                                  </div>
                               </div>
                               <div class="col-sm-6">
+                                 <label class="myReservationLabel">Providing Branches</label>
+                                 <div>
+                                 <select style="padding: 0;" id="dropProvidingBranches" class="js-example-basic-single col-sm-12" class="form-control" multiple="multiple">
+                                 
+                                 </select>
+                                 </div>
+                              </div>
+                              
+                           </div>
+                           <div class="row" style="margin-top: 15px">
+                              <div class="col-sm-6">
                                  <label class="myReservationLabel">Mode Of Payment</label>
 
-                                 <select ng-model="newVendor.modeOfPayment" class="form-control" id="my_mode">                     
+                                 <select style="height: 40px" ng-model="newVendor.modeOfPayment" class="form-control" id="my_mode">                     
                                     <option value="CASH">Cash</option>
                                     <option value="CHEQUE">CHEQUE</option>
                                     <option value="CREDIT">CREDIT</option>                                    
                                  </select>
                               </div>
-                           </div>
-                           <div class="row">
-                              <br>
-                           </div>
-                           <div class="row">
-
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Payment Reference</label>
                                   <input type="text" ng-model="newVendor.paymentReference" class="form-control input-lg" placeholder="Payment Reference">
@@ -262,7 +247,7 @@
                         </div>                                                                                       
                         <div class="modal-footer">                      
                            <button type="button" style="float: left" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                           <button type="button" class="btn btn-success" ng-click="saveNewReservation()">Save</button>
+                           <button type="button" class="btn btn-success" ng-click="saveNewVendor()">Save</button>
                         </div>
                      </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
@@ -271,12 +256,13 @@
                
                
                
-               <!-- Edit Reservation Modal -->
-               <div class="modal fade" id="editEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <!-- Edit Vendor Modal -->
+               <div class="modal fade" id="editVendorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
-                        <div class="modal-body">
-                           <h2>Edit Vendor</h2>
+
+                      <div class="modal-body">
+                           <h2>Edit Vendor - <b>{{editDisplayName}}</b></h2>
                            <div class="row">
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Vendor Name</label>
@@ -284,77 +270,57 @@
                               </div>
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Contact Number</label>
-                                 <input type="text" ng-model="editVendor.mobile" class="form-control input-lg" placeholder="Address">
+                                 <input type="text" ng-model="editVendor.contact" class="form-control input-lg" placeholder="Number">
                               </div>
                            </div>
-                           <div class="row">
-                              <br>
-                           </div>
-                           <div class="row">
-                              <div class="col-sm-6">
+
+                           <div class="row" style="margin-top: 15px">
+                              <div class="col-sm-12">
                                  <label class="myReservationLabel">Address</label>
-                                 <input type="text" ng-model="editVendor.address" class="form-control input-lg" placeholder="address">
+                                 <input type="text" ng-model="editVendor.address" class="form-control input-lg" placeholder="Address">
                               </div>
                               
-                              <div class="col-sm-6">
-                                 <label class="myReservationLabel">Providing Branches</label>
-                                 <div>
-                                 <select style="padding: 0;" id="drop" class="js-example-basic-single col-sm-12" class="form-control" ng-model="editVendor.providingBranches" multiple="multiple">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
-                                 </div>
-                              </div>
+                              
                            </div>
                            <div class="row" style="margin-top: 15px;">
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Inventories Provided</label>
                                  <div>
-                                    <select style="padding: 0;" id="drop" class="js-example-basic-single col-sm-12" class="form-control" ng-model="editVendor.inventoriesProvided"  multiple="multiple">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
+                                    <select style="padding: 0;" id="dropProvidingInventoriesEdit" class="js-example-basic-single col-sm-12" class="form-control" multiple="multiple">
+
+                                    </select>
                                  </div>
                               </div>
                               <div class="col-sm-6">
+                                 <label class="myReservationLabel">Providing Branches</label>
+                                 <div>
+                                 <select style="padding: 0;" id="dropProvidingBranchesEdit" class="js-example-basic-single col-sm-12" class="form-control" multiple="multiple">
+                                 
+                                 </select>
+                                 </div>
+                              </div>
+                              
+                           </div>
+                           <div class="row" style="margin-top: 15px">
+                              <div class="col-sm-6">
                                  <label class="myReservationLabel">Mode Of Payment</label>
 
-                                 <select ng-model="editVendor.modeOfPayment" class="form-control" id="my_mode">                     
+                                 <select style="height: 40px" ng-model="editVendor.modeOfPayment" class="form-control" id="my_mode">                     
                                     <option value="CASH">Cash</option>
                                     <option value="CHEQUE">CHEQUE</option>
                                     <option value="CREDIT">CREDIT</option>                                    
                                  </select>
                               </div>
-                           </div>
-                           <div class="row">
-                              <br>
-                           </div>
-                           <div class="row">
-
                               <div class="col-sm-6">
                                  <label class="myReservationLabel">Payment Reference</label>
                                   <input type="text" ng-model="editVendor.paymentReference" class="form-control input-lg" placeholder="Payment Reference">
                               </div>
                            </div>
                            <p ng-show="editVendorError != ''" style="margin: 20px 0px 0px 15px; color: #e74c3c">{{editVendorError}}</p>                                                
-                        </div>                                                                                       
+                        </div>                                                                                    
                         <div class="modal-footer">                      
                            <button type="button" style="float: left" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                           <button type="button" class="btn btn-success" ng-click="saveEditReservation()">Save</button>
+                           <button type="button" class="btn btn-success" ng-click="saveEditVendor()">Save</button>
                         </div>
                      </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
@@ -376,7 +342,6 @@
          </div>
       </div>
 
-         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> 
       <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>                      <!-- Load jQuery -->
       <script type="text/javascript" src="assets/js/jqueryui-1.10.3.min.js"></script>                    <!-- Load jQueryUI -->
       <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>                       <!-- Load Bootstrap -->

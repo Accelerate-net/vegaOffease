@@ -269,7 +269,8 @@
                                              <form class="form-horizontal tabular-form">
                                              	<div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Inventory Name</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-7" class="form-control" ng-model="addNewContent.id">
+                                                   <div style="padding: 0 0 0 16px; display: -webkit-box">
+                                                      <select id="drop" class="js-example-basic-single col-sm-10" class="form-control" ng-model="addNewContent.id" style="padding: 0">
                                                          <option value="" disabled="">
                                                               Select an option
                                                          </option>
@@ -277,6 +278,7 @@
                                                               {{inventory.name}}
                                                          </option>
                                                       </select>
+                                                   </div>
                                                 </div>
 
                                                 <div class="form-group">
@@ -289,7 +291,7 @@
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Date</label>
                                                    <div class="col-sm-8">
-                                                      <input type="date" ng-model="addNewContent.date" class="form-control">
+                                                      <input type="text" id="inventory_date" ng-model="addNewContent.date" class="form-control">
                                                    </div>
                                                 </div>
                                                 <div class="form-group">

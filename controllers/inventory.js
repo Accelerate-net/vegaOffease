@@ -311,6 +311,26 @@ angular.module('inventoryApp', ['ngCookies'])
 		    }
 		} 
 	}
+
+	function getTodayDate(){
+		  var today = new Date();
+
+          var dd = today.getDate();
+          var mm = today.getMonth()+1; //January is 0!
+          var yyyy = today.getFullYear();
+
+          if(dd<10) {
+              dd = '0'+dd;
+          } 
+
+          if(mm<10) {
+              mm = '0'+mm;
+          } 
+
+          today = dd + '-' + mm + '-' + yyyy;
+
+		  return today;
+	}
 	
 	
 	//New Creations
@@ -323,6 +343,22 @@ angular.module('inventoryApp', ['ngCookies'])
 				$scope.editComboWindowFlag = false;
 			    $scope.editPromoWindowFlag = false;
 			    $scope.editCouponWindowFlag = false;
+
+			    
+			    $('#inventory_date').datetimepicker({  // Date
+				    format: "dd-mm-yyyy",
+				    weekStart: 1,
+			        todayBtn:  1,
+					autoclose: 1,
+					todayHighlight: 1,
+					startView: 2,
+					minView: 2,
+					forceParse: 1
+			    });
+
+
+			    document.getElementById("inventory_date").value = getTodayDate();
+
 
                        		
                        		break;
