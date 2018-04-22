@@ -1,4 +1,4 @@
-angular.module('stocksApp', ['ngCookies'])
+angular.module('inventoryListApp', ['ngCookies'])
 
 .config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
@@ -6,7 +6,7 @@ angular.module('stocksApp', ['ngCookies'])
 
 
 
-  .controller('stocksController', function($scope, $http, $interval, $cookies) {
+  .controller('inventoryListController', function($scope, $http, $interval, $cookies) {
 
     // //Check if logged in
     // if($cookies.get("zaitoonAdmin")){
@@ -36,7 +36,7 @@ angular.module('stocksApp', ['ngCookies'])
       $scope.searchID = '';
       $scope.isReservationsFound = false;
       $scope.resultMessage = '';
-      $scope.filterTitle = 'Inventory Stocks List';
+      $scope.filterTitle = 'Inventory Master List';
 
       //Default Results : Reservations of the Week
       var today = new Date();
@@ -58,7 +58,7 @@ $scope.initStocks = function(){
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/erpfetchstock.php',
+        url     : 'https://zaitoon.online/services/erpfetchinventorylist.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -103,7 +103,7 @@ $scope.initStocks();
       
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/erpdeletestocklist.php',
+                url     : 'https://zaitoon.online/services/erpdeleteinventorylist.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -123,83 +123,36 @@ $scope.initStocks();
      //Add new reservation
      $scope.nullNewInventory = function(){
       $scope.newStock = {};
-      $scope.newStock.minStockUnit = "";
-      $scope.newStock.currentStock = "";
-      $scope.newStock.vendorList = '';
+      $scope.newStock.name = "";
+      $scope.newStock.category = "";
+      $scope.newStock.unit = "";
      }
      $scope.nullNewInventory();
      
-     $scope.metaVendorsList = [];
-     $scope.metaInventoryList = [];
-
      
      $scope.openNewInventory = function(){
-      $scope.nullNewInventory();
+     
+            $scope.nullNewInventory();
 
             var data = {}; 
             data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
       
-            //fetch inventories list, vendors list etc.
+            //fetch categories list, vendors list etc.
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+              url     : 'https://zaitoon.online/services/erpnewinventorymetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
              .then(function(response) {
                     if(response.data.status){
-                      $scope.metaVendorsList = response.data.vendors;
-                      $scope.metaInventoryList = response.data.inventories;
-
-                      var n = 0;
-                      var listing = '';
-                      while($scope.metaVendorsList[n]){
-                        listing = listing + '<option value="'+$scope.metaVendorsList[n].code+'">'+$scope.metaVendorsList[n].name+'</option>';
-                        
-
-                        if(n == $scope.metaVendorsList.length - 1){
-                          document.getElementById("dropProvidingVendors").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
-                          $('#newInventoryModal').modal('show');
-                        }
-
-                        n++;
-                      }
-
-
-
-                      var m = 0;
-                      var allItemsListing = '';
-                      while($scope.metaInventoryList[m]){
-
-                        var k = 0;
-                        var itemsListing = '';
-                        while($scope.metaInventoryList[m].items[k]){
-                          itemsListing = itemsListing + '<option value="'+encodeURI(JSON.stringify($scope.metaInventoryList[m].items[k]))+'">'+$scope.metaInventoryList[m].items[k].name+'</option>';
-                          k++;
-                        }
-
-                        allItemsListing = allItemsListing + '<optgroup label="'+$scope.metaInventoryList[m].category+'">' + itemsListing + '</optgroup>';
-
-                        //last iteration
-                        if(m == $scope.metaInventoryList.length - 1){
-                          document.getElementById("inventorySuggestions").innerHTML = allItemsListing;
-                          $("#inventorySuggestions").change(function(){
-                            var itemObj = JSON.parse(decodeURI($("#inventorySuggestions").val()));
-                            document.getElementById("stockUnits").innerHTML = 'in '+itemObj.unit;
-                            document.getElementById("stockCurrentUnits").innerHTML = 'in '+itemObj.unit;
-                          });
-                        }
-
-                        m++
-                      }
-
-
+                      $scope.metaCategoryList = response.data.categories;
+                      $('#newInventoryModal').modal('show');
                     }
              });  
 
-
-      
      }
+
 
 
 
@@ -207,16 +160,6 @@ $scope.initStocks();
      $scope.showEdit = function(obj){
       $scope.editStock = obj;
       $scope.editDisplayName = $scope.editStock.name;
-
-      var tempVendorsList = [];
-
-      if(($scope.editStock.vendorsList).length > 0){
-        var j = 0;
-        while($scope.editStock.vendorsList[j]){
-          tempVendorsList.push($scope.editStock.vendorsList[j].id)
-          j++;
-        }  
-      }
       
             var data = {}; 
             data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
@@ -230,27 +173,8 @@ $scope.initStocks();
              })
              .then(function(response) {
                     if(response.data.status){
-                      $scope.metaVendorsList = response.data.vendors;
                       $scope.metaCategoryList = response.data.categories;
-
-                      var n = 0;
-                      var listing = '';
-                      while($scope.metaVendorsList[n]){
-                        listing = listing + '<option value="'+$scope.metaVendorsList[n].code+'">'+$scope.metaVendorsList[n].name+'</option>';
-                        
-
-                        if(n == $scope.metaVendorsList.length - 1){
-                          document.getElementById("dropProvidingVendorsEdit").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
-                          $('#stockEditModal').modal('show');
-
-                          //Prefill vendors list
-                          $('#dropProvidingVendorsEdit').select2({}).select2('val', tempVendorsList);
-
-                        }
-
-                        n++;
-                      }
-
+                      $('#stockEditModal').modal('show');
                     }
              });  
 
@@ -260,39 +184,27 @@ $scope.initStocks();
      
   $scope.saveNewInventory = function(){
 
-    var tempVendors = $("#dropProvidingVendors").val();
-    
     $scope.newStockError = "";
-
-    var tempObj = document.getElementById("inventorySuggestions").value;
-    var itemObj = JSON.parse(decodeURI(tempObj));
-
-    $scope.newStock.code = itemObj.code;
     
-    if($scope.newStock.minStockUnit == ""){
-      $scope.newStockError = "Invalid Minimum Stock";
+    if($scope.newStock.name == "" || !(/^[a-zA-Z ]+$/.test($scope.newStock.name))){
+      $scope.newStockError = "Invalid Name";
     }
-    else if($scope.newStock.currentStock == ""){
-      $scope.newStockError = "Invalid Current Stock";
-    } 
-    else if($scope.newStock.code == "" || $scope.newStock.code == undefined){
-      $scope.newStockError = "Invalid Inventory";
-    }    
+    else if($scope.newStock.category == ""){
+      $scope.newStockError = "Select the Category";
+    }
+    else if($scope.newStock.unit == ""){
+      $scope.newStockError = "Invalid Unit";
+    }   
     else{
       $scope.newStockError = "";
       
-            var data = {};
+      var data = {};
             data.details = $scope.newStock;
-
-            if(tempVendors && tempVendors.length > 0){
-              data.vendorsList = tempVendors;
-            }
-
             data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
       
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpaddstocklist.php',
+              url     : 'https://zaitoon.online/services/erpaddinventorylist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -331,31 +243,34 @@ $scope.initStocks();
   return styles[code];
 }
 
-  $scope.saveEditInventory = function(){
 
-    var tempVendors = $("#dropProvidingVendorsEdit").val();
+ 
+  
+  $scope.saveEditInventory = function(){
     
     $scope.editStockError = "";
     
-    if($scope.editStock.minStockUnit == ""){
-      $scope.editStockError = "Invalid Minimum Stock";
+    if($scope.editStock.name == "" || !(/^[a-zA-Z ]+$/.test($scope.editStock.name))){
+      $scope.editStockError = "Invalid Name";
     }
-    else if($scope.editStock.currentStock == ""){
-      $scope.editStockError = "Invalid Current Stock";
-    }   
+    else if($scope.editStock.category == ""){
+      $scope.editStockError = "Select the Category";
+    }
+    else if($scope.editStock.unit == ""){
+      $scope.editStockError = "Invalid Unit";
+    }  
     else{
       $scope.editStockError = "";
       
             var data = {};
             data.details = $scope.editStock;
             data.id = $scope.editStock.id;
-            data.vendorsList = tempVendors;
 
             data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
 
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpeditstocklist.php',
+              url     : 'https://zaitoon.online/services/erpeditinventorylist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -419,9 +334,4 @@ $scope.initStocks();
         }, 20000);
         
   })
-;
-
-
-
-
-
+  ;
