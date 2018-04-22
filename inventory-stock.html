@@ -144,7 +144,7 @@
                                                 <td>#{{$index + 1}}</td>
                                                 <td>{{stock.name}}</td>
                                                 <td>{{stock.category}}</td>
-                                                <td><tag style="border: 1px solid gray; padding: 2px 4px; margin: 0 2px 2px 0" ng-repeat="vendor in stock.vendorsList">{{vendor.name}}</tag></td>
+                                                <td><tag ng-style="getRandomColor(vendor.id)" ng-repeat="vendor in stock.vendorsList">{{vendor.name}}<comma style = "color: #000" ng-if="$index != stock.vendorsList.length - 1 && stock.vendorsList.length > 1 ">, </comma></tag></td>
                                                 <td>{{stock.minStockUnit}} <tag style="font-size: 70%">{{stock.unit}}</tag></td> 
                                                 <td>{{stock.currentStock && stock.currentStock != undefined ? stock.currentStock : '-'}} <tag style="font-size: 70%">{{stock.currentStock && stock.currentStock != undefined ? stock.unit : ''}}</tag> </td>
                                                 <td><a ng-click="showEdit(stock)"><i class="fa fa-pencil" aria-hidden="true" style="color: #bdc3c7"></i></a></td>

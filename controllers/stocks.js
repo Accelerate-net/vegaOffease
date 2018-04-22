@@ -285,6 +285,29 @@ $scope.initStocks();
   
   }
   
+
+
+  $scope.getRandomColor = function(code){
+
+  code = code.toString().split('').pop();
+
+  var styles = [
+    {"color": "#ff4300"},
+    {"color": "#1abc9c"},
+    {"color": "#3498db"},
+    {"color": "#9b59b6"},
+    {"color": "#34495e"},
+    {"color": "#e67e22"},
+    {"color": "#0a3d62"},
+    {"color": "#b71540"},
+    {"color": "#e58e26"},
+    {"color": "#60a3bc"}
+  ];
+
+  return styles[code];
+}
+
+
  
   
   $scope.saveEditInventory = function(){
