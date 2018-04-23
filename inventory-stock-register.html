@@ -15,13 +15,9 @@
       <script src="assets/js/jquery.js"></script>
       <script src="assets/js/angular.min.js"></script>
       <script src="assets/js/angular-cookies.min.js"></script>
-      <script src="controllers/inventory.js"></script>
-      
-      <!-- CROPPER -->
-      <script src="assets/plugins/cropper/cropper.js"></script>
-      <link type="text/css" href="assets/plugins/cropper/cropper.css" rel="stylesheet">
-      
-      		<script>
+      <script src="controllers/stockregister.js"></script>
+
+      <script>
 			$(window).ready(function() {
 				$('#loading').hide();
 			});		
@@ -143,7 +139,7 @@
                            </div>                                                      
                            
                         </div>
-                        <div data-widget-group="group1">
+                        <div class="">
                            <div class="row">
 				<div class="col-md-6">
                                  <div class="panel panel-teal" style="margin-bottom: 10px">
@@ -159,59 +155,62 @@
                                     </div>
                                     <div class="panel-body no-padding">
                                        <p ng-if="!active_content.length" style="padding: 20px; text-align: center" class="ng-scope">There are no {{marketingType}} history.</p>
-                                       <!-- Display Combos -->
+                                       <!-- Display Stock Out -->
                                        <table class="table m-n" ng-if="active_content.length && marketingType == 'out' && isContentFound">
                                           <thead>
                                              <tr>
-                                                <td>ID</td>
+                                                <td></td>
                                                 <td>Name</td>
                                                 <td>Date</td>
                                                 <td>Quantity</td>
-                                                <td>Remarks</td>
-                                                <td></td>
+                                                
                                                 <td></td>
                                                 <td></td>
                                              </tr>
                                           </thead>
                                           <tbody>
                                              <tr ng-repeat="content in active_content track by $index">
-                                                <td>{{content.id}}</td>
-                                                <td style="color: #3498db; font-weight: bold;">{{content.name}}</td>
+                                                <td>{{((currentDisplayPage - 1) * 10) + ($index + 1)}}</td>
+                                                <td ng-style="getRandomColor(content.inventoryCode)">{{content.inventoryName}}</td>
                                                 <td>{{content.date}}</td>
-                                                <td>{{content.quantity}}</td>
-                                                <td><i class="fa fa-inr"></i>{{content.remarks}}</td>
+                                                <td>
+                                                   {{content.quantity}}
+                                                   <tag style="font-size: 70%">{{content.unit}}</tag>
+                                                   <tag style="color: #f39c12" ng-if="content.remarks && content.remarks != ''"><i class="fa fa-comment-o"></i></tag>
+                                                </td>
                                                 <td><a ng-click="viewMyContent(content)"><i class="fa fa-eye" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
-                                                <td><a ng-click="showEditContentWindow(content)"><i class="fa fa-pencil" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                                 <td><a ng-click="confirmDeleteStockOut(content)"><i class="fa fa-trash-o" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                              </tr>
                                           </tbody>
                                        </table>
                                        
-                                       <!-- Display Promos -->
+                                       <!-- Display Purchases -->
                                        <table class="table m-n" ng-if="active_content.length && marketingType == 'purchases' && isContentFound">
                                           <thead>
                                              <tr>
-                                                <td>Vendor</td>
-                                                <td>Item</td>
-                                                <td>Units</td>
-                                                <td>Amount</td>
-                                                <td>Mode of Payment</td>
-                                                <td>Remarks</td>
                                                 <td></td>
+                                                <td>Date</td>
+                                                <td>Inventory</td>
+                                                <td>Quantity</td>
+                                                <td>Vendor</td>
+                                                <td>Amount</td>
                                                 <td></td>
                                                 <td></td>
                                              </tr>
                                           </thead>
                                           <tbody>
                                              <tr ng-repeat="content in active_content track by $index">
+                                                <td>{{((currentDisplayPage - 1) * 10) + ($index + 1)}}</td>
+                                                <td>{{content.date}}</td>
+                                                <td ng-style="getRandomColor(content.inventoryCode)">{{content.inventoryName}}</td>
+                                                <td>
+                                                   {{content.quantity}}
+                                                   <tag style="font-size: 70%">{{content.unit}}</tag>
+                                                   <tag style="color: #f39c12" ng-if="content.comments && content.comments != ''"><i class="fa fa-comment-o"></i></tag>
+                                                </td>
                                                 <td>{{content.vendorName}}</td>
-                                                <td>{{content.item}}</td>
-                                                <td>{{content.units}}</td>
-                                                <td>{{content.amount}}</td>
-                                                <td>{{content.modeOfPayment}}</td>
-                                                <td>{{content.remarks}}</td>
+                                                <td><i class="fa fa-inr"></i> {{content.amount}}</td>
                                                 <td><a ng-click="viewMyContent(content)"><i class="fa fa-eye" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
-                                                <td><a ng-click="showEditContentWindow(content)"><i class="fa fa-pencil" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                                 <td><a ng-click="confirmDeletePurchase(content)"><i class="fa fa-trash-o" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                              </tr>
                                           </tbody>
@@ -222,27 +221,29 @@
                                        <table class="table m-n" ng-if="active_content.length && marketingType == 'payments' && isContentFound">
                                          <thead>
                                              <tr>
-                                                <td>Vendor/Item</td>
-                                                <td>Amount</td>
-                                                <td>Mode of Payment</td>
-                                                <td>Payment Ref</td>
-                                                <td>Payment Date</td>
-                                                <td>Comments</td>
                                                 <td></td>
+                                                <td>Date</td>
+                                                <td>Amount</td>
+                                                <td>Mode</td>
+                                                <td>Credited To</td>
                                                 <td></td>
                                                 <td></td>
                                              </tr>
                                           </thead>
                                           <tbody>
                                              <tr ng-repeat="content in active_content track by $index">
-                                                <td>{{content.item}}</td>
-                                                <td style="color: #3498db; font-weight: bold;">{{content.amount}}</td>
-                                                <td>{{content.modeOfPayment}}</td>
-                                                <td>{{content.paymentReference}}</td>
+                                                <td>{{((currentDisplayPage - 1) * 10) + ($index + 1)}}</td>
                                                 <td>{{content.date}}</td>
-                                                <td>{{content.comments}}</td>
+                                                <td>
+                                                   <i class="fa fa-inr"></i> {{content.amount}}
+                                                   <tag style="color: #f39c12" ng-if="content.reference && content.reference != ''"><i class="fa fa-comment-o"></i></tag>
+                                                </td>
+                                                <td>{{content.mode}}</td>
+                                                <td>
+                                                   {{content.paymentTo ? content.paymentTo : 'Unknown'}}
+                                                   <tag style="display: block; font-size: 70%; color: #95a5a6" ng-if="content.paymentFor && content.paymentFor != ''">for {{content.paymentFor}}</tag>
+                                                </td>
                                                 <td><a ng-click="viewMyContent(content)"><i class="fa fa-eye" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
-                                                <td><a ng-click="showEditContentWindow(content)"><i class="fa fa-pencil" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                                 <td><a ng-click="confirmDeletePayment(content)"><i class="fa fa-trash-o" aria-hidden="true" style="color: #bdc3c7"></i></a></td>
                                              </tr>
                                           </tbody>
@@ -259,7 +260,7 @@
                               <!-- WIZARDS SECTION -->
                               <div class="col-md-6" ng-show="newComboWindowFlag || newPromoWindowFlag || newCouponWindowFlag">
                               
-                            	 <!-- COMBOS -->
+                            	 <!-- STOCK OUT -->
                                  <div class="panel panel-bluegray" ng-show="newComboWindowFlag">
                                     <div class="panel-heading" style="background: #27ae60 !important;">
                                        <h2>Mark New Stock-Out Entry</h2>
@@ -271,13 +272,8 @@
                                              	<div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Inventory Name</label>
                                                    <div style="padding: 0 0 0 16px; display: -webkit-box">
-                                                      <select id="drop" class="js-example-basic-single col-sm-10" class="form-control" ng-model="addNewContent.id" style="padding: 0">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
-                                                              {{inventory.name}}
-                                                         </option>
+                                                      <select id="dropStockOutInventory" class="js-example-basic-single col-sm-10" class="form-control" style="padding: 0">
+                                                         
                                                       </select>
                                                    </div>
                                                 </div>
@@ -287,12 +283,12 @@
                                                    <div class="col-sm-6">
                                                       <input type="number" class="form-control"  ng-model="addNewContent.quantity">
                                                    </div>
-                                                   <label class="col-sm-2 control-label" style="padding-left: 0; text-align: left">{{selectedItem.unit}}</label>
+                                                   <label class="col-sm-2 control-label" style="padding-left: 0; text-align: left" id="unitDisplayPart"></label>
                                                 </div>
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Date</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text" id="inventory_date" ng-model="addNewContent.date" class="form-control">
+                                                      <input type="text" id="inventory_date" class="form-control">
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
@@ -321,7 +317,7 @@
                                  </div>
 
                               
-                              	 <!-- PROMOS -->
+                              	 <!-- PURCHASES -->
                                  <div class="panel panel-bluegray" ng-show="newPromoWindowFlag">
                                     <div class="panel-heading" style="background: #27ae60 !important;">
                                        <h2>New Purchase</h2>
@@ -332,46 +328,51 @@
                                           <div class="col-md-12">
                                              <form class="form-horizontal tabular-form">
                                                 <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Select Vendor</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="addNewContent.vendorId">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option ng-repeat="vendor in vendorList" value="vendor.id">
-                                                              {{vendor.name}}
-                                                         </option>
+                                                   <label class="col-sm-3 control-label">Vendor</label>
+                                                   <div style="padding: 0 0 0 16px; display: -webkit-box">
+                                                      <select id="dropPurchaseVendor" class="js-example-basic-single col-sm-10" class="form-control" style="padding: 0">
+                                                         
                                                       </select>
+                                                   </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Select Item</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="addNewContent.id">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
-                                                              {{inventory.name}}
-                                                         </option>
+                                                   <label for="form-name" class="col-sm-3 control-label">Inventory</label>
+                                                   <div style="padding: 0 0 0 16px; display: -webkit-box">
+                                                      <select id="dropPurchaseInventory" class="js-example-basic-single col-sm-10" class="form-control" style="padding: 0">
+                                                         
                                                       </select>
+                                                   </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Select Units</label>
-                                                   <div class="col-sm-8">
+                                                   <label for="form-name" class="col-sm-3 control-label">Purchased Quantity</label>
+                                                   <div class="col-sm-6">
                                                       <input type="number"  ng-model="addNewContent.unitsPurchased" class="form-control">
                                                    </div>
+                                                   <label class="col-sm-2 control-label" style="padding-left: 0; text-align: left" id="unitDisplayPartPurchase"></label>
+                                                   
                                                 </div> 
+                                                <div class="form-group">
+                                                   <label for="form-name" class="col-sm-3 control-label">Date of Purchase</label>
+                                                   <div class="col-sm-8">
+                                                      <input type="text" id="purchase_date" class="form-control">
+                                                   </div>
+                                                </div>
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Total Amount</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text"  ng-model="addNewContent.totalAmount" class="form-control">
+                                                      <input type="number"  ng-model="addNewContent.totalAmount" class="form-control">
                                                    </div>
                                                 </div> 
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Mode of Payment</label>
-                                                      <select class="col-sm-8" ng-model="addNewContent.paymentMode">
-                                                         <option value="CREDIT">Credit</option>
-                                                         <option value="CHEQUE">Cheque</option>
-                                                         <option value="CASH">Cash</option>
-                                                      </select>
+                                                      <label for="form-name" class="col-sm-3 control-label">Mode of Payment</label>
+                                                      <div class="col-sm-8">
+                                                         <select class="form-control" style="height: 40px" ng-model="addNewContent.paymentMode">
+                                                            <option value="CREDIT">Credit</option>
+                                                            <option value="CHEQUE">Cheque</option>
+                                                            <option value="CASH">Cash</option>
+                                                         </select>
+                                                      </div>
+                                                      
                                                 </div> 
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Remarks</label>
@@ -397,7 +398,7 @@
                                     </div>                                    
                                  </div>
                                  
-                                 <!-- COUPONS -->
+                                 <!-- PAYMENT -->
                                  <div class="panel panel-bluegray" ng-show="newCouponWindowFlag">
                                     <div class="panel-heading" style="background: #27ae60 !important;">
                                        <h2>New Payment</h2>
@@ -406,43 +407,40 @@
                                        <div class="row">
                                           <div class="col-md-12">
                                              <form class="form-horizontal tabular-form">
+                                                
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Category</label>
-                                                   <span style="padding-right: 15%; padding-left: 5%;padding-top: 3%;">
-                                                      <input type="radio" ng-model="paymentCat" value="0" name="">From
-                                                   </span>
-                                                      <input type="radio" ng-model="paymentCat" value="1" name="">For
-                                                </div>
-                                             	<div class="form-group" ng-if="paymentCat == 0">
-                                                   <label class="col-sm-3 control-label">Select Vendor</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="addNewContent.vendorId">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option ng-repeat="vendor in vendorList" value="vendor.id">
-                                                              {{vendor.name}}
-                                                         </option>
+                                                   <label class="col-sm-3 control-label">Paying Vendor</label>
+                                                   <div style="padding: 0 0 0 16px; display: -webkit-box">
+                                                      <select id="dropPaymentVendor" class="js-example-basic-single col-sm-10" class="form-control" style="padding: 0">
+                                                         
                                                       </select>
+                                                   </div>
                                                 </div>
-                                                <div class="form-group" ng-if="paymentCat == 1">
-                                                   <label for="form-name" class="col-sm-3 control-label">Item Name</label>
+
+                                                <div class="form-group">
+                                                   <label class="col-sm-3 control-label">Payment For</label>
+                                                   <div style="padding: 0 0 0 16px; display: -webkit-box">
+                                                      <select id="dropPaymentInventory" class="js-example-basic-single col-sm-10" class="form-control" style="padding: 0">
+                                                         
+                                                      </select>
+                                                   </div>
+                                                </div>                                                
+                                             	
+                                                <div class="form-group">
+                                                   <label for="form-name" class="col-sm-3 control-label">Amount</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text"  ng-model="addNewContent.name" class="form-control">
+                                                      <input type="number"  ng-model="addNewContent.totalAmount" class="form-control">
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Amount</label>
+                                                   <label class="col-sm-3 control-label">Mode of Payment</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text"  ng-model="addNewContent.totalAmount" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Payment Mode</label>
-                                                      <select class="col-sm-8" ng-model="addNewContent.paymentMode">
+                                                      <select class="form-control" ng-model="addNewContent.paymentMode">
                                                          <option value="CREDIT">Credit</option>
                                                          <option value="CHEQUE">Cheque</option>
                                                          <option value="CASH">Cash</option>
                                                       </select>
+                                                   </div>
                                                 </div>
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Payment Reference</label>
@@ -451,15 +449,15 @@
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Date</label>
+                                                   <label for="form-name" class="col-sm-3 control-label">Date of Payment</label>
                                                    <div class="col-sm-8">
-                                                      <input type="date"  ng-model="addNewContent.date" class="form-control">
+                                                      <input type="text" id="payment_date" class="form-control">
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                    <label for="form-name" class="col-sm-3 control-label">Comments</label>
                                                    <div class="col-sm-8">
-                                                      <input type="text"  ng-model="addNewContent.comments" class="form-control">
+                                                      <input type="text"  ng-model="addNewContent.extraComments" class="form-control">
                                                    </div>
                                                 </div>
                                              </form>
@@ -485,292 +483,139 @@
                               </div>
 
                            <div class="col-md-6" ng-show="editComboWindowFlag || editPromoWindowFlag || editCouponWindowFlag">
+                           </div>
                               
-                               <!-- OUT-ENTRY -->
-                                 <div class="panel panel-bluegray" ng-show="editComboWindowFlag">
-                                    <div class="panel-heading" style="background: yellow !important;">
-                                       <h2>Edit Stock-Out Entry</h2>
-                                    </div>
-                                    <div class="panel-body">
-                                       <div class="row">
-                                          <div class="col-md-12">
-                                             <form class="form-horizontal tabular-form">
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Inventory Name</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-7" class="form-control" ng-model="myEditContent.id" onchange="dropChange(this)">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option ng-repeat="inventory in inventoryList" value="inventory.id">
-                                                              {{inventory.name}}
-                                                         </option>
-                                                      </select>
-                                                </div>
+               
 
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Quantity</label>
-                                                   <div class="col-sm-6">
-                                                      <input type="number" class="form-control"  ng-model="myEditContent.quantity">
-                                                   </div>
-                                                   <label class="col-sm-2 control-label" style="padding-left: 0; text-align: left">{{selectedItem.unit}}</label>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Date</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="date" ng-model="myEditContent.date" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Remarks</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text" ng-model="myEditContent.remarks" placeholder="Any remarks" class="form-control" style="color: #3498db;">
-                                                   </div>
-                                                </div>
-                                                
-                                             </form>
-                                          </div>
-                                       </div>
-                                       
-                                       <p style="color: #e74c3c; font-weight: bold; margin: 10px 0px 0px 0px; text-align: center;">{{editContentSaveError}}</p>
-                                       
-                                    </div>                                    
-                                    
-                                    <div class="panel-footer">
-                                       <div class="row">
-                                          <div class="col-sm-12">
-                                             <button class="btn-success btn pull-right" ng-click="saveNewContent(marketingType)">Save</button>
-                                             <button class="btn-default btn pull-right" style="margin-right: 10px" ng-click="hideNewContent()" >Cancel</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
 
-                              
-                                  <!-- PURCHASE -->
-                                 <div class="panel panel-bluegray" ng-show="editPromoWindowFlag">
-                                    <div class="panel-heading" style="background: yellow !important;">
-                                       <h2>Edit Purchase</h2>
-                                    </div>
-                                    <div class="panel-body">
 
-                                       <div class="row">
-                                          <div class="col-md-12">
-                                             <form class="form-horizontal tabular-form">
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Select Vendor</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="myEditContent.vendorId">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Select Item</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="myEditContent.id">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Select Units</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="number"  ng-model="myEditContent.unitsPurchased" class="form-control">
-                                                   </div>
-                                                </div> 
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Total Amount</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.totalAmount" class="form-control">
-                                                   </div>
-                                                </div> 
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Mode of Payment</label>
-                                                      <select class="col-sm-8" ng-model="myEditContent.paymentMode">
-                                                         <option value="CREDIT">Credit</option>
-                                                         <option value="CHEQUE">Cheque</option>
-                                                         <option value="CASH">Cash</option>
-                                                      </select>
-                                                </div> 
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Remarks</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.comments" class="form-control">
-                                                   </div>
-                                                </div>     
-                                             </form>
-                                          </div>
-                                       </div>
-                                       
-                                       <p style="color: #e74c3c; font-weight: bold; margin: 10px 0px 0px 0px; text-align: center;">{{editContentSaveError}}</p>
-                                       
-                                    </div>                                    
-                                    
-                                    <div class="panel-footer">
-                                       <div class="row">
-                                          <div class="col-sm-12">
-                                             <button class="btn-success btn pull-right" ng-click="saveNewContent(marketingType)">Save</button>
-                                             <button class="btn-default btn pull-right" style="margin-right: 10px" ng-click="hideNewContent()" >Cancel</button>
-                                          </div>
-                                       </div>
-                                    </div>                                    
-                                 </div>
-                                 
-                                 <!-- PAYMENY -->
-                                 <div class="panel panel-bluegray" ng-show="editCouponWindowFlag">
-                                    <div class="panel-heading" style="background: yellow !important;">
-                                       <h2>Edit Payment</h2>
-                                    </div>
-                                    <div class="panel-body">
-                                       <div class="row">
-                                          <div class="col-md-12">
-                                             <form class="form-horizontal tabular-form">
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Category</label>
-                                                   <span style="padding-right: 15%; padding-left: 5%;padding-top: 3%;">
-                                                      <input type="radio" ng-model="paymentCat" value="0" name="">From
-                                                   </span>
-                                                      <input type="radio" ng-model="paymentCat" value="1" name="">For
-                                                </div>
-                                                <div class="form-group" ng-if="paymentCat == 0">
-                                                   <label class="col-sm-3 control-label">Select Vendor</label>
-                                                      <select id="drop" class="js-example-basic-single col-sm-8" class="form-control" ng-model="myEditContent.vendorId">
-                                                         <option value="" disabled="">
-                                                              Select an option
-                                                         </option>
-                                                         <option value="1">
-                                                              Belh
-                                                         </option>
-                                                         <option value="2">
-                                                              Belasf
-                                                         </option>
-                                                      </select>
-                                                </div>
-                                                <div class="form-group" ng-if="paymentCat == 1">
-                                                   <label for="form-name" class="col-sm-3 control-label">Item Name</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.name" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Amount</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.totalAmount" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label class="col-sm-3 control-label">Payment Mode</label>
-                                                      <select class="col-sm-8" ng-model="myEditContent.paymentMode">
-                                                         <option value="CREDIT">Credit</option>
-                                                         <option value="CHEQUE">Cheque</option>
-                                                         <option value="CASH">Cash</option>
-                                                      </select>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Reference</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.paymentReference" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Payment Date</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="date"  ng-model="myEditContent.date" class="form-control">
-                                                   </div>
-                                                </div>
-                                                <div class="form-group">
-                                                   <label for="form-name" class="col-sm-3 control-label">Comments</label>
-                                                   <div class="col-sm-8">
-                                                      <input type="text"  ng-model="myEditContent.comments" class="form-control">
-                                                   </div>
-                                                </div>
-                                             </form>
-                                          </div>
-                                       </div>
-                                       
-                                       <p style="color: #e74c3c; font-weight: bold; margin: 10px 0px 0px 0px; text-align: center;">{{editContentSaveError}}</p>
-                                       
-                                    </div>                                    
-                                    
-                                    <div class="panel-footer">
-                                       <div class="row">
-                                          <div class="col-sm-12">
-                                             <button class="btn-success btn pull-right" ng-click="saveNewContent(marketingType)">Save</button>
-                                             <button class="btn-default btn pull-right" style="margin-right: 10px" ng-click="hideNewContent()" >Cancel</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 
-                                 
-                                 
-                              </div>
-                              
-                              		<!-- View Modal -->
+
+               <!-- View Modal -->
 					<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">								
 								<div class="modal-body">
-									<h2 style="color: #FFF; font-weight: 700; text-transform: uppercase; background: #1abc9c; padding: 10px 15px; display: inline-block; border: 2px #16a085 dashed" ng-if="marketingType == 'out'">{{viewContent.name}}</h2>
-									<p style="font-size: 21px; color: #34495e" ng-if="marketingType != 'out'">{{viewContent.quan}}</p>
-									<img ng-src="{{viewContent.url}}" style="margin-bottom: 15px" width="100%" ng-if="viewContent.isImg">
-									<p style="margin: 0; color: #7f8c8d; font-size: 18px">{{viewContent.brief}}</p>
- 									<p style="margin: 0; color: #bdc3c7" ng-if="marketingType != 'combos'">Created: <tag style="font-weight: bold; color: #2ecc71">{{viewContent.since}}</tag> | Expiry: <tag style="font-weight: bold; color: #2ecc71">{{viewContent.expiry}}</tag></p>
- 									<p style="margin: 0; color: #bdc3c7" ng-if="marketingType == 'combos'"><tag style="font-weight: bold; font-size: 18px; color: #2ecc71"><i class="fa fa-inr" style="font-size:14px"></i> {{viewContent.price}}</tag></p>
+									<div ng-if="marketingType == 'out'">
+   									<p style="margin: 0; font-size: 21px; color: #34495e" >{{viewContent.inventoryName}} <tag style="font-weight: 300; color: gray">x {{viewContent.quantity}} <tag style="font-size: 70%">{{viewContent.unit}}</tag></tag></p>
+                              <p style="font-size: 12px;">Item Category: <tag style="text-transform: uppercase; padding: 2px 4px; color: #3498db">{{viewContent.category}}</tag></p>
+   									<p style="margin: 0 0 5px 0; font-weight: 300; color: #7f8c8d; font-size: 18px"><tag ng-if="viewContent.remarks && viewContent.remarks != ''">Remarks: <i>{{viewContent.remarks}}</i></tag></p>
+    									<p style="margin: 0; color: #bdc3c7">Added by <tag style="font-weight: bold; color: #2ecc71">{{viewContent.createdAdmin}}</tag> on <tag style="font-weight: bold; color: #2ecc71">{{viewContent.date}}</tag></p>
+                           </div>
+
+                           <div ng-if="marketingType == 'purchases'">
+                              <h1>Purchase of <b>{{viewContent.inventoryName}}</b></h1>
+
+                              <table class="table table-striped m-n">
+                                 <tbody>
+
+                                    <tr>
+                                       <td>Item Category</td>
+                                       <td>{{viewContent.category}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Date of Purchase</td>
+                                       <td>{{viewContent.date}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Quantity</td>
+                                       <td>{{viewContent.quantity}} <tag style="font-size: 70%">{{viewContent.unit}}</tag></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Total Amount</td>
+                                       <td><i class="fa fa-inr"></i> {{viewContent.amount}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Payment Status</td>
+                                       <td>{{viewContent.isPaid ? 'Paid Purchase' : 'Unpaid'}}</td>
+                                    </tr>
+                                    <tr ng-if="viewContent.isPaid">
+                                       <td>Mode of Payment</td>
+                                       <td>{{viewContent.mode}}</td>
+                                    </tr>
+                                    <tr ng-if="viewContent.comments && viewContent.comments != ''">
+                                       <td>Comments</td>
+                                       <td><i>{{viewContent.comments}}</i></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Vendor Name</td>
+                                       <td>{{viewContent.vendorName}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Entry Added By</td>
+                                       <td>{{viewContent.createdAdmin}}</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+
+
+                           <div ng-if="marketingType == 'payments'">
+                              <h1>Payment 
+                                 <span ng-if="viewContent.paymentTo && viewContent.paymentTo != ''">made to <b>{{viewContent.paymentTo}}</b></span>
+                                 <span ng-if="((!viewContent.paymentTo || viewContent.paymentTo == '') && (viewContent.paymentFor && viewContent.paymentFor != ''))">made for <b>{{viewContent.paymentFor}}</b></span>
+                              </h1>
+
+                              <table class="table table-striped m-n">
+                                 <tbody>
+
+                                    <tr ng-if="viewContent.paymentTo && viewContent.paymentTo != ''">
+                                       <td>Paid To</td>
+                                       <td>{{viewContent.paymentTo}}</td>
+                                    </tr>
+                                    <tr ng-if="viewContent.paymentFor && viewContent.paymentFor != ''">
+                                       <td>Paid For</td>
+                                       <td>{{viewContent.paymentFor}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Date of Payment</td>
+                                       <td>{{viewContent.date}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Total Amount</td>
+                                       <td><i class="fa fa-inr"></i> {{viewContent.amount}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Mode of Payment</td>
+                                       <td>{{viewContent.mode}}</td>
+                                    </tr>
+                                    <tr ng-if="viewContent.reference && viewContent.reference != ''">
+                                       <td>Payment Reference</td>
+                                       <td>{{viewContent.reference}}</td>
+                                    </tr>
+                                    <tr ng-if="viewContent.comments && viewContent.comments != ''">
+                                       <td>Comments</td>
+                                       <td><i>{{viewContent.comments}}</i></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Entry Added By</td>
+                                       <td>{{viewContent.createdAdmin}}</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+
 
 									
 								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<div class="modal-footer" style="padding: 0">
+									<button style="border: none; width: 100%; height: 40px;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal-dialog -->
 					</div><!-- /.modal -->
 					
 					
-					<!-- Image Modal -->
-					<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content" style="width: 810px">								
-								<div class="modal-body">
-								<div class="row" style="padding: 15px">
-                                                                        <button class="btn-success btn pull-right" ng-click="saveAttachment()" style="margin-left: 5px" ng-show="photoLoadedToFrame">Save</button>
-									<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-<div style="padding:5px 10px; background:#00ad2d; border:1px solid #00ad2d; position:relative; color:#fff; border-radius:2px; text-align:center; float:left; cursor:pointer">Select an Image<input type="file" id="fileInput" style="position: absolute; z-index: 1000; opacity: 0; cursor: pointer; right: 0; top: 0; height: 100%; font-size: 24px; width: 100%;"/></div>
-								</div>
-<div style="margin-top: 10px">
-  <img id="image" ng-src="{{myImage}}" style="max-width: 100%;">
-</div>															
-<p style="margin: 0; padding-top: 15px; color: #bdc3c7">Upload High Quality image only. Use minimum 853x480 resolution(Width: 853px Height: 480px). Only JPG, PNG files supported.</p>
 
-								</div> 
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
 					
-					
-					
-					
+								
 					<!-- DELETE STOCK OUT Confirmation Modal -->
 					<div class="modal fade" id="deleteStockOutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">																						
 								<div class="modal-footer">
-									<h2 class="modal-title" style="font-size: 16px; color: #95a5a6; float: left">Do you really want to delete Stock Out Entry of {{deleteItemQuantity}} units of {{deleteItemName}} <strong style="color: #e74c3c">{{deleteItemDate}}</strong>?</h2>									
+									<h2 class="modal-title" style="font-size: 16px; color: #95a5a6; margin-bottom: 15px; text-align: left">Do you really want to delete the entry of {{deleteItemQuantity}} units of <strong style="color: #e74c3c">{{deleteItemName}}</strong> of {{deleteItemDate}} from the Stock Register?</h2>									
 									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-									<button type="button" class="btn btn-danger" ng-click="deleteContent(deleteItemId)">Delete</button>
+									<button type="button" class="btn btn-danger" ng-click="deleteStockOutContent(deleteUID)">Delete</button>
 									<p style="color: #e74c3c; margin: 10px 0px 0px 0px; text-align: center;">{{deleteError}}</p>
 								</div>
 							</div><!-- /.modal-content -->
@@ -782,9 +627,9 @@
                   <div class="modal-dialog">
                      <div class="modal-content">                                                                  
                         <div class="modal-footer">
-                           <h2 class="modal-title" style="font-size: 16px; color: #95a5a6; float: left">Do you really want to delete payment amount of {{deleteItemAmount}} <span ng-if="deleteItemVendor"> from {{deleteItemVendor}}</span><span ng-if="deleteItemName"> for {{deleteItemName}}</span> on <strong style="color: #e74c3c">{{deleteItemDate}}</strong>?</h2>                         
+                           <h2 class="modal-title" style="font-size: 16px; color: #95a5a6; margin-bottom: 15px; text-align: left">Do you really want to delete the entry for the payment of <i class="fa fa-inr"></i> {{deleteItemAmount}} <span ng-if="deleteItemVendor"> made to <strong style="color: #e74c3c">{{deleteItemVendor}}</strong></span><span ng-if="deleteItemName"> for {{deleteItemName}}</span> on {{deleteItemDate}}?</h2>                         
                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                           <button type="button" class="btn btn-danger" ng-click="deleteContent(deleteItemId)">Delete</button>
+                           <button type="button" class="btn btn-danger" ng-click="deletePaymentContent(deleteUID)">Delete</button>
                            <p style="color: #e74c3c; margin: 10px 0px 0px 0px; text-align: center;">{{deleteError}}</p>
                         </div>
                      </div><!-- /.modal-content -->
@@ -792,13 +637,13 @@
                </div><!-- /.modal -->
 
                <!-- DELETE PURCHASE Confirmation Modal -->
-               <div class="modal fade" id="deletePaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <div class="modal fade" id="deletePurchaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">                                                                  
                         <div class="modal-footer">
-                           <h2 class="modal-title" style="font-size: 16px; color: #95a5a6; float: left">Do you really want to delete purchase of {{deleteItemQuantity}} units of {{deleteItemName}} from {{deleteItemVendor}} on<strong style="color: #e74c3c">{{deleteItemDate}}</strong>?</h2>                         
+                           <h2 class="modal-title" style="font-size: 16px; color: #95a5a6; margin-bottom: 15px; text-align: left">Do you really want to delete the entry for the purchase of {{deleteItemQuantity}} units of <strong style="color: #e74c3c">{{deleteItemName}}</strong> from {{deleteItemVendor}} on {{deleteItemDate}}?</h2>                         
                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                           <button type="button" class="btn btn-danger" ng-click="deleteContent(deleteItemId)">Delete</button>
+                           <button type="button" class="btn btn-danger" ng-click="deletePurchaseContent(deleteUID)">Delete</button>
                            <p style="color: #e74c3c; margin: 10px 0px 0px 0px; text-align: center;">{{deleteError}}</p>
                         </div>
                      </div><!-- /.modal-content -->

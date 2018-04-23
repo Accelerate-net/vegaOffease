@@ -5,11 +5,13 @@ angular.module('inventoryApp', ['ngCookies'])
 }])
 
 
-
   .controller('inventoryController', function($scope, $http, $interval, $cookies) {
 //promotions --> purchasse
 //Coupon --> payments
 //combo --> out
+
+TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';
+
 
 /*
     //Check if logged in
@@ -21,69 +23,8 @@ angular.module('inventoryApp', ['ngCookies'])
       window.location = "adminlogin.html";
     }
 */
-		$scope.paymentCat = 0;
 
-		$('.js-example-basic-single').select2();
-
-		$scope.fetchInventoryList = function(){
-			var co_data = {};
-	        co_data.token = $cookies.get("zaitoonAdmin");
-	        $http({
-	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpFetchInventoryList.php',
-	          data    : co_data,
-	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-	         })
-	         .then(function(response) {
-			if(response.data.status){   
-			      $scope.inventoryList = response.data.response;
-			      console.log($scope.inventoryList);		    			       
-			}
-			else{	
-				$scope.isContentFound = false;		
-				$scope.newContentSet();	
-				$scope.inventoryList = {};
-			}
-	         });	
-		}
-		$scope.fetchInventoryList();
-
-		$scope.fetchVendorsList = function(){
-			var co_data = {};
-	        co_data.token = $cookies.get("zaitoonAdmin");
-	        $http({
-	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpFetchVendors.php',
-	          data    : co_data,
-	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-	         })
-	         .then(function(response) {
-			if(response.data.status){   
-			      $scope.vendorsList = response.data.response;
-			      console.log($scope.vendorsList);		    			       
-			}
-			else{	
-				$scope.isContentFound = false;		
-				$scope.newContentSet();	
-				$scope.vendorsList = {};
-			}
-	         });	
-		}
-		$scope.fetchVendorsList();
-
-        $('#new_stockout_date').datetimepicker({  // Date
-		    format: "dd-mm-yyyy",
-		    weekStart: 1,
-	        todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 1
-	    });
-
-
-
+	$('.js-example-basic-single').select2();
 
     //Logout function
     $scope.logoutNow = function(){
@@ -171,10 +112,10 @@ angular.module('inventoryApp', ['ngCookies'])
 	      	var co_data = {};
 	      	co_data.type = type;
 	      	co_data.page = pageid - 1;
-	        co_data.token = $cookies.get("zaitoonAdmin");
+	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/fetchmarketingcontent.php',
+	          url     : 'https://zaitoon.online/services/erpfetchstockregistercontent.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -215,7 +156,29 @@ angular.module('inventoryApp', ['ngCookies'])
 			}
 	    });	
 	}
-	
+
+
+  $scope.getRandomColor = function(code){
+
+  code = code.toString().split('').pop();
+
+  var styles = [
+    {"color": "#ff4300"},
+    {"color": "#1abc9c"},
+    {"color": "#3498db"},
+    {"color": "#9b59b6"},
+    {"color": "#34495e"},
+    {"color": "#e67e22"},
+    {"color": "#0a3d62"},
+    {"color": "#b71540"},
+    {"color": "#e58e26"},
+    {"color": "#60a3bc"}
+  ];
+
+  return styles[code];
+}
+
+
 	$scope.initializeContent($scope.marketingType, 1);
 	
       
@@ -239,13 +202,14 @@ angular.module('inventoryApp', ['ngCookies'])
 	    document.getElementById("couponsTabButton").style.background="#F1F1F1";
 	    
 	$scope.openType = function (type){
+		$scope.active_content = [];
 		$scope.marketingType = type;
 		$scope.initializeContent(type, 1);
 		//Styling
 		switch(type) {
 		    case 'out':
 		    {		    	
-		            document.getElementById("combosTitle").style.color = "#FFF";
+		        document.getElementById("combosTitle").style.color = "#FFF";
 			    document.getElementById("combosIcon").style.color = "#FFF";
 			    document.getElementById("combosTag").style.color = "#FFF";
 			    document.getElementById("combosCount").style.color = "#FFF";
@@ -263,11 +227,11 @@ angular.module('inventoryApp', ['ngCookies'])
 			    document.getElementById("couponsCount").style.color = "#ABB2B9";
 			    document.getElementById("couponsTabButton").style.background="#F1F1F1";
 		        
-		            break;
+		        break;
 		    }
 		    case 'purchases':
 		    {
-		            document.getElementById("promotionsTitle").style.color = "#FFF";
+		        document.getElementById("promotionsTitle").style.color = "#FFF";
 			    document.getElementById("promotionsIcon").style.color = "#FFF";
 			    document.getElementById("promotionsTag").style.color = "#FFF";
 			    document.getElementById("promotionsCount").style.color = "#FFF";
@@ -285,11 +249,11 @@ angular.module('inventoryApp', ['ngCookies'])
 			    document.getElementById("couponsCount").style.color = "#ABB2B9";
 			    document.getElementById("couponsTabButton").style.background="#F1F1F1";
 		        
-		            break;
+		        break;
 		    }
 		    case 'payments':
 		    {
-		            document.getElementById("couponsTitle").style.color = "#FFF";
+		        document.getElementById("couponsTitle").style.color = "#FFF";
 			    document.getElementById("couponsIcon").style.color = "#FFF";
 			    document.getElementById("couponsTag").style.color = "#FFF";
 			    document.getElementById("couponsCount").style.color = "#FFF";
@@ -307,7 +271,7 @@ angular.module('inventoryApp', ['ngCookies'])
 			    document.getElementById("combosCount").style.color = "#ABB2B9";
 			    document.getElementById("combosTabButton").style.background="#F1F1F1";
 		        
-		            break;
+		        break;
 		    }
 		} 
 	}
@@ -337,51 +301,254 @@ angular.module('inventoryApp', ['ngCookies'])
 	$scope.showNewContentWindow = function(){
 		switch($scope.marketingType){
 			case 'out':{
-				$scope.newComboWindowFlag  = true;
-				$scope.newPromoWindowFlag  = false;
-				$scope.newCouponWindowFlag  = false;
-				$scope.editComboWindowFlag = false;
-			    $scope.editPromoWindowFlag = false;
-			    $scope.editCouponWindowFlag = false;
-
-			    
-			    $('#inventory_date').datetimepicker({  // Date
-				    format: "dd-mm-yyyy",
-				    weekStart: 1,
-			        todayBtn:  1,
-					autoclose: 1,
-					todayHighlight: 1,
-					startView: 2,
-					minView: 2,
-					forceParse: 1
-			    });
 
 
-			    document.getElementById("inventory_date").value = getTodayDate();
+              var data = {};
+              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+              $http({
+                method  : 'POST',
+                url     : 'https://zaitoon.online/services/erpnewstockoutregistermetadata.php',
+                data    : data,
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+               })
+               .then(function(response) {
+                    if(response.data.status){ 
+
+						$scope.newComboWindowFlag  = true;
+						$scope.newPromoWindowFlag  = false;
+						$scope.newCouponWindowFlag  = false;
+						$scope.editComboWindowFlag = false;
+					    $scope.editPromoWindowFlag = false;
+					    $scope.editCouponWindowFlag = false;
 
 
-                       		
-                       		break;
+	                      $scope.metaInventoryList = response.data.inventories; 
+	                    	
+	                      var m = 0;
+	                      var allItemsListing = '';
+	                      while($scope.metaInventoryList[m]){
+
+	                        var k = 0;
+	                        var itemsListing = '';
+	                        while($scope.metaInventoryList[m].items[k]){
+	                          itemsListing = itemsListing + '<option value="'+encodeURI(JSON.stringify($scope.metaInventoryList[m].items[k]))+'">'+$scope.metaInventoryList[m].items[k].name+'</option>';
+	                          k++;
+	                        }
+
+	                        allItemsListing = allItemsListing + '<optgroup label="'+$scope.metaInventoryList[m].category+'">' + itemsListing + '</optgroup>';
+
+	                        //last iteration
+	                        if(m == $scope.metaInventoryList.length - 1){
+	                          document.getElementById("dropStockOutInventory").innerHTML = allItemsListing;
+	                          document.getElementById("dropStockOutInventory").value = '';
+
+	                          $("#dropStockOutInventory").change(function(){
+	                            var itemObj = JSON.parse(decodeURI($("#dropStockOutInventory").val()));
+	                            document.getElementById("unitDisplayPart").innerHTML = itemObj.unit;
+	                          });
+	                        }
+
+	                        m++
+	                      }
+
+
+
+
+					    
+					    $('#inventory_date').datetimepicker({  // Date
+						    format: "dd-mm-yyyy",
+						    weekStart: 1,
+					        todayBtn:  1,
+							autoclose: 1,
+							todayHighlight: 1,
+							startView: 2,
+							minView: 2,
+							forceParse: 1
+					    });
+
+
+					    document.getElementById("inventory_date").value = getTodayDate(); 
+			        }
+               	});      
+
+               	break;
 			}
 			case 'purchases':{
-				$scope.newComboWindowFlag  = false;
-				$scope.newPromoWindowFlag  = true;
-				$scope.newCouponWindowFlag  = false;
-				$scope.editComboWindowFlag = false;
-			    $scope.editPromoWindowFlag = false;
-			      $scope.editCouponWindowFlag = false;
+
+              var data = {};
+              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+              $http({
+                method  : 'POST',
+                url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+                data    : data,
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+               })
+               .then(function(response) {
+                    if(response.data.status){ 
+
+						$scope.newComboWindowFlag  = false;
+						$scope.newPromoWindowFlag  = true;
+						$scope.newCouponWindowFlag  = false;
+						$scope.editComboWindowFlag = false;
+					    $scope.editPromoWindowFlag = false;
+					    $scope.editCouponWindowFlag = false;
+                      
+
+
+                      	$scope.metaVendorsList = response.data.vendors;
+                      	$scope.metaInventoryList = response.data.inventories;
+
+	                      var n = 0;
+	                      var listing = '';
+	                      while($scope.metaVendorsList[n]){
+	                        listing = listing + '<option value="'+$scope.metaVendorsList[n].code+'">'+$scope.metaVendorsList[n].name+'</option>';
+	                        
+
+	                        if(n == $scope.metaVendorsList.length - 1){
+	                          	document.getElementById("dropPurchaseVendor").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
+	                        	document.getElementById("dropPurchaseVendor").value = '';
+	                        }
+
+	                        n++;
+	                      }
+
+
+
+
+	                      var m = 0;
+	                      var allItemsListing = '';
+	                      while($scope.metaInventoryList[m]){
+
+	                        var k = 0;
+	                        var itemsListing = '';
+	                        while($scope.metaInventoryList[m].items[k]){
+	                          itemsListing = itemsListing + '<option value="'+encodeURI(JSON.stringify($scope.metaInventoryList[m].items[k]))+'">'+$scope.metaInventoryList[m].items[k].name+'</option>';
+	                          k++;
+	                        }
+
+	                        allItemsListing = allItemsListing + '<optgroup label="'+$scope.metaInventoryList[m].category+'">' + itemsListing + '</optgroup>';
+
+	                        //last iteration
+	                        if(m == $scope.metaInventoryList.length - 1){
+	                          document.getElementById("dropPurchaseInventory").innerHTML = allItemsListing;
+	                          document.getElementById("dropPurchaseInventory").value = '';
+	                          $("#dropPurchaseInventory").change(function(){
+	                            var itemObj = JSON.parse(decodeURI($("#dropPurchaseInventory").val()));
+	                            document.getElementById("unitDisplayPartPurchase").innerHTML = itemObj.unit;
+	                          });
+	                        }
+
+	                        m++
+	                      }
+
+
+
+
+					    
+					    $('#purchase_date').datetimepicker({  // Date
+						    format: "dd-mm-yyyy",
+						    weekStart: 1,
+					        todayBtn:  1,
+							autoclose: 1,
+							todayHighlight: 1,
+							startView: 2,
+							minView: 2,
+							forceParse: 1
+					    });
+
+
+					    document.getElementById("purchase_date").value = getTodayDate(); 
+			        }
+               	});
                        		
-                       		break;			
+                break;			
 			}
 			case 'payments':{
-				$scope.newComboWindowFlag  = false;
-				$scope.newPromoWindowFlag  = false;
-				$scope.newCouponWindowFlag  = true;
-				$scope.editComboWindowFlag = false;
-			    $scope.editPromoWindowFlag = false;
-			    $scope.editCouponWindowFlag = false;
+
+              var data = {};
+              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      
+              $http({
+                method  : 'POST',
+                url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+                data    : data,
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+               })
+               .then(function(response) {
+                    if(response.data.status){ 
+
+						$scope.newComboWindowFlag  = false;
+						$scope.newPromoWindowFlag  = false;
+						$scope.newCouponWindowFlag  = true;
+						$scope.editComboWindowFlag = false;
+					    $scope.editPromoWindowFlag = false;
+					    $scope.editCouponWindowFlag = false;
+                      
+
+
+                      	$scope.metaVendorsList = response.data.vendors;
+                      	$scope.metaInventoryList = response.data.inventories;
+
+	                      var n = 0;
+	                      var listing = '';
+	                      while($scope.metaVendorsList[n]){
+	                        listing = listing + '<option value="'+$scope.metaVendorsList[n].code+'">'+$scope.metaVendorsList[n].name+'</option>';
+	                        
+
+	                        if(n == $scope.metaVendorsList.length - 1){
+	                          	document.getElementById("dropPaymentVendor").innerHTML = ' <option value="" disabled=""> Select an option </option> '+ listing;
+	                        	document.getElementById("dropPaymentVendor").value = '';
+	                        }
+
+	                        n++;
+	                      }
+
+
+
+
+	                      var m = 0;
+	                      var allItemsListing = '';
+	                      while($scope.metaInventoryList[m]){
+
+	                        var k = 0;
+	                        var itemsListing = '';
+	                        while($scope.metaInventoryList[m].items[k]){
+	                          itemsListing = itemsListing + '<option value="'+$scope.metaInventoryList[m].items[k].code+'">'+$scope.metaInventoryList[m].items[k].name+'</option>';
+	                          k++;
+	                        }
+
+	                        allItemsListing = allItemsListing + '<optgroup label="'+$scope.metaInventoryList[m].category+'">' + itemsListing + '</optgroup>';
+
+	                        //last iteration
+	                        if(m == $scope.metaInventoryList.length - 1){
+	                          	document.getElementById("dropPaymentInventory").innerHTML = allItemsListing;
+	                        	document.getElementById("dropPaymentInventory").value = '';
+	                        }
+
+	                        m++
+	                      }
+
+					    
+					    $('#payment_date').datetimepicker({  // Date
+						    format: "dd-mm-yyyy",
+						    weekStart: 1,
+					        todayBtn:  1,
+							autoclose: 1,
+							todayHighlight: 1,
+							startView: 2,
+							minView: 2,
+							forceParse: 1
+					    });
+
+
+					    document.getElementById("payment_date").value = getTodayDate(); 
+			        }
+               	});
                        		
-                       		break;			
+                break;	
+
 			}
 		
 		}
@@ -431,173 +598,27 @@ angular.module('inventoryApp', ['ngCookies'])
 		}
 	}
 
-	$scope.saveEditChanges = function(){
 
-		if($scope.marketingType == 'out'){
-			if($scope.myEditContent.id == ""){
-				$scope.editContentSaveError = "Choose an inventory item";
-			}
-			else if($scope.myEditContent.quantity == ""){
-				$scope.editContentSaveError = "Enter the quantity of the item";
-			}
-			else{
-				//Add to server
-		      		$scope.editContentSaveError = "";
-		      		
-		      		$('#loading').show(); $("body").css("cursor", "progress");		      		
-		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-		        	data.id = $scope.myEditContent.id;
-		        	data.quantity = $scope.myEditContent.quantity;
-		        	data.remarks = $scope.myEditContent.remarks;
-		        	data.date = $scope.myEditContent.date;
-   
-			        $http({
-			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/erpStockOutEntry.php',
-			          data    : data,
-			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-			         })
-			         .then(function(response) {
-			              $('#loading').hide(); $("body").css("cursor", "default");
-			              if(response.data.status){
-			              	$scope.newContentSet();
-			              	$scope.initializeContent($scope.marketingType, $scope.currentDisplayPage);
-			              }
-			              else{
-			              	$scope.editContentSaveError = response.data.error;
-			              }
-			         });
-			}
-		}
-
-
-		else if($scope.marketingType == 'purchases'){ 
-
-			if($scope.myEditContent.vendorId == ""){
-		      		$scope.editContentSaveError = "Choose a vendor";
-		      	}      
-		      	else if($scope.myEditContent.item == ""){
-		      		$scope.editContentSaveError = "Choose an item";
-		      	}
-				else if($scope.myEditContent.units == ""){
-		      		$scope.editContentSaveError = "Enter the units for the item";
-		      	}
-		      	else if($scope.myEditContent.paymentMode == ""){
-		      		$scope.editContentSaveError = "Choose a payment Method";
-		      	}
-		      	else if($scope.myEditContent.totalAmount == ""){
-		      		$scope.editContentSaveError = "Enter the amount on purchase";
-		      	}
-		      	else{
-		      		//Add to server
-		      		$scope.editContentSaveError = "";
-		      		
-		      		$('#loading').show(); $("body").css("cursor", "progress");
-		      		
-	
-		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-		        	data.vendorId = $scope.myEditContent.vendorId;
-		        	data.item = $scope.myEditContent.item;
-		        	data.units = $scope.myEditContent.units;
-		        	data.paymentMode = $scope.myEditContent.paymentMode;
-		        	data.remarks = $scope.myEditContent.remarks;   
-   
-			        $http({
-			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
-			          data    : data,
-			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-			         })
-			         .then(function(response) {
-			              $('#loading').hide(); $("body").css("cursor", "default");
-			              if(response.data.status){
-			              	$scope.newContentSet();
-			              	$scope.initializeContent($scope.marketingType, $scope.currentDisplayPage);
-			              }
-			              else{
-			              	$scope.editContentSaveError = response.data.error;
-			              }
-			         });
-		      	}
-		}		
-		else if($scope.marketingType == 'payments'){ //2. Promos 
-
-				if($scope.myEditContent.vendorId == "" && $scope.myEditContent.name == ""){
-		      		$scope.editContentSaveError = "Choose a vendor/Enter the item Name";
-		      	}
-		      	else if($scope.myEditContent.totalAmount == ""){
-		      		$scope.editContentSaveError = "Enter the payment amount";
-		      	}
-		      	else if($scope.myEditContent.paymentMode == ""){
-		      		$scope.editContentSaveError = "Choose a payment mode";
-		      	}
-		      	else if($scope.myEditContent.paymentRef == ""){
-		      		$scope.editContentSaveError = "Enter the payment reference";
-		      	}
-		      	else if($scope.myEditContent.paymentDate == ""){
-		      		$scope.editContentSaveError = "Choose a payment date";
-		      	}
-
-		      	else{
-		      		//Add to server
-		      		$scope.editContentSaveError = "";
-		      		
-		      		$('#loading').show(); $("body").css("cursor", "progress");
-	
-		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-		        	data.vendorId = $scope.myEditContent.vendorId;
-		        	data.name = $scope.myEditContent.name;
-		        	data.totalAmount = $scope.myEditContent.totalAmount;
-		        	data.paymentMode = $scope.myEditContent.paymentMode;
-		        	data.paymentRef = $scope.myEditContent.paymentRef;
-		        	data.paymentDate = $scope.myEditContent.paymentDate;
-		        	
-		        	console.log(data)  	
-			        $http({
-			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
-			          data    : data,
-			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-			         })
-			         .then(function(response) {
-			              $('#loading').hide(); $("body").css("cursor", "default");
-			              if(response.data.status){
-			              	$scope.newContentSet();
-			              	$scope.initializeContent($scope.marketingType, $scope.currentDisplayPage);
-			              }
-			              else{
-			              	$scope.editContentSaveError = response.data.error;
-			              }
-			         });
-		      	}
-		}
-
-	}
-	
-	$scope.changeOfferType = function(){
-		$scope.addNewContent.offer = !$scope.addNewContent.offer;
-	}
 	
 	//Delete Confirmation
 	$scope.confirmDeleteStockOut = function(content){
-		$scope.deleteItemName = content.name;
+		$scope.deleteItemName = content.inventoryName
 		$scope.deleteItemQuantity = content.quantity;
 		$scope.deleteItemDate = content.date;
 		$scope.deleteItemId = content.id;
+
+		$scope.deleteUID = content.id;
 		$('#deleteStockOutModal').modal('show');
 	}
 
 	$scope.deleteStockOutContent = function(req_id){
 		var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = $cookies.get("zaitoonAdmin");
+	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/deletemarketingcontent.php',
+	          url     : 'https://zaitoon.online/services/erpdeletestockouthistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -615,16 +636,18 @@ angular.module('inventoryApp', ['ngCookies'])
 	$scope.confirmDeletePurchase = function(content){
 		$scope.deleteItemId = content.id;
 		$scope.deleteItemQuantity = content.quantity;
-		$scope.deleteItemName = content.name;
+		$scope.deleteItemName = content.inventoryName;
 		$scope.deleteItemVendor = content.vendorName;
 		$scope.deleteItemDate = content.date;
-		$('#deletePaymentModal').modal('show');
+
+		$scope.deleteUID = content.id;
+		$('#deletePurchaseModal').modal('show');
 	}
 
 	$scope.deletePurchaseContent = function(req_id){
 		var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = $cookies.get("zaitoonAdmin");
+	        co_data.token = TOKEN_TEMP;// $cookies.get("zaitoonAdmin");
 
 	        $http({
 	          method  : 'POST',
@@ -635,7 +658,7 @@ angular.module('inventoryApp', ['ngCookies'])
 	         .then(function(response) {
 			if(response.data.status){			      
 			      	$scope.initializeContent($scope.marketingType, $scope.currentDisplayPage, 'delete'); 
-			      	$('#deletePaymentModal').modal('hide');
+			      	$('#deletePurchaseModal').modal('hide');
 			}
 			else{
 				$scope.deleteError = response.data.error;
@@ -646,27 +669,29 @@ angular.module('inventoryApp', ['ngCookies'])
 	$scope.confirmDeletePayment = function(content){
 		$scope.deleteItemName = content.name;
 		$scope.deleteItemAmount = content.amount;
-		$scope.deleteItemVendor = content.vendorName;
+		$scope.deleteItemVendor = content.paymentTo;
 		$scope.deleteItemDate = content.date;
-		$scope.deleteItemId = content.id;
-		$('#deletePurchaseModal').modal('show');
+		$scope.deleteItemId = content.paymentFor;
+
+		$scope.deleteUID = content.id;
+		$('#deletePaymentModal').modal('show');
 	}
 
 	$scope.deletePaymentContent = function(req_id){
-		var co_data = {};
+			var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = $cookies.get("zaitoonAdmin");
+	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpdeleteinventorypaymenthistory.php',
+	          url     : 'https://zaitoon.online/services/erpdeleteinventorypaymentshistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
 	         .then(function(response) {
 			if(response.data.status){			      
 			      	$scope.initializeContent($scope.marketingType, $scope.currentDisplayPage, 'delete'); 
-			      	$('#deletePurchaseModal').modal('hide');
+			      	$('#deletePaymentModal').modal('hide');
 			}
 			else{
 				$scope.deleteError = response.data.error;
@@ -683,24 +708,28 @@ angular.module('inventoryApp', ['ngCookies'])
 	//New Content
 	$scope.addNewContent = {};
 	$scope.newContentSet = function(){
+
+		document.getElementById("dropStockOutInventory").innerHTML = '';
+		document.getElementById("dropPurchaseVendor").innerHTML = '';
+		document.getElementById("dropPurchaseInventory").innerHTML = '';
+		document.getElementById("dropPaymentVendor").innerHTML = '';
+		document.getElementById("dropPaymentInventory").innerHTML = '';
+
+
+		$scope.addNewContent.quantity = "";
+		$scope.addNewContent.remarks = "";
 		$scope.addNewContent.id = "";
-		$scope.addNewContent.branch = "";
-		$scope.addNewContent.name = "";
-		$scope.addNewContent.category = "";
-		$scope.addNewContent.unit = "";
-		$scope.addNewContent.minStockUnit = "";
-		$scope.addNewContent.currentStock = "";
 
 		$scope.addNewContent.unitsPurchased = "";
 		$scope.addNewContent.vendorId = "";
 		$scope.addNewContent.comments = "";
-		$scope.addNewContent.paymentMode = "";
+		$scope.addNewContent.paymentMode = "CASH";
 		$scope.addNewContent.totalAmount = "";
+
+		$scope.addNewContent.paymentReference = "";
+		$scope.addNewContent.extraComments = "";
 		
-		$scope.isPhotoAttached = false;
-		$scope.myPhotoURL = "";
-		
-		$scope.currentDisplayPage = 1;
+			$scope.currentDisplayPage = 1;
 	      	$scope.totalDisplayPages = 1;
 	      	$scope.isContentFound = false;
 	}
@@ -708,11 +737,18 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	 $scope.saveNewContent = function(type){
 		if(type == 'out'){
+
+		    var tempObj = document.getElementById("dropStockOutInventory").value;
+		    var itemObj = JSON.parse(decodeURI(tempObj));	
+
+		    $scope.addNewContent.id = itemObj.code;
+		    $scope.addNewContent.date = document.getElementById("inventory_date").value;
+
 			if($scope.addNewContent.id == ""){
-				$scope.newContentSaveError = "Choose an inventory item";
+				$scope.newContentSaveError = "Choose an Inventory";
 			}
 			else if($scope.addNewContent.quantity == ""){
-				$scope.newContentSaveError = "Enter the quantity of the item";
+				$scope.newContentSaveError = "Mention Quantity";
 			}
 			else{
 				//Add to server
@@ -720,15 +756,15 @@ angular.module('inventoryApp', ['ngCookies'])
 		      		
 		      		$('#loading').show(); $("body").css("cursor", "progress");		      		
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
+		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
 		        	data.id = $scope.addNewContent.id;
 		        	data.quantity = $scope.addNewContent.quantity;
 		        	data.remarks = $scope.addNewContent.remarks;
 		        	data.date = $scope.addNewContent.date;
-   
+
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/erpStockOutEntry.php',
+			          url     : 'https://zaitoon.online/services/erpstockregisterentry.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -748,20 +784,34 @@ angular.module('inventoryApp', ['ngCookies'])
 
 		else if(type == 'purchases'){ 
 
-			if($scope.addNewContent.vendorId == ""){
-		      		$scope.newContentSaveError = "Choose a vendor";
+			var tempVendor = document.getElementById("dropPurchaseVendor").value;
+
+			var tempObj = document.getElementById("dropPurchaseInventory").value;
+		    var itemObj = JSON.parse(decodeURI(tempObj));	
+
+
+		    $scope.addNewContent.vendorId = tempVendor;
+		    $scope.addNewContent.item = itemObj.code;
+		    $scope.addNewContent.purchaseDate = document.getElementById("purchase_date").value;
+		    
+
+				if($scope.addNewContent.vendorId == ""){
+		      		$scope.newContentSaveError = "Choose a Vendor";
 		      	}      
 		      	else if($scope.addNewContent.item == ""){
-		      		$scope.newContentSaveError = "Choose an item";
+		      		$scope.newContentSaveError = "Choose an Inventory";
 		      	}
-				else if($scope.addNewContent.units == ""){
-		      		$scope.newContentSaveError = "Enter the units for the item";
+				else if($scope.addNewContent.unitsPurchased == ""){
+		      		$scope.newContentSaveError = "Enter the purchased quantity";
+		      	}
+		      	else if($scope.addNewContent.purchaseDate == ""){
+		      		$scope.newContentSaveError = "Enter purchase date";
 		      	}
 		      	else if($scope.addNewContent.paymentMode == ""){
-		      		$scope.newContentSaveError = "Choose a payment Method";
+		      		$scope.newContentSaveError = "Choose a payment method";
 		      	}
 		      	else if($scope.addNewContent.totalAmount == ""){
-		      		$scope.newContentSaveError = "Enter the amount on purchase";
+		      		$scope.newContentSaveError = "Enter the total amount";
 		      	}
 		      	else{
 		      		//Add to server
@@ -771,13 +821,15 @@ angular.module('inventoryApp', ['ngCookies'])
 		      		
 	
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
+		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
 		        	data.vendorId = $scope.addNewContent.vendorId;
 		        	data.item = $scope.addNewContent.item;
-		        	data.units = $scope.addNewContent.units;
+		        	data.units = $scope.addNewContent.unitsPurchased;
 		        	data.paymentMode = $scope.addNewContent.paymentMode;
-		        	data.remarks = $scope.addNewContent.remarks;   
-   
+		        	data.remarks = $scope.addNewContent.comments;   
+		        	data.amount = $scope.addNewContent.totalAmount;
+		        	data.date = $scope.addNewContent.purchaseDate; 
+
 			        $http({
 			          method  : 'POST',
 			          url     : 'https://zaitoon.online/services/erpaddinventorypurchasehistory.php',
@@ -796,40 +848,45 @@ angular.module('inventoryApp', ['ngCookies'])
 			         });
 		      	}
 		}		
-		else if(type == 'payments'){ //2. Promos 
+		else if(type == 'payments'){
 
-				if($scope.addNewContent.vendorId == "" && $scope.addNewContent.name == ""){
-		      		$scope.newContentSaveError = "Choose a vendor/Enter the item Name";
+
+			var tempVendor = document.getElementById("dropPaymentVendor").value;
+			var tempItem = document.getElementById("dropPaymentInventory").value;
+		    var tempDate = document.getElementById("payment_date").value;
+
+
+
+				if(tempVendor == "" && tempItem == ""){
+		      		$scope.newContentSaveError = "Mention which Vendor you are paying to or what Item are you paying for?";
 		      	}
-		      	else if($scope.addNewContent.totalAmount == ""){
-		      		$scope.newContentSaveError = "Enter the payment amount";
+		      	else if($scope.addNewContent.totalAmount == "" && $scope.addNewContent.totalAmount != 0){
+		      		$scope.newContentSaveError = "Enter the amount";
 		      	}
 		      	else if($scope.addNewContent.paymentMode == ""){
 		      		$scope.newContentSaveError = "Choose a payment mode";
 		      	}
-		      	else if($scope.addNewContent.paymentRef == ""){
-		      		$scope.newContentSaveError = "Enter the payment reference";
-		      	}
-		      	else if($scope.addNewContent.paymentDate == ""){
-		      		$scope.newContentSaveError = "Choose a payment date";
+		      	else if(tempDate == ""){
+		      		$scope.newContentSaveError = "Mention date of payment";
 		      	}
 
 		      	else{
+
 		      		//Add to server
 		      		$scope.newContentSaveError = "";
 		      		
 		      		$('#loading').show(); $("body").css("cursor", "progress");
 	
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
-		        	data.vendorId = $scope.addNewContent.vendorId;
-		        	data.name = $scope.addNewContent.name;
-		        	data.totalAmount = $scope.addNewContent.totalAmount;
-		        	data.paymentMode = $scope.addNewContent.paymentMode;
-		        	data.paymentRef = $scope.addNewContent.paymentRef;
-		        	data.paymentDate = $scope.addNewContent.paymentDate;
-		        	
-		        	console.log(data)  	
+		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+		        	data.paymentTo = tempVendor;
+		        	data.paymentFor = tempItem;
+		        	data.amount = $scope.addNewContent.totalAmount;
+		        	data.mode = $scope.addNewContent.paymentMode;
+		        	data.reference = $scope.addNewContent.paymentReference;
+		        	data.comments = $scope.addNewContent.extraComments;
+		        	data.date = tempDate;
+
 			        $http({
 			          method  : 'POST',
 			          url     : 'https://zaitoon.online/services/erpaddinventorypaymentshistory.php',
