@@ -41,7 +41,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.searchWithBranch = function(){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 
             $http({
               method  : 'POST',
@@ -71,7 +71,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.searchWithRole = function(){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 
             $http({
               method  : 'POST',
@@ -101,7 +101,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.search = function(search_key){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
             data.key = search_key;
 
 
@@ -299,7 +299,7 @@ angular.module('peopleApp', ['ngCookies'])
             else{
             
                         var data = {};
-                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 
                         data.empID = $scope.editStudent.regEmpID;
                         data.regMobile = $scope.editStudent.regMobile;
@@ -434,7 +434,7 @@ angular.module('peopleApp', ['ngCookies'])
             else{
             
                         var data = {};
-                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 
                         data.empID = $scope.newStudent.regEmpID;
                         data.regMobile = $scope.newStudent.regMobile;
@@ -578,7 +578,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.goToStudentProfile = function(search_key){
             
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
             data.key = search_key;
 
             $http({
@@ -667,7 +667,7 @@ angular.module('peopleApp', ['ngCookies'])
             var userID = $scope.studentData.employeeID;
             
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
             data.year = year;
             data.month = month;
             data.user = userID;

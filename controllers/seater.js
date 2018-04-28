@@ -8,6 +8,7 @@ angular.module('seaterApp', ['ngCookies'])
 
   .controller('seaterController', function($scope, $http, $interval, $cookies) {
 
+/*
     //Check if logged in
     if($cookies.get("zaitoonAdmin")){
       $scope.isLoggedIn = true;
@@ -16,6 +17,7 @@ angular.module('seaterApp', ['ngCookies'])
       $scope.isLoggedIn = false;
       window.location = "adminlogin.html";
     }
+*/
 
     //Logout function
     $scope.logoutNow = function(){

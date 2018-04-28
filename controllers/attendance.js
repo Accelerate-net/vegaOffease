@@ -43,7 +43,7 @@ $scope.fetchFigures = function(){
     $scope.figure_total_absent = 0;	
 
 		      		var data = {};
-		        	data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+		        	data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
           
 			        $http({
 			          method  : 'POST',
@@ -123,7 +123,7 @@ $scope.fetchFigures();
 			  $scope.seatPlanError = "";
 		
 		      var data = {};
-		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
 
 
@@ -199,7 +199,7 @@ $scope.fetchFigures();
       $scope.confirmAttendance = function(fullData){
 
 		      var data = {};
-		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOjC9w6ykxnp+crPz2zpkBrCaYzxn6BghxEkgugp1PxORCHlxMhUWzWUCZEwcXmLXYQ='; //$cookies.get("dashManager");
+		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
 		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
 		      data.info = fullData;
 
