@@ -12,9 +12,9 @@ angular.module('peopleApp', ['ngCookies'])
 
 //3.Otther data to be displayed on the screeen ('badges', 'messages', 'notificaitons')
 
-/*
+
       //Check if logged in
-      if($cookies.get("dashManager")){
+      if($cookies.get("accelerateVegaDeskAdmin")){
         $scope.isLoggedIn = true;
       }
       else{
@@ -22,26 +22,21 @@ angular.module('peopleApp', ['ngCookies'])
         window.location = "adminlogin.html";
       }
       
-*/
+
 
       //Logout function
       $scope.logoutNow = function(){
-        if($cookies.get("dashManager")){
-          $cookies.remove("dashManager");
+        if($cookies.get("accelerateVegaDeskAdmin")){
+          $cookies.remove("accelerateVegaDeskAdmin");
           window.location = "adminlogin.html";
         }
       }
 
 
-
-
-
-
-
       $scope.searchWithBranch = function(){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
 
             $http({
               method  : 'POST',
@@ -71,7 +66,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.searchWithRole = function(){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
 
             $http({
               method  : 'POST',
@@ -101,7 +96,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.search = function(search_key){
 
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
             data.key = search_key;
 
 
@@ -299,7 +294,7 @@ angular.module('peopleApp', ['ngCookies'])
             else{
             
                         var data = {};
-                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+                        data.token = $cookies.get("accelerateVegaDeskAdmin");
 
                         data.empID = $scope.editStudent.regEmpID;
                         data.regMobile = $scope.editStudent.regMobile;
@@ -434,7 +429,7 @@ angular.module('peopleApp', ['ngCookies'])
             else{
             
                         var data = {};
-                        data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+                        data.token = $cookies.get("accelerateVegaDeskAdmin");
 
                         data.empID = $scope.newStudent.regEmpID;
                         data.regMobile = $scope.newStudent.regMobile;
@@ -578,7 +573,7 @@ angular.module('peopleApp', ['ngCookies'])
       $scope.goToStudentProfile = function(search_key){
             
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
             data.key = search_key;
 
             $http({
@@ -667,7 +662,7 @@ angular.module('peopleApp', ['ngCookies'])
             var userID = $scope.studentData.employeeID;
             
             var data = {};
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
             data.year = year;
             data.month = month;
             data.user = userID;

@@ -9,7 +9,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
   .controller('feedbackController', function($scope, $http, $interval, $cookies) {
 
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
@@ -19,8 +19,8 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -32,10 +32,10 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
 
     $("#feedbackLoader").addClass("smallLoading");
     var data = {};
-    data.token = $cookies.get("zaitoonAdmin");
+    data.token = $cookies.get("accelerateVegaDeskAdmin");
     $http({
       method  : 'POST',
-      url     : 'https://kopperkadai.online/services/deskreviewfigures.php',
+      url     : 'https://zaitoon.online/services/deskreviewfigures.php',
       data    : data,
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
      })
@@ -242,14 +242,14 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
 	$scope.init = function(){
 	
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      data.id = 0;
 	      data.filter = $scope.filterMode;
     	      data.isFilter = $scope.isFilterApplied? 1 : 0;
     	         	      
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskfetchreviews.php',
+	        url     : 'https://zaitoon.online/services/deskfetchreviews.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -319,7 +319,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
        $scope.loadMore = function() {
           $scope.limiter = $scope.limiter + 5;
           var data = {};
-          data.token = $cookies.get("zaitoonAdmin");
+          data.token = $cookies.get("accelerateVegaDeskAdmin");
           data.id = $scope.limiter;
           
           data.filter = $scope.filterMode;
@@ -327,7 +327,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
     	      
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/deskfetchreviews.php',
+            url     : 'https://zaitoon.online/services/deskfetchreviews.php',
             data    : data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
@@ -405,13 +405,13 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
         $scope.sendResponse = function(){		
 		
 		var mydata = {};
-		mydata.token = $cookies.get("zaitoonAdmin");	
+		mydata.token = $cookies.get("accelerateVegaDeskAdmin");	
 		mydata.id = $scope.replyOrder;	
 					  
 		$scope.submitToServer = function(){
 		 $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/feedbackresponseadmin.php',
+		          url     : 'https://zaitoon.online/services/feedbackresponseadmin.php',
 		          data    : mydata,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -461,10 +461,10 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
 
         //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -484,7 +484,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

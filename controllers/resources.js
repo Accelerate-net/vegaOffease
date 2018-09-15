@@ -8,7 +8,7 @@ angular.module('ResourcesApp', ['ngCookies'])
   .controller('stewardsController', function($scope, $http, $interval, $cookies) {
 
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
@@ -18,8 +18,8 @@ angular.module('ResourcesApp', ['ngCookies'])
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -28,7 +28,7 @@ angular.module('ResourcesApp', ['ngCookies'])
       var temp_branch = localStorage.getItem("branchCode");
 
       $scope.initAgents = function(){
-	      $http.get("https://kopperkadai.online/services/fetchroles.php?branch="+temp_branch+"&role=STEWARD").then(function(response) {
+	      $http.get("https://zaitoon.online/services/fetchroles.php?branch="+temp_branch+"&role=STEWARD").then(function(response) {
 	          $scope.delivery_agent = response.data.results;
 	      });
       }
@@ -40,7 +40,7 @@ angular.module('ResourcesApp', ['ngCookies'])
       $scope.agentname = '';
       $scope.addAgent = function(){
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.code = $scope.agentcode ;
         data.name = $scope.agentname ;
         if(data.code == "" || data.name == ""){
@@ -49,7 +49,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         else{
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/deskaddsteward.php',
+            url     : 'https://zaitoon.online/services/deskaddsteward.php',
             data    : data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
@@ -66,11 +66,11 @@ angular.module('ResourcesApp', ['ngCookies'])
 
       $scope.removeAgent = function(code){
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.code = code;
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/deskremovesteward.php',
+          url     : 'https://zaitoon.online/services/deskremovesteward.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -84,10 +84,10 @@ angular.module('ResourcesApp', ['ngCookies'])
 
        //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -107,7 +107,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

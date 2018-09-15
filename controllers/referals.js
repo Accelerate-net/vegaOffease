@@ -7,21 +7,23 @@ angular.module('referalApp', ['ngCookies'])
 
 
   .controller('referalController', function($scope, $http, $interval, $cookies) {
-//promotions --> purchasse
-//Coupon --> payments
-//combo --> out
 
-/*
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
       $scope.isLoggedIn = false;
       window.location = "adminlogin.html";
     }
-*/
 
+    //Logout function
+    $scope.logoutNow = function(){
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
+        window.location = "adminlogin.html";
+      }
+    }
 
 
         $('#new_referal_date').datetimepicker({  // Date
@@ -43,11 +45,11 @@ $scope.fetchFigures = function(){
     $scope.figure_converted_referees = 0;	
 
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/fetchreferalfigures.php',
+			          url     : 'https://zaitoon.online/services/deskfetchreferalfigures.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -71,8 +73,8 @@ $scope.fetchFigures();
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -81,6 +83,8 @@ $scope.fetchFigures();
     $scope.outletCode = localStorage.getItem("branch");
 
 	 $scope.saveNewContent = function(){
+
+	 			var tempDate = document.getElementById("new_referal_date").value;
 		
 				if($scope.addNewContent.name == ""){
 		      		$scope.newContentSaveError = "Name can not be empty";
@@ -95,15 +99,15 @@ $scope.fetchFigures();
 		      		$('#loading').show(); $("body").css("cursor", "progress");
 		      				      		
 		      		var data = {};
-		        	data.token = $cookies.get("zaitoonAdmin");
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        	data.name = $scope.addNewContent.name;
 		        	data.mobile = $scope.addNewContent.mobile;
-		        	data.date = $scope.addNewContent.date;   
-		        	date.list = $scope.referencesHoldList;
-   
+		        	data.date = tempDate;   
+		        	data.list = $scope.referencesHoldList;
+
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/newmarketingcontent.php',
+			          url     : 'https://zaitoon.online/services/deskaddreferrals.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -216,7 +220,7 @@ $scope.fetchFigures();
 
          //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
           url     : 'https://zaitoon.online/services/fetchbadgecounts.php',

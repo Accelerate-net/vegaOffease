@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="utf-8">
-      <title>KK Desk</title>
+      <title>Feedbacks</title>
       <link type='text/css' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet'>
       <link type="text/css" href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
       <link type="text/css" href="assets/fonts/themify-icons/themify-icons.css" rel="stylesheet">
@@ -21,7 +21,7 @@
        <script src="assets/js/ng-infinite-scroll.min.js"></script>
    </head>
    <body class="animated-content" ng-app="feedsApp" ng-controller="feedbackController" ng-cloak>
-      <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
+      <header id="topnav" class="navbar navbar-fixed-top navbar-midnightblue" role="banner">
          <div class="logo-area">
             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg">
             <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -31,7 +31,7 @@
             </a>
             </span>
             <a class="navbar-brand" href="index.html" style="width: 125px"></a>
-            <h1 style="font-size: 18px; font-weight: bold; text-transform: uppercase">{{outletCode}}</h1>
+            <h1 style="font-size: 18px; font-weight: bold; color: #ffd042; text-transform: uppercase">{{outletCode}}</h1>
          </div>
          <!-- logo-area -->
          <ul class="nav navbar-nav toolbar pull-right">
@@ -51,7 +51,7 @@
       </header>
       <div id="wrapper">
          <div id="layout-static">
-            <div class="static-sidebar-wrapper sidebar-default">
+            <div class="static-sidebar-wrapper sidebar-bluegray">
                <div class="static-sidebar">
                   <div class="sidebar">
                      <div class="widget stay-on-collapse" id="widget-sidebar">
@@ -59,18 +59,34 @@
                            <ul class="acc-menu">
                               <li><a href="index.html"><i class="ti ti-layout-grid2"></i><span>Table Manager</span><span class="badge badge-teal" ng-if="pending_orders_length > 0">{{pending_orders_length}}</span></a></li>
                               <li><a href="reservations.html"><i class="ti ti-bookmark-alt"></i><span>Reservations</span><span class="badge badge-inverse" ng-if="reservations_length > 0">{{reservations_length}}</span></a></li>
-                              <li><a href="redeem.html"><i class="ti ti-gift"></i><span>Redeem Coupon</span></a></li>                              
+                              <li><a href="redeem.html"><i class="ti ti-gift"></i><span>Redeem Coupon</span></a></li>
                               <li><a href="feedback.html"><i class="ti ti-thumb-up"></i><span>Feedbacks</span></a></li>
                               <li><a href="guest-profile.html"><i class="ti ti-user"></i><span>Guest Details</span></a></li>
                               <li><a href="referals.html"><i class="ti ti-star"></i><span>Referral Program</span></a></li>
                               <li>
-                                     <a href="javascript:;"><i class="ti ti-settings"></i><span>Tools</span></a>
-                                     <ul class="acc-menu">
-                                        <li><a href="resources-steward.html">Stewards</a></li>
-                                        <li><a href="resources-reservationchannel.html">Reservation Channels</a></li>
-                                        <li><a href="tables.html">Tables List</a></li>
-                                        <!--<li><a href="settings.html">Account Settings</a></li>-->
-                                     </ul>
+                                 <a href="javascript:;"><i class="ti ti-id-badge"></i><span>Human Resources</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="people.html">People</a></li>
+                                    <li><a href="attendance.html">Attendance</a></li>
+                                    <li><a href="salary-slips.html">Salary Slips</a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <a href="javascript:;"><i class="ti ti-package"></i><span>Inventory</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="inventory-stock.html">Stock</a></li>
+                                    <li><a href="inventory-stock-register.html">Stock Register</a></li>
+                                    <li><a href="inventory-vendors.html">Vendors</a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <a href="javascript:;"><i class="ti ti-settings"></i><span>Tools</span></a>
+                                 <ul class="acc-menu">
+                                    <li><a href="resources-steward.html">Stewards</a></li>
+                                    <li><a href="resources-reservationchannel.html">Reservation Channels</a></li>
+                                    <li><a href="tables.html">Tables List</a></li>
+                                    <!--<li><a href="settings.html">Account Settings</a></li>-->
+                                 </ul>
                               </li>
                            </ul>
                         </nav>

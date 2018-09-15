@@ -8,7 +8,7 @@ angular.module('RedeemApp', ['ngCookies'])
 .controller('redeemController', function($scope, $http, $interval, $cookies) {
 
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
@@ -18,8 +18,8 @@ angular.module('RedeemApp', ['ngCookies'])
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -56,12 +56,12 @@ angular.module('RedeemApp', ['ngCookies'])
       $scope.warningMsg = "";
       
       var data = {};
-      data.token = $cookies.get("zaitoonAdmin");
+      data.token = $cookies.get("accelerateVegaDeskAdmin");
       data.coupon = $scope.searchID;
 
       $http({
         method  : 'POST',
-        url     : 'https://www.kopperkadai.online/services/getadmincoupon.php',
+        url     : 'https://www.zaitoon.online/services/getadmincoupon.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -93,14 +93,14 @@ angular.module('RedeemApp', ['ngCookies'])
     	     $scope.redeemFlag = false;
     
 	    var data = {};
-	    data.token = $cookies.get("zaitoonAdmin");
+	    data.token = $cookies.get("accelerateVegaDeskAdmin");
 	    data.coupon = $scope.displayCoupon;
 	    data.amount = $scope.coupon.k_Amount;
 	    data.discount = $scope.coupon.k_Discount;    
 	    
 	    $http({
 	        method  : 'POST',
-	        url     : 'https://www.kopperkadai.online/services/redeemcoupon.php',
+	        url     : 'https://www.zaitoon.online/services/redeemcoupon.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -124,10 +124,10 @@ angular.module('RedeemApp', ['ngCookies'])
     
      //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -147,7 +147,7 @@ angular.module('RedeemApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

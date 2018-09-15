@@ -8,21 +8,22 @@ angular.module('seaterApp', ['ngCookies'])
 
   .controller('seaterController', function($scope, $http, $interval, $cookies) {
 
-/*
+
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
       $scope.isLoggedIn = false;
       window.location = "adminlogin.html";
     }
-*/
+
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -144,13 +145,13 @@ $scope.initReservations = function(){
       $scope.activeDinnerCount = 0;         
 
       var data = {};
-      data.token = $cookies.get("zaitoonAdmin");
+      data.token = $cookies.get("accelerateVegaDeskAdmin");
       data.id = 0;
       data.key = today;
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://kopperkadai.online/services/deskfetchreservations.php',
+        url     : 'https://zaitoon.online/services/deskfetchreservations.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -210,14 +211,14 @@ $scope.initReservations();
       $scope.search = function() {
 
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.key = $scope.searchID;
         data.id = 0;
         $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
         if($scope.searchID != ""){
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/deskfetchreservations.php',
+	          url     : 'https://zaitoon.online/services/deskfetchreservations.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -254,13 +255,13 @@ $scope.initReservations();
       $scope.loadMore = function(){
         $scope.limiter = $scope.limiter + 10;
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.key = $scope.searchID;
         data.id = $scope.limiter;
 
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/deskfetchreservations.php',
+          url     : 'https://zaitoon.online/services/deskfetchreservations.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -375,10 +376,10 @@ $scope.initReservations();
          $scope.confirmCancel = function(code){
 	    	var data = {};
 	    	data.id = code;
-	        data.token = $cookies.get("zaitoonAdmin");
+	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/cancelreservationsadmin.php',
+	          url     : 'https://zaitoon.online/services/cancelreservationsadmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -408,10 +409,10 @@ $scope.initReservations();
          $scope.confirmComplete = function(code){
 	    	var data = {};
 	    	data.id = code;
-	        data.token = $cookies.get("zaitoonAdmin");
+	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/deskmarkreservationcompleted.php',
+	          url     : 'https://zaitoon.online/services/deskmarkreservationcompleted.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -537,15 +538,13 @@ $scope.initReservations();
 			
 			var data = {};
 		    	data.details = $scope.newReservationContent;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 
-console.log(data)
-		        
 		        document.getElementById("newReservationSaveButton").innerHTML = '<img width="17px" src="assets/img/arrowloader.gif">';
 		        
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/newreservationsadmin.php',
+		          url     : 'https://zaitoon.online/services/newreservationsadmin.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -593,10 +592,10 @@ console.log(data)
 			
 			var data = {};
 		    	data.details = $scope.editReservationContent;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/editreservationsadmin.php',
+		          url     : 'https://zaitoon.online/services/editreservationsadmin.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -669,10 +668,10 @@ console.log(data)
 		$scope.seatPlanError = "";
 	
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskfetchtables.php',
+	        url     : 'https://zaitoon.online/services/deskfetchtables.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -804,12 +803,12 @@ console.log(data)
       
       $scope.allocateSeats = function(code, list){	      
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      data.id = code;
 	      data.tables = list; //JSON.stringify(list);
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskassigntable.php',
+	        url     : 'https://zaitoon.online/services/deskassigntable.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -834,12 +833,12 @@ console.log(data)
       
       $scope.deallocateSeats = function(code, list){	      
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      data.id = code;
 	      data.tables = list;
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskreleasealltables.php',
+	        url     : 'https://zaitoon.online/services/deskreleasealltables.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -866,12 +865,12 @@ console.log(data)
       $scope.confirmRelease = function(code, reserveID){
 	      
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      data.id = code;
 	      data.bookingID = reserveID;
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskreleasetables.php',
+	        url     : 'https://zaitoon.online/services/deskreleasetables.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -897,10 +896,10 @@ console.log(data)
 
      //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -920,7 +919,7 @@ console.log(data)
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
