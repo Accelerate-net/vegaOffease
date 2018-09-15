@@ -7,32 +7,34 @@ angular.module('attendanceApp', ['ngCookies'])
 
 
   .controller('attendanceController', function($scope, $http, $interval, $cookies) {
-//promotions --> purchasse
-//Coupon --> payments
-//combo --> out
 
-/*
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
       $scope.isLoggedIn = false;
       window.location = "adminlogin.html";
     }
-*/
+
+    //Logout function
+    $scope.logoutNow = function(){
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
+        window.location = "adminlogin.html";
+      }
+    }
 
 
-
-        $('#new_attendance_date').datetimepicker({  // Date
+      $('#new_attendance_date').datetimepicker({  // Date
 		    format: "dd-mm-yyyy",
 		    weekStart: 1,
-	        todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 1
+	       todayBtn:  1,
+  			autoclose: 1,
+  			todayHighlight: 1,
+  			startView: 2,
+  			minView: 2,
+  			forceParse: 1
 	    });
 
 
@@ -43,8 +45,8 @@ $scope.fetchFigures = function(){
     $scope.figure_total_absent = 0;	
 
 		      		var data = {};
-		        	data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
-          
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
+
 			        $http({
 			          method  : 'POST',
 			          url     : 'https://zaitoon.online/services/erpfetchattendancefigures.php',
@@ -71,8 +73,8 @@ $scope.fetchFigures();
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
       }
     }
@@ -123,8 +125,8 @@ $scope.fetchFigures();
 			  $scope.seatPlanError = "";
 		
 		      var data = {};
-		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
-		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
+		      data.token = $cookies.get("accelerateVegaDeskAdmin");
+          data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
 
 
 		      $http({
@@ -199,8 +201,8 @@ $scope.fetchFigures();
       $scope.confirmAttendance = function(fullData){
 
 		      var data = {};
-		      data.token = data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk='; //$cookies.get("dashManager");
-		      data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
+		      data.token = $cookies.get("accelerateVegaDeskAdmin");
+          data.date = getFormattedDate(document.getElementById("new_attendance_date").value);
 		      data.info = fullData;
 
 		      $http({
@@ -229,7 +231,7 @@ $scope.fetchFigures();
 
          //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
           url     : 'https://zaitoon.online/services/fetchbadgecounts.php',

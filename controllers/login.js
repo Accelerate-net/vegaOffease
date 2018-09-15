@@ -19,7 +19,7 @@ angular.module('AdminLoginApp', ['ngCookies'])
         data.password = $scope.password;
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/adminlogin.php',
+          url     : 'https://zaitoon.online/services/adminlogin.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -31,7 +31,7 @@ angular.module('AdminLoginApp', ['ngCookies'])
             //Set cookies
             var now = new Date();
             now.setDate(now.getDate() + 7);
-            $cookies.put("zaitoonAdmin", $scope.token, {
+            $cookies.put("accelerateVegaDeskAdmin", $scope.token, {
                 expires: now
             });
 

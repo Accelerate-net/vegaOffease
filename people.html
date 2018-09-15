@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="utf-8">
-      <title>Dash Students</title>
+      <title>People</title>
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
       <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,7 +51,7 @@
       <link type="text/css" href="assets/plugins/cropper/cropper.css" rel="stylesheet">
    </head>
    <body class="animated-content" ng-app="peopleApp" ng-controller="peopleController" ng-cloak>
-      <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
+      <header id="topnav" class="navbar navbar-fixed-top navbar-midnightblue" role="banner">
          <div class="logo-area">
             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg">
             <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -61,7 +61,7 @@
             </a>
             </span>
             <a class="navbar-brand" href="index.html" style="width: 125px"></a>
-            <h1 style="font-size: 18px; font-weight: bold; text-transform: uppercase">{{outletCode}}</h1>
+            <h1 style="font-size: 18px; font-weight: bold; color: #FFF; text-transform: uppercase">{{outletCode}}</h1>
          </div>
          <!-- logo-area -->
          <ul class="nav navbar-nav toolbar pull-right">
@@ -81,7 +81,7 @@
       </header>
       <div id="wrapper">
          <div id="layout-static">
-            <div class="static-sidebar-wrapper sidebar-default">
+            <div class="static-sidebar-wrapper sidebar-bluegray">
                <div class="static-sidebar">
                   <div class="sidebar">
                      <div class="widget stay-on-collapse" id="widget-sidebar">
@@ -189,7 +189,7 @@
                                              <div data-row-span="3">
                                                 <div data-field-span="1">
                                                    <label>Religion</label>
-                                                   <select ng-model="newStudent.religion">
+                                                   <select class="form-control" ng-model="newStudent.religion" style="height: 40px">
                                                       <option value="Muslim" title="Muslim">Muslim</option>
                                                       <option value="Hindu" title="Hindu">Hindu</option>
                                                       <option value="Christian" title="Christian">Christian</option>
@@ -200,7 +200,7 @@
                                                 </div>
                                                 <div data-field-span="1">
                                                    <label>Blood Group</label>
-                                                   <select ng-model="newStudent.bloodGroup">
+                                                   <select class="form-control" ng-model="newStudent.bloodGroup" style="height: 40px">
                                                       <option value="A+" title="A+">A+</option>
                                                       <option value="O+" title="O+">O+</option>
                                                       <option value="B+" title="B+">B+</option>
@@ -308,7 +308,7 @@
                                                 <div data-row-span="4">
                                                    <div data-field-span="1">
                                                       <label>Designation</label>
-                                                      <select ng-model="newStudent.designation">
+                                                      <select class="form-control" style="height: 40px" ng-model="newStudent.designation">
                                                          <option value="MANAGER" selected>Manager</option>
                                                          <option value="ACCOUNTANT">Accountant</option>
                                                          <option value="BILLING">Billing</option>
@@ -322,13 +322,13 @@
                                                    </div>
                                                    <div data-field-span="1">
                                                       <label>Joining Branch</label>
-                                                      <select ng-model="newStudent.joinBranch">
+                                                      <select class="form-control" style="height: 40px" ng-model="newStudent.joinBranch">
                                                          <option value="VELACHERY" selected>Velachery</option>
                                                       </select>
                                                    </div>
                                                    <div data-field-span="1">
                                                       <label>Assigned Branch</label>
-                                                      <select ng-model="newStudent.currentBranch">
+                                                      <select class="form-control" style="height: 40px" ng-model="newStudent.currentBranch">
                                                          <option value="VELACHERY" selected>Velachery</option>
                                                       </select>
                                                    </div>
@@ -447,7 +447,7 @@
                                              <div data-row-span="3">
                                                 <div data-field-span="1">
                                                    <label>Religion</label>
-                                                   <select ng-model="editStudent.religion">
+                                                   <select class="form-control" style="height: 40px" ng-model="editStudent.religion">
                                                       <option value="Muslim" title="Muslim">Muslim</option>
                                                       <option value="Hindu" title="Hindu">Hindu</option>
                                                       <option value="Christian" title="Christian">Christian</option>
@@ -458,7 +458,7 @@
                                                 </div>
                                                 <div data-field-span="1">
                                                    <label>Blood Group</label>
-                                                   <select ng-model="editStudent.bloodGroup">
+                                                   <select class="form-control" style="height: 40px" ng-model="editStudent.bloodGroup">
                                                       <option value="A+" title="A+">A+</option>
                                                       <option value="O+" title="O+">O+</option>
                                                       <option value="B+" title="B+">B+</option>
@@ -566,7 +566,7 @@
                                                 <div data-row-span="4">
                                                    <div data-field-span="1">
                                                       <label>Designation</label>
-                                                      <select ng-model="editStudent.designation">
+                                                      <select class="form-control" style="height: 40px" ng-model="editStudent.designation">
                                                          <option value="MANAGER" selected>Manager</option>
                                                          <option value="ACCOUNTANT">Accountant</option>
                                                          <option value="BILLING">Billing</option>
@@ -580,13 +580,13 @@
                                                    </div>
                                                    <div data-field-span="1">
                                                       <label>Joining Branch</label>
-                                                      <select ng-model="editStudent.joinBranch">
+                                                      <select class="form-control" style="height: 40px" ng-model="editStudent.joinBranch">
                                                          <option value="VELACHERY" selected>Velachery</option>
                                                       </select>
                                                    </div>
                                                    <div data-field-span="1">
                                                       <label>Assigned Branch</label>
-                                                      <select ng-model="editStudent.currentBranch">
+                                                      <select class="form-control" style="height: 40px" ng-model="editStudent.currentBranch">
                                                          <option value="VELACHERY" selected>Velachery</option>
                                                       </select>
                                                    </div>

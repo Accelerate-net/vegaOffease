@@ -8,22 +8,23 @@ angular.module('stocksApp', ['ngCookies'])
 
   .controller('stocksController', function($scope, $http, $interval, $cookies) {
 
-    // //Check if logged in
-    // if($cookies.get("zaitoonAdmin")){
-    //   $scope.isLoggedIn = true;
-    // }
-    // else{
-    //   $scope.isLoggedIn = false;
-    //   window.location = "adminlogin.html";
-    // }
+    //Check if logged in
+    if($cookies.get("accelerateVegaDeskAdmin")){
+      $scope.isLoggedIn = true;
+    }
+    else{
+      $scope.isLoggedIn = false;
+      window.location = "adminlogin.html";
+    }
 
-    // //Logout function
-    // $scope.logoutNow = function(){
-    //   if($cookies.get("zaitoonAdmin")){
-    //     $cookies.remove("zaitoonAdmin");
-    //     window.location = "adminlogin.html";
-    //   }
-    // }
+    //Logout function
+    $scope.logoutNow = function(){
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
+        window.location = "adminlogin.html";
+      }
+    }
+
 
     $('.js-example-basic-single').select2();
 
@@ -53,7 +54,7 @@ angular.module('stocksApp', ['ngCookies'])
 $scope.initStocks = function(){
 
       var data = {};
-      data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+      data.token = $cookies.get("accelerateVegaDeskAdmin");
       
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
@@ -99,7 +100,7 @@ $scope.initStocks();
          $scope.confirmCancel = function(code){
               var data = {};
               data.id = code;
-              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+              data.token = $cookies.get("accelerateVegaDeskAdmin");
       
               $http({
                 method  : 'POST',
@@ -137,7 +138,7 @@ $scope.initStocks();
       $scope.nullNewInventory();
 
             var data = {}; 
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
       
             //fetch inventories list, vendors list etc.
             $http({
@@ -219,7 +220,7 @@ $scope.initStocks();
       }
       
             var data = {}; 
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
       
             //fetch categories list, vendors list etc.
             $http({
@@ -288,7 +289,7 @@ $scope.initStocks();
               data.vendorsList = tempVendors;
             }
 
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
       
             $http({
               method  : 'POST',
@@ -351,7 +352,7 @@ $scope.initStocks();
             data.id = $scope.editStock.id;
             data.vendorsList = tempVendors;
 
-            data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+            data.token = $cookies.get("accelerateVegaDeskAdmin");
 
             $http({
               method  : 'POST',
@@ -377,10 +378,10 @@ $scope.initStocks();
 
      //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -400,7 +401,7 @@ $scope.initStocks();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

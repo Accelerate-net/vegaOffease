@@ -8,22 +8,22 @@ angular.module('tablesApp', ['ngCookies'])
 
   .controller('tablesController', function($scope, $http, $interval, $cookies) {
 
-    // //Check if logged in
-    // if($cookies.get("zaitoonAdmin")){
-    //   $scope.isLoggedIn = true;
-    // }
-    // else{
-    //   $scope.isLoggedIn = false;
-    //   window.location = "adminlogin.html";
-    // }
+    //Check if logged in
+    if($cookies.get("accelerateVegaDeskAdmin")){
+      $scope.isLoggedIn = true;
+    }
+    else{
+      $scope.isLoggedIn = false;
+      window.location = "adminlogin.html";
+    }
 
-    // //Logout function
-    // $scope.logoutNow = function(){
-    //   if($cookies.get("zaitoonAdmin")){
-    //     $cookies.remove("zaitoonAdmin");
-    //     window.location = "adminlogin.html";
-    //   }
-    // }
+    //Logout function
+    $scope.logoutNow = function(){
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
+        window.location = "adminlogin.html";
+      }
+    }
 
     $scope.outletCode = localStorage.getItem("branch");
 
@@ -57,14 +57,14 @@ angular.module('tablesApp', ['ngCookies'])
       $scope.initSections = function(){
 	
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");
 	      
 	      console.log(data)
 	      
 	      $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskfetchtablesections.php',
+	        url     : 'https://zaitoon.online/services/deskfetchtablesections.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -98,12 +98,12 @@ angular.module('tablesApp', ['ngCookies'])
       $scope.initTables = function(){
 	
 	      var data = {};
-	      data.token = $cookies.get("zaitoonAdmin");	      
+	      data.token = $cookies.get("accelerateVegaDeskAdmin");	      
 	      
 	      $('#vegaPanelBodyLoaderTables').show(); $("body").css("cursor", "progress");
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://kopperkadai.online/services/deskfetchtables.php',
+	        url     : 'https://zaitoon.online/services/deskfetchtables.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -143,10 +143,10 @@ angular.module('tablesApp', ['ngCookies'])
       $scope.confirmDeleteSection = function(code){
 	    	var data = {};
 	    	data.id = code;
-	        data.token = $cookies.get("zaitoonAdmin");
+	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/deskdeletetablesection.php',
+	          url     : 'https://zaitoon.online/services/deskdeletetablesection.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -186,10 +186,10 @@ angular.module('tablesApp', ['ngCookies'])
 			
 			var data = {};
 		    	data.name = $scope.newSectionContent.name;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/deskaddtablesection.php',
+		          url     : 'https://zaitoon.online/services/deskaddtablesection.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -224,10 +224,10 @@ angular.module('tablesApp', ['ngCookies'])
       $scope.confirmDeleteTable = function(code){
 	    	var data = {};
 	    	data.id = code;
-	        data.token = $cookies.get("zaitoonAdmin");
+	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/deskdeletetable.php',
+	          url     : 'https://zaitoon.online/services/deskdeletetable.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -283,11 +283,11 @@ angular.module('tablesApp', ['ngCookies'])
 		    	data.name = $scope.newTableContent.name;
 		    	data.section = $scope.newTableContent.section;
 		    	data.capacity = $scope.newTableContent.capacity;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        console.log(data)
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/deskaddtable.php',
+		          url     : 'https://zaitoon.online/services/deskaddtable.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -311,10 +311,10 @@ angular.module('tablesApp', ['ngCookies'])
 
      //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -334,7 +334,7 @@ angular.module('tablesApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

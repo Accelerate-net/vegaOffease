@@ -6,33 +6,28 @@ angular.module('inventoryApp', ['ngCookies'])
 
 
   .controller('inventoryController', function($scope, $http, $interval, $cookies) {
-//promotions --> purchasse
-//Coupon --> payments
-//combo --> out
 
-TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';
-
-
-/*
     //Check if logged in
-    if($cookies.get("zaitoonAdmin")){
+    if($cookies.get("accelerateVegaDeskAdmin")){
       $scope.isLoggedIn = true;
     }
     else{
       $scope.isLoggedIn = false;
       window.location = "adminlogin.html";
     }
-*/
-
-	$('.js-example-basic-single').select2();
 
     //Logout function
     $scope.logoutNow = function(){
-      if($cookies.get("zaitoonAdmin")){
-        $cookies.remove("zaitoonAdmin");
+    if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
         window.location = "adminlogin.html";
-      }
     }
+    
+
+
+	$('.js-example-basic-single').select2();
+
+
 
       $scope.outletCode = localStorage.getItem("branch");
       
@@ -112,7 +107,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 	      	var co_data = {};
 	      	co_data.type = type;
 	      	co_data.page = pageid - 1;
-	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+	        co_data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
 	          url     : 'https://zaitoon.online/services/erpfetchstockregistercontent.php',
@@ -160,23 +155,23 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 
   $scope.getRandomColor = function(code){
 
-  code = code.toString().split('').pop();
+	  code = code.toString().split('').pop();
 
-  var styles = [
-    {"color": "#ff4300"},
-    {"color": "#1abc9c"},
-    {"color": "#3498db"},
-    {"color": "#9b59b6"},
-    {"color": "#34495e"},
-    {"color": "#e67e22"},
-    {"color": "#0a3d62"},
-    {"color": "#b71540"},
-    {"color": "#e58e26"},
-    {"color": "#60a3bc"}
-  ];
+	  var styles = [
+	    {"color": "#ff4300"},
+	    {"color": "#1abc9c"},
+	    {"color": "#3498db"},
+	    {"color": "#9b59b6"},
+	    {"color": "#34495e"},
+	    {"color": "#e67e22"},
+	    {"color": "#0a3d62"},
+	    {"color": "#b71540"},
+	    {"color": "#e58e26"},
+	    {"color": "#60a3bc"}
+	  ];
 
-  return styles[code];
-}
+	  return styles[code];
+	}
 
 
 	$scope.initializeContent($scope.marketingType, 1);
@@ -304,7 +299,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 
 
               var data = {};
-              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
+              data.token = $cookies.get("accelerateVegaDeskAdmin");
       
               $http({
                 method  : 'POST',
@@ -377,8 +372,8 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 			case 'purchases':{
 
               var data = {};
-              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
-      
+              data.token = $cookies.get("accelerateVegaDeskAdmin");
+
               $http({
                 method  : 'POST',
                 url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
@@ -468,8 +463,8 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 			case 'payments':{
 
               var data = {};
-              data.token = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC7q98wzcQdKf5pr0jnYyEo9KLFkWlsXE5iCUCsj2Nk=';//$cookies.get("zaitoonAdmin");
-      
+              data.token = $cookies.get("accelerateVegaDeskAdmin");
+
               $http({
                 method  : 'POST',
                 url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
@@ -614,7 +609,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 	$scope.deleteStockOutContent = function(req_id){
 		var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+	        co_data.token = $cookies.get("accelerateVegaDeskAdmin");
 
 	        $http({
 	          method  : 'POST',
@@ -647,7 +642,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 	$scope.deletePurchaseContent = function(req_id){
 		var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = TOKEN_TEMP;// $cookies.get("zaitoonAdmin");
+	        co_data.token = $cookies.get("accelerateVegaDeskAdmin");
 
 	        $http({
 	          method  : 'POST',
@@ -680,7 +675,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 	$scope.deletePaymentContent = function(req_id){
 			var co_data = {};
 	      	co_data.id = req_id;
-	        co_data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+	        co_data.token = $cookies.get("accelerateVegaDeskAdmin");
 
 	        $http({
 	          method  : 'POST',
@@ -756,7 +751,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 		      		
 		      		$('#loading').show(); $("body").css("cursor", "progress");		      		
 		      		var data = {};
-		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        	data.id = $scope.addNewContent.id;
 		        	data.quantity = $scope.addNewContent.quantity;
 		        	data.remarks = $scope.addNewContent.remarks;
@@ -821,7 +816,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 		      		
 	
 		      		var data = {};
-		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        	data.vendorId = $scope.addNewContent.vendorId;
 		        	data.item = $scope.addNewContent.item;
 		        	data.units = $scope.addNewContent.unitsPurchased;
@@ -878,7 +873,7 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 		      		$('#loading').show(); $("body").css("cursor", "progress");
 	
 		      		var data = {};
-		        	data.token = TOKEN_TEMP; //$cookies.get("zaitoonAdmin");
+		        	data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        	data.paymentTo = tempVendor;
 		        	data.paymentFor = tempItem;
 		        	data.amount = $scope.addNewContent.totalAmount;
@@ -914,11 +909,11 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
 		$scope.defaultFlagSet();
 	}
 
-	
+}
 
          //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
           url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
@@ -958,5 +953,6 @@ TOKEN_TEMP = 'sHtArttc2ht+tMf9baAeQ9ukHnXtlsHfexmCWx5sJOhJxfKghGchZ5AsN8IjcE2stC
               	}
            });
         }, 20000);
-  })
-  ;
+
+
+});

@@ -8,22 +8,22 @@ angular.module('reservationsApp', ['ngCookies'])
 
   .controller('reservationsController', function($scope, $http, $interval, $cookies) {
 
-    // //Check if logged in
-    // if($cookies.get("zaitoonAdmin")){
-    //   $scope.isLoggedIn = true;
-    // }
-    // else{
-    //   $scope.isLoggedIn = false;
-    //   window.location = "adminlogin.html";
-    // }
+    //Check if logged in
+    if($cookies.get("accelerateVegaDeskAdmin")){
+      $scope.isLoggedIn = true;
+    }
+    else{
+      $scope.isLoggedIn = false;
+      window.location = "adminlogin.html";
+    }
 
-    // //Logout function
-    // $scope.logoutNow = function(){
-    //   if($cookies.get("zaitoonAdmin")){
-    //     $cookies.remove("zaitoonAdmin");
-    //     window.location = "adminlogin.html";
-    //   }
-    // }
+    //Logout function
+    $scope.logoutNow = function(){
+      if($cookies.get("accelerateVegaDeskAdmin")){
+        $cookies.remove("accelerateVegaDeskAdmin");
+        window.location = "adminlogin.html";
+      }
+    }
 
     $scope.outletCode = localStorage.getItem("branch");
 
@@ -72,13 +72,13 @@ angular.module('reservationsApp', ['ngCookies'])
 $scope.initReservations = function(){
 
       var data = {};
-      data.token = $cookies.get("zaitoonAdmin");
+      data.token = $cookies.get("accelerateVegaDeskAdmin");
       data.id = 0;
       data.key = today;
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
+        url     : 'https://zaitoon.online/services/fetchreservationsadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -134,14 +134,14 @@ $scope.initReservations();
       $scope.search = function() {
 
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.key = $scope.searchID;
         data.id = 0;
         $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
         if($scope.searchID != ""){
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
+	          url     : 'https://zaitoon.online/services/fetchreservationsadmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -176,13 +176,13 @@ $scope.initReservations();
       $scope.loadMore = function(){
         $scope.limiter = $scope.limiter + 10;
         var data = {};
-        data.token = $cookies.get("zaitoonAdmin");
+        data.token = $cookies.get("accelerateVegaDeskAdmin");
         data.key = $scope.searchID;
         data.id = $scope.limiter;
 
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchreservationsadmin.php',
+          url     : 'https://zaitoon.online/services/fetchreservationsadmin.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -246,10 +246,10 @@ $scope.initReservations();
          $scope.confirmCancel = function(code){
 	    	var data = {};
 	    	data.id = code;
-	        data.token = $cookies.get("zaitoonAdmin");
+	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://kopperkadai.online/services/cancelreservationsadmin.php',
+	          url     : 'https://zaitoon.online/services/cancelreservationsadmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -372,10 +372,10 @@ $scope.initReservations();
 			
 			var data = {};
 		    	data.details = $scope.newReservationContent;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/newreservationsadmin.php',
+		          url     : 'https://zaitoon.online/services/newreservationsadmin.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -415,10 +415,10 @@ $scope.initReservations();
 			
 			var data = {};
 		    	data.details = $scope.editReservationContent;
-		        data.token = $cookies.get("zaitoonAdmin");
+		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://kopperkadai.online/services/editreservationsadmin.php',
+		          url     : 'https://zaitoon.online/services/editreservationsadmin.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -440,10 +440,10 @@ $scope.initReservations();
 
      //Refresh Badge Counts
         var admin_data = {};
-        admin_data.token = $cookies.get("zaitoonAdmin");
+        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -463,7 +463,7 @@ $scope.initReservations();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://kopperkadai.online/services/fetchbadgecounts.php',
+            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
