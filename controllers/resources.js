@@ -28,7 +28,7 @@ angular.module('ResourcesApp', ['ngCookies'])
       var temp_branch = localStorage.getItem("branchCode");
 
       $scope.initAgents = function(){
-	      $http.get("https://zaitoon.online/services/fetchroles.php?branch="+temp_branch+"&role=STEWARD").then(function(response) {
+	      $http.get("https://accelerateengine.app/food-engine/apis/fetchroles.php?branch="+temp_branch+"&role=STEWARD").then(function(response) {
 	          $scope.delivery_agent = response.data.results;
 	      });
       }
@@ -49,7 +49,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         else{
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/deskaddsteward.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/deskaddsteward.php',
             data    : data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
@@ -70,7 +70,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         data.code = code;
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/deskremovesteward.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/deskremovesteward.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -87,7 +87,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -107,7 +107,7 @@ angular.module('ResourcesApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

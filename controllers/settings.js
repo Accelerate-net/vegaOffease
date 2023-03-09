@@ -40,7 +40,7 @@ angular.module('SettingsApp', ['ngCookies'])
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/fetchadmininfo.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/fetchadmininfo.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -90,7 +90,7 @@ angular.module('SettingsApp', ['ngCookies'])
       		
      		$http({
 	        method  : 'POST',
-	        url     : 'https://zaitoon.online/services/saveadmininfo.php',
+	        url     : 'https://accelerateengine.app/food-engine/apis/saveadmininfo.php',
 	        data    : mydata,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -123,7 +123,7 @@ angular.module('SettingsApp', ['ngCookies'])
 	        admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/getsettingsadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/getsettingsadmin.php',
 	          data    : admin_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -149,7 +149,7 @@ angular.module('SettingsApp', ['ngCookies'])
 	        admin_data.type = 'PAYMENT';
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/changesettingsadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/changesettingsadmin.php',
 	          data    : admin_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -171,7 +171,7 @@ angular.module('SettingsApp', ['ngCookies'])
 	        admin_data.type = 'RESERVATION';
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/changesettingsadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/changesettingsadmin.php',
 	          data    : admin_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -193,7 +193,7 @@ angular.module('SettingsApp', ['ngCookies'])
 	        admin_data.type = 'REWARD';
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/changesettingsadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/changesettingsadmin.php',
 	          data    : admin_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -215,7 +215,7 @@ angular.module('SettingsApp', ['ngCookies'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -235,7 +235,7 @@ angular.module('SettingsApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

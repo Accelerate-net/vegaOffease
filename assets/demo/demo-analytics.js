@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
       
       $.ajax({
           type: 'POST',
-          url: 'https://www.zaitoon.online/services/analyticssales.php',
+          url: 'https://accelerateengine.app/food-engine/apis/analyticssales.php',
           data: JSON.stringify(val),
           contentType: "application/json",
           dataType: 'json',

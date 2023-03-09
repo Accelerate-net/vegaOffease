@@ -40,7 +40,7 @@ angular.module('peopleApp', ['ngCookies'])
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchpeoplemetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchpeoplemetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -70,7 +70,7 @@ angular.module('peopleApp', ['ngCookies'])
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchpeoplemetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchpeoplemetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -102,7 +102,7 @@ angular.module('peopleApp', ['ngCookies'])
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchpeople.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchpeople.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -351,7 +351,7 @@ angular.module('peopleApp', ['ngCookies'])
             
                         $http({
                           method  : 'POST',
-                          url     : 'https://www.zaitoon.online/services/epreditperson.php',
+                          url     : 'https://accelerateengine.app/food-engine/apis/epreditperson.php',
                           data    : data,
                           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                          })
@@ -484,7 +484,7 @@ angular.module('peopleApp', ['ngCookies'])
             
                         $http({
                           method  : 'POST',
-                          url     : 'https://www.zaitoon.online/services/erpaddperson.php',
+                          url     : 'https://accelerateengine.app/food-engine/apis/erpaddperson.php',
                           data    : data,
                           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                          })
@@ -578,7 +578,7 @@ angular.module('peopleApp', ['ngCookies'])
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchpeople.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchpeople.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -669,7 +669,7 @@ angular.module('peopleApp', ['ngCookies'])
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchpeopleattendance.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchpeopleattendance.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })

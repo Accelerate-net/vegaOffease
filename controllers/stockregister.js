@@ -110,7 +110,7 @@ angular.module('inventoryApp', ['ngCookies'])
 	        co_data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpfetchstockregistercontent.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/erpfetchstockregistercontent.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -303,7 +303,7 @@ angular.module('inventoryApp', ['ngCookies'])
       
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/erpnewstockoutregistermetadata.php',
+                url     : 'https://accelerateengine.app/food-engine/apis/erpnewstockoutregistermetadata.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -376,7 +376,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+                url     : 'https://accelerateengine.app/food-engine/apis/erpnewstockmetadata.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -467,7 +467,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+                url     : 'https://accelerateengine.app/food-engine/apis/erpnewstockmetadata.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -613,7 +613,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpdeletestockouthistory.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/erpdeletestockouthistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -646,7 +646,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpdeleteinventorypurchasehistory.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/erpdeleteinventorypurchasehistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -679,7 +679,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpdeleteinventorypaymentshistory.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/erpdeleteinventorypaymentshistory.php',
 	          data    : co_data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -759,7 +759,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/erpstockregisterentry.php',
+			          url     : 'https://accelerateengine.app/food-engine/apis/erpstockregisterentry.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -827,7 +827,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/erpaddinventorypurchasehistory.php',
+			          url     : 'https://accelerateengine.app/food-engine/apis/erpaddinventorypurchasehistory.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -884,7 +884,7 @@ angular.module('inventoryApp', ['ngCookies'])
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/erpaddinventorypaymentshistory.php',
+			          url     : 'https://accelerateengine.app/food-engine/apis/erpaddinventorypaymentshistory.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -916,7 +916,7 @@ angular.module('inventoryApp', ['ngCookies'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -936,7 +936,7 @@ angular.module('inventoryApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

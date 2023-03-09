@@ -75,7 +75,7 @@ $scope.initVouchers = function(){
       
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/fetchvouchersadmin.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/fetchvouchersadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -137,7 +137,7 @@ $scope.initVouchers();
         if($scope.searchID != ""){
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/fetchvouchersadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/fetchvouchersadmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -178,7 +178,7 @@ $scope.initVouchers();
 
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchvouchersadmin.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchvouchersadmin.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -262,12 +262,12 @@ $scope.initVouchers();
   		else{  		
   			from = formatDate(document.getElementById("reportFromDate").value);
   			to = formatDate(document.getElementById("reportToDate").value);
-  			window.open ("https://zaitoon.online/services/fetchvouchersummary.php?access="+temp_token+"&from="+from+"&to="+to);
+  			window.open ("https://accelerateengine.app/food-engine/apis/fetchvouchersummary.php?access="+temp_token+"&from="+from+"&to="+to);
   			$('#dateModal').modal('hide');
   		}
   	}
   	else{
-  		window.open ("https://zaitoon.online/services/fetchvouchersummary.php?access="+temp_token+"&from=&to=");
+  		window.open ("https://accelerateengine.app/food-engine/apis/fetchvouchersummary.php?access="+temp_token+"&from=&to=");
   		$('#dateModal').modal('hide');
   	}
       	
@@ -297,7 +297,7 @@ $scope.initVouchers();
 	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/cancelvoucheradmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/cancelvoucheradmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -365,7 +365,7 @@ $scope.initVouchers();
 		        $scope.isLoading = true;
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/customvouchercheck.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/customvouchercheck.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -493,7 +493,7 @@ $scope.initVouchers();
 		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/newvoucheradmin.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/newvoucheradmin.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -515,7 +515,7 @@ $scope.initVouchers();
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -535,7 +535,7 @@ $scope.initVouchers();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

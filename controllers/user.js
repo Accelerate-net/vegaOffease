@@ -49,7 +49,7 @@ angular.module('UsersApp', ['ngCookies'])
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/fetchusersadmin.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/fetchusersadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -71,7 +71,7 @@ angular.module('UsersApp', ['ngCookies'])
 
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/orderhistoryadmin.php',
+                url     : 'https://accelerateengine.app/food-engine/apis/orderhistoryadmin.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -121,7 +121,7 @@ console.log(response)
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/setuserblock.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/setuserblock.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -147,7 +147,7 @@ console.log(response)
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/orderhistoryadmin.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/orderhistoryadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -180,7 +180,7 @@ console.log(response)
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/orderhistoryadmin.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/orderhistoryadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -203,7 +203,7 @@ console.log(response)
 
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/orderhistoryadmin.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/orderhistoryadmin.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -221,7 +221,7 @@ console.log(response)
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -241,7 +241,7 @@ console.log(response)
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

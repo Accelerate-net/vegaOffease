@@ -97,7 +97,7 @@ $scope.initReservations = function(){
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/erpfetchsalaryslips.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/erpfetchsalaryslips.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -160,7 +160,7 @@ $scope.initReservations();
         if($scope.searchID != ""){
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/erpfetchsalaryslips.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/erpfetchsalaryslips.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -201,7 +201,7 @@ $scope.initReservations();
 
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/erpfetchsalaryslips.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/erpfetchsalaryslips.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -268,7 +268,7 @@ $scope.initReservations();
 	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/cancelreservationsadmin.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/cancelreservationsadmin.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -312,7 +312,7 @@ $scope.initReservations();
 
             $http({
               method  : 'POST',
-              url     : 'https://www.zaitoon.online/services/erpfetchstafflistsalary.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpfetchstafflistsalary.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -411,7 +411,7 @@ $scope.initReservations();
             
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/erpaddsalaryslip.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/erpaddsalaryslip.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -474,7 +474,7 @@ $scope.initReservations();
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -494,7 +494,7 @@ $scope.initReservations();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

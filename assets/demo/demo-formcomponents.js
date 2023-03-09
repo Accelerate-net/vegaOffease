@@ -4,7 +4,7 @@ $(function() {
 	//Tokenfield
 	var myList = "";
 	
-	$.get("https://www.zaitoon.online/services/fetchoutletinfosimple.php", function(data){
+	$.get("https://accelerateengine.app/food-engine/apis/fetchoutletinfosimple.php", function(data){
           var temp = JSON.parse(data);
           if(temp.status){
 		myList = temp.response;

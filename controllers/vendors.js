@@ -60,7 +60,7 @@ $scope.initVendors = function(){
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/erpfetchvendors.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/erpfetchvendors.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -117,7 +117,7 @@ $scope.getRandomColor = function(code){
 
     	        $http({
     	          method  : 'POST',
-    	          url     : 'https://zaitoon.online/services/erpdeleteinventoryvendors.php',
+    	          url     : 'https://accelerateengine.app/food-engine/apis/erpdeleteinventoryvendors.php',
     	          data    : data,
     	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     	         })
@@ -159,7 +159,7 @@ $scope.getRandomColor = function(code){
             //fetch inventory list, branches list etc.
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpnewvendormetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpnewvendormetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -238,7 +238,7 @@ $scope.getRandomColor = function(code){
             //fetch categories list, vendors list etc.
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpnewvendormetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpnewvendormetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -332,7 +332,7 @@ $scope.getRandomColor = function(code){
 
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/erpaddinventoryvendors.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/erpaddinventoryvendors.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -383,7 +383,7 @@ $scope.getRandomColor = function(code){
 
             $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/erpeditinventoryvendors.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/erpeditinventoryvendors.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -408,7 +408,7 @@ $scope.getRandomColor = function(code){
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -428,7 +428,7 @@ $scope.getRandomColor = function(code){
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

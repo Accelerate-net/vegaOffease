@@ -35,7 +35,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
     data.token = $cookies.get("accelerateVegaDeskAdmin");
     $http({
       method  : 'POST',
-      url     : 'https://zaitoon.online/services/deskreviewfigures.php',
+      url     : 'https://accelerateengine.app/food-engine/apis/deskreviewfigures.php',
       data    : data,
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
      })
@@ -249,7 +249,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
     	         	      
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://zaitoon.online/services/deskfetchreviews.php',
+	        url     : 'https://accelerateengine.app/food-engine/apis/deskfetchreviews.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -327,7 +327,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
     	      
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/deskfetchreviews.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/deskfetchreviews.php',
             data    : data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
@@ -411,7 +411,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
 		$scope.submitToServer = function(){
 		 $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/feedbackresponseadmin.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/feedbackresponseadmin.php',
 		          data    : mydata,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -464,7 +464,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -484,7 +484,7 @@ angular.module('feedsApp', ['ngCookies', 'infinite-scroll'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

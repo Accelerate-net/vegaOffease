@@ -3,7 +3,7 @@ $(function() {
 	//Tokenfield
 	var myList = "";
 	
-	$.get("https://www.zaitoon.online/services/fetchclassinfosimple.php", function(data){
+	$.get("https://accelerateengine.app/food-engine/apis/fetchclassinfosimple.php", function(data){
           var temp = JSON.parse(data);
           if(temp.status){
 		myList = temp.response;

@@ -64,7 +64,7 @@ angular.module('tablesApp', ['ngCookies'])
 	      $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://zaitoon.online/services/deskfetchtablesections.php',
+	        url     : 'https://accelerateengine.app/food-engine/apis/deskfetchtablesections.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -103,7 +103,7 @@ angular.module('tablesApp', ['ngCookies'])
 	      $('#vegaPanelBodyLoaderTables').show(); $("body").css("cursor", "progress");
 	      $http({
 	        method  : 'POST',
-	        url     : 'https://zaitoon.online/services/deskfetchtables.php',
+	        url     : 'https://accelerateengine.app/food-engine/apis/deskfetchtables.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -146,7 +146,7 @@ angular.module('tablesApp', ['ngCookies'])
 	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/deskdeletetablesection.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/deskdeletetablesection.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -189,7 +189,7 @@ angular.module('tablesApp', ['ngCookies'])
 		        data.token = $cookies.get("accelerateVegaDeskAdmin");
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/deskaddtablesection.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/deskaddtablesection.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -227,7 +227,7 @@ angular.module('tablesApp', ['ngCookies'])
 	        data.token = $cookies.get("accelerateVegaDeskAdmin");
 	        $http({
 	          method  : 'POST',
-	          url     : 'https://zaitoon.online/services/deskdeletetable.php',
+	          url     : 'https://accelerateengine.app/food-engine/apis/deskdeletetable.php',
 	          data    : data,
 	          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	         })
@@ -287,7 +287,7 @@ angular.module('tablesApp', ['ngCookies'])
 		        console.log(data)
 		        $http({
 		          method  : 'POST',
-		          url     : 'https://zaitoon.online/services/deskaddtable.php',
+		          url     : 'https://accelerateengine.app/food-engine/apis/deskaddtable.php',
 		          data    : data,
 		          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 		         })
@@ -314,7 +314,7 @@ angular.module('tablesApp', ['ngCookies'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -334,7 +334,7 @@ angular.module('tablesApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

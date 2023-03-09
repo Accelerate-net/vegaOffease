@@ -49,7 +49,7 @@ $scope.fetchFigures = function(){
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/deskfetchreferalfigures.php',
+			          url     : 'https://accelerateengine.app/food-engine/apis/deskfetchreferalfigures.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -107,7 +107,7 @@ $scope.fetchFigures();
 
 			        $http({
 			          method  : 'POST',
-			          url     : 'https://zaitoon.online/services/deskaddreferrals.php',
+			          url     : 'https://accelerateengine.app/food-engine/apis/deskaddreferrals.php',
 			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 			         })
@@ -223,7 +223,7 @@ $scope.fetchFigures();
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -243,7 +243,7 @@ $scope.fetchFigures();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

@@ -19,7 +19,7 @@ angular.module('AdminLoginApp', ['ngCookies'])
         data.password = $scope.password;
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/adminlogin.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/adminlogin.php',
           data    : data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })

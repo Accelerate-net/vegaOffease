@@ -59,7 +59,7 @@ $scope.initStocks = function(){
       $('#vegaPanelBodyLoader').show(); $("body").css("cursor", "progress");
       $http({
         method  : 'POST',
-        url     : 'https://zaitoon.online/services/erpfetchstock.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/erpfetchstock.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -104,7 +104,7 @@ $scope.initStocks();
       
               $http({
                 method  : 'POST',
-                url     : 'https://zaitoon.online/services/erpdeletestocklist.php',
+                url     : 'https://accelerateengine.app/food-engine/apis/erpdeletestocklist.php',
                 data    : data,
                 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
                })
@@ -143,7 +143,7 @@ $scope.initStocks();
             //fetch inventories list, vendors list etc.
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpnewstockmetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpnewstockmetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -225,7 +225,7 @@ $scope.initStocks();
             //fetch categories list, vendors list etc.
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpnewinventorymetadata.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpnewinventorymetadata.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -293,7 +293,7 @@ $scope.initStocks();
       
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpaddstocklist.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpaddstocklist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -356,7 +356,7 @@ $scope.initStocks();
 
             $http({
               method  : 'POST',
-              url     : 'https://zaitoon.online/services/erpeditstocklist.php',
+              url     : 'https://accelerateengine.app/food-engine/apis/erpeditstocklist.php',
               data    : data,
               headers : {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -381,7 +381,7 @@ $scope.initStocks();
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -401,7 +401,7 @@ $scope.initStocks();
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })

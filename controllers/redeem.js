@@ -61,7 +61,7 @@ angular.module('RedeemApp', ['ngCookies'])
 
       $http({
         method  : 'POST',
-        url     : 'https://www.zaitoon.online/services/getadmincoupon.php',
+        url     : 'https://accelerateengine.app/food-engine/apis/getadmincoupon.php',
         data    : data,
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        })
@@ -100,7 +100,7 @@ angular.module('RedeemApp', ['ngCookies'])
 	    
 	    $http({
 	        method  : 'POST',
-	        url     : 'https://www.zaitoon.online/services/redeemcoupon.php',
+	        url     : 'https://accelerateengine.app/food-engine/apis/redeemcoupon.php',
 	        data    : data,
 	        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 	       })
@@ -127,7 +127,7 @@ angular.module('RedeemApp', ['ngCookies'])
         admin_data.token = $cookies.get("accelerateVegaDeskAdmin");
         $http({
           method  : 'POST',
-          url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+          url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
           data    : admin_data,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
@@ -147,7 +147,7 @@ angular.module('RedeemApp', ['ngCookies'])
         $scope.Timer = $interval(function () {
           $http({
             method  : 'POST',
-            url     : 'https://zaitoon.online/services/fetchbadgecounts.php',
+            url     : 'https://accelerateengine.app/food-engine/apis/fetchbadgecounts.php',
             data    : admin_data,
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}
            })
